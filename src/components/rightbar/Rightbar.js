@@ -1,12 +1,14 @@
-import "./rightbar.css"
-import {Celebration} from "@mui/icons-material"
+import "./rightbar.css";
+import { Celebration } from "@mui/icons-material";
+import { Users } from "../../dummyData";
+import OnlineUser from "../onlineUser/OnlineUser";
 
 export default function Rightbar() {
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
         <div className="birthdayContainer">
-          < Celebration className="birthdayImg"/>
+          <Celebration className="birthdayImg" />
           <span className="birthdayText">
             <b> Heba A </b> and <b> 3 other friends </b> have a birthday today
           </span>
@@ -14,16 +16,11 @@ export default function Rightbar() {
         <img src="assets/pictures/ad.jpg" className="rightbarAd" alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="assets/people/3.png" className="rightbarProfileImg" alt="" />
-              <span className="rightbarOnline"></span>
-            </div>
-            <span className="rightbarUsername">Fruitti H</span>
-          </li>
+          {Users.map((user) => (
+            <OnlineUser key={user.id} user={user} />
+          ))}
         </ul>
       </div>
-
     </div>
-  )
+  );
 }
