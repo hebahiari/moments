@@ -3,6 +3,8 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 
+
+//testing
 function App() {
   return <Home />
 }
