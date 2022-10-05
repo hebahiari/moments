@@ -3,6 +3,9 @@ const { resetWatchers } = require("nodemon/lib/monitor/watch");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
+
+//ADD: change follow/unfollow to be one thing that just does the opposite
+
 //update user
 router.put("/:id", async (req, res) => {
   if (req.body.userId === req.params.id || req.body.isAdmin) {
