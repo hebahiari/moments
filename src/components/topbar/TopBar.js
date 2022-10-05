@@ -20,10 +20,7 @@ export default function TopBar() {
       </div>
 
       <div className="topbarRight">
-        <div className="topbarLinks">
-          <span className="topbarLinks">Home</span>
-          <span className="topbarLinks">Profile</span>
-        </div>
+
 
         <div className="topbarIcons">
           <div className="topbarIconsItem">
@@ -34,12 +31,7 @@ export default function TopBar() {
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>
-          <div className="topbarIconsItem">
-            <Chat />
-            <span className="topbarIconBadge">1</span>
-          </div>
         </div>
-
         <img src="/assets/people/1.jpg" alt="profile" className="topbarImage" />
       </div>
     </div>

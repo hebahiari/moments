@@ -5,7 +5,7 @@ import Register from "./pages/register/Register";
 import Welcome from "./pages/welcome/Welcome";
 
 function App() {
-  return <Welcome />
+  return <Home />
 }
 
 export default App;
