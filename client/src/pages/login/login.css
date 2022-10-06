@@ -1,11 +1,14 @@
 .login {
   width: 100vw;
   height: 100vh;
-  background-color: aliceblue;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
 }
+
 
 .loginWrapper {
   width: 70%;
@@ -37,7 +40,7 @@
 .loginBox{
     height: 300px;
     padding: 20px;
-    background-color: brown;
+    background-color: rgb(111, 199, 206);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -56,7 +59,7 @@
     height: 50px;
     border-radius: 10px;
     border: none;
-    background-color: blueviolet;
+    background-color: rgb(160, 241, 157);
     color: aliceblue;
     font-size: 20px;
     font-weight: 500;

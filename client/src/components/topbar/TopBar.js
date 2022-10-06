@@ -1,11 +1,14 @@
 import "./topbar.css";
-import { Search, Person, Notifications, Chat } from "@mui/icons-material";
+import { Search, Person, Notifications } from "@mui/icons-material";
+import { Link } from "react-router-dom"
 
 export default function TopBar() {
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
+        <Link to="/" style={{textDecoration:"none"}}>
         <span className="logo">Petsgram</span>
+        </Link>
       </div>
 
       <div className="topbarCenter">

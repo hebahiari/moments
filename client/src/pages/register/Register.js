@@ -2,7 +2,7 @@ import "./register.css";
 
 export default function Register() {
   return (
-    <div className="login">
+    <div className="login"  style={{ backgroundImage: 'url("assets/website/pets.gif")' }}>
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">Petsgram</h3>

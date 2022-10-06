@@ -1,6 +1,6 @@
 import "./sidebar.css";
 import { RssFeed, Event, Group } from "@mui/icons-material";
-import { Users } from "../../dummyData";
+// import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
 
 export default function Sidebar() {
@@ -24,9 +24,9 @@ export default function Sidebar() {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          {Users.map((user) => (
+          {/* {Users.map((user) => (
             <CloseFriend key={user.id} user={user} />
-          ))}
+          ))} */}
         </ul>
       </div>
     </div>

@@ -21,10 +21,6 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
-    profilePicture: {
-      type: String,
-      default: "",
-    },
     followers: {
       type: Array,
       default: [],
@@ -44,7 +40,15 @@ const UserSchema = new mongoose.Schema(
     pets: {
         type:Array,
         default: [],
-    }
+    },
+    profilePicture: {
+      type:String,
+      default: "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
+    },
+    coverPhoto: {
+      type:String,
+      default: "https://img.freepik.com/free-vector/animal-background-vector-with-cute-pets-illustration_53876-127698.jpg?w=2000"
+    },
   },
   { timestamps: true }
 );
