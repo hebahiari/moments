@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./welcome.css";
 
 export default function Welcome() {
@@ -10,10 +11,16 @@ export default function Welcome() {
         <div className="welcomeLogin">
           <div className="welcomeInput">
             <h1 className="welcomeTitle">Welcome to Petsgram!</h1>
-            <div className="welcomeDesc">The place where you come to smile!</div>
+            <div className="welcomeDesc">
+              The place where you come to smile!
+            </div>
             <div className="welcomeButtons">
-              <button className="welcomeButton">Log In</button>
-              <button className="welcomeButton">Sign Up</button>
+              <Link to="/login">
+                <button className="welcomeButton">Log In</button>
+              </Link>
+              <Link to="/Register">
+                <button className="welcomeButton">Sign Up</button>
+              </Link>
             </div>
           </div>
         </div>

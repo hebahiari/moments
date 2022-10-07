@@ -1,6 +1,19 @@
 import "./login.css";
+import { useContext, useRef } from "react";
+import { loginCall } from "../../utils/api";
+import { AuthContext } from "../../context/AuthContext";
+// import { CircularProgress } from '@material-ui/core';
 
 export default function Login() {
+  const email = useRef();
+  const password = useRef();
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    loginCall({ email: email.current.value, password: password.current.value }, dispatch);
+  };
+   
   return (
     <div
       className="login"
@@ -12,13 +25,31 @@ export default function Login() {
           <span className="loginDesc">See Other Pets!</span>
         </div>
         <div className="loginRight">
-          <div className="loginBox">
-            <input type="text" className="loginInput" placeholder="Email" />
-            <input type="text" className="loginInput" placeholder="Password" />
-            <button className="loginButton">Log in</button>
+          <form className="loginBox" onSubmit={handleSubmit}>
+            <input
+              type="email"
+              className="loginInput"
+              placeholder="Email"
+              ref={email}
+              required
+            />
+            <input
+              type="password"
+              className="loginInput"
+              placeholder="Password"
+              ref={password}
+              required
+              minLength={5}
+            />
+            <button className="loginButton" type="submit">
+              {isFetching ? 
+              //ADD: fix this situation
+              // <CircularProgress size="20px" color="white" />
+              "Loading ..." : "Log in"}
+            </button>
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginRegisterButton">Sign Up</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

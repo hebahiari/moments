@@ -67,6 +67,10 @@
     align-self: center;
 }
 
+.loginButton:focus, .loginRegisterButton:focus{
+  outline: none;
+}
+
 .loginInput:focus{
 outline: none;
 }
