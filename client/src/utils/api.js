@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export async function getFollowingPosts() {
-  return await axios.get("/posts/timeline/633f15cff4cd896359bf1d6a");
+export async function getFollowingPosts(id) {
+  return await axios.get(`/posts/timeline/${id}`);
 }
 
 export async function getUserById(id) {
@@ -28,4 +28,7 @@ export async function loginCall(userCredentials, dispatch) {
 
 export async function registerUser(user) {
   const res = await axios.post("/auth/register", user);
+}
+export async function likeDislikePost(postId, userId) {
+  const res = await axios.put(`/posts/${postId}/like`, { userId: userId });
 }

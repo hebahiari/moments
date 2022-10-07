@@ -1,14 +1,18 @@
 import "./post.css";
 import { MoreVert, Favorite } from "@mui/icons-material";
-import { useEffect, useState } from "react";
-import { getUserById } from "../../utils/api";
+import { useContext, useEffect, useState } from "react";
+import { getUserById, likeDislikePost } from "../../utils/api";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const currentUser = useContext(AuthContext).user;
+  const history = useHistory();
 
   //fetch users
   useEffect(() => {
@@ -17,8 +21,11 @@ export default function Post({ post }) {
 
   //ADD: actual like
   const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
+    console.log(currentUser);
+    try {
+      likeDislikePost(post._id, currentUser._id).then(history.go());
+      console.log("liked!");
+    } catch (error) {}
   };
 
   return (

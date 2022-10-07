@@ -2,6 +2,7 @@ import "./login.css";
 import { useContext, useRef } from "react";
 import { loginCall } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "@mui/material";
 // import { CircularProgress } from '@material-ui/core';
 
 export default function Login() {
@@ -11,9 +12,12 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginCall({ email: email.current.value, password: password.current.value }, dispatch);
+    loginCall(
+      { email: email.current.value, password: password.current.value },
+      dispatch
+    );
   };
-   
+
   return (
     <div
       className="login"
@@ -41,14 +45,17 @@ export default function Login() {
               required
               minLength={5}
             />
-            <button className="loginButton" type="submit">
-              {isFetching ? 
-              //ADD: fix this situation
-              // <CircularProgress size="20px" color="white" />
-              "Loading ..." : "Log in"}
-            </button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">Sign Up</button>
+            <button className="loginButton" type="submit">
+              {isFetching
+                ? //ADD: fix this situation
+                  // <CircularProgress size="20px" color="white" />
+                  "Loading ..."
+                : "Log in"}
+            </button>
+            <Link to="/register">
+              <button className="loginRegisterButton">Sign Up</button>
+            </Link>
           </form>
         </div>
       </div>

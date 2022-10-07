@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
 import { getFollowingPosts, getUserPosts } from "../../utils/api";
+import { AuthContext } from "../../context/AuthContext"
 
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
+  const {user} = useContext(AuthContext);
 
   //fetch posts
   useEffect(() => {
     if (username) {
       getUserPosts(username).then((response) => setPosts(response.data));
     } else {
-      getFollowingPosts().then((response) => setPosts(response.data));
+      getFollowingPosts(user._id).then((response) => setPosts(response.data));
     }
-  }, []);
+  }, [username, user._id]);
 
   return (
     <div className="feed">
