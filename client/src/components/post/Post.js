@@ -14,6 +14,8 @@ export default function Post({ post }) {
   const currentUser = useContext(AuthContext).user;
   const history = useHistory();
 
+  // const redHeart =  (<Favorite className="likeIcon" onClick={likeHandler} />)
+
   //TODO: change heart color to red when post is liked
 
   //fetch users
@@ -60,11 +62,19 @@ export default function Post({ post }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <Favorite className="likeIcon" onClick={likeHandler} />
+            {isLiked ? (
+              <Favorite
+                className="likeIcon"
+                style={{ color: "warning" }}
+                onClick={likeHandler}
+              />
+            ) : (
+              <Favorite className="likeIcon" onClick={likeHandler} />
+            )}
             <span className="postLikeCounter">
               {post.likes.length === 1
                 ? "1 Like"
-                : post.likes.length + " Likes"}{" "}
+                : post.likes.length + " Likes"}
             </span>
           </div>
           <div className="postBottomRight">

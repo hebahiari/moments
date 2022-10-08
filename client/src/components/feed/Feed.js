@@ -9,8 +9,6 @@ export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
 
-  console.log(username);
-
   //fetch posts
   useEffect(() => {
     if (username) {

@@ -88,3 +88,59 @@
   height: 32px;
   border-radius: 50%;
 }
+
+/* menu styling */
+.topbarRightMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbarRightMenu li {
+  list-style: none;
+}
+
+.topbarRightHamburgerIcon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .searchBar {
+    display: none;
+  }
+  .topbarRightHamburgerIcon {
+    display: block;
+  }
+
+  .topbarRightMenu {
+    display: none;
+  }
+
+  .topbarRightHamburgerMenu {
+    background-color: rgb(13, 113, 180);
+    width: 200px;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    z-index: 3;
+  }
+
+  .topbarRightHamburgerItem {
+    margin-top: 20px;
+  }
+
+  .topbarRightHamburgerOverlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 60px;
+    right: 0;
+  }
+}
