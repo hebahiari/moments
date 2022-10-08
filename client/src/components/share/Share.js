@@ -67,10 +67,10 @@ export default function Share() {
                 onChange={(event) => setFile(event.target.files[0])}
               ></input>
             </label>
-            <div className="shareOption">
+            {/* <div className="shareOption">
               <EmojiEmotions className="shareIcon" />
               <span className="shareOptionText">Feeling</span>
-            </div>
+            </div> */}
           </div>
           <button className="shareButton" type="submit">
             Share
