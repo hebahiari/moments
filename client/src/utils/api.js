@@ -29,6 +29,16 @@ export async function loginCall(userCredentials, dispatch) {
 export async function registerUser(user) {
   const res = await axios.post("/auth/register", user);
 }
+
 export async function likeDislikePost(postId, userId) {
   const res = await axios.put(`/posts/${postId}/like`, { userId: userId });
+}
+
+export async function sharePost(post) {
+  await axios.post("/posts", post);
+}
+
+export async function uploadImage(options) {
+  fetch("/upload", options);
+  // await axios.post("/upload", data);
 }
