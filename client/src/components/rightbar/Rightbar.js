@@ -1,14 +1,16 @@
 import "./rightbar.css";
-import { Celebration, Add } from "@mui/icons-material";
+import { Celebration, Add, Remove } from "@mui/icons-material";
 import OnlineUser from "../onlineUser/OnlineUser";
 import { useContext, useEffect, useState } from "react";
-import { getFollowingUsers } from "../../utils/api";
+import { followUser, getFollowingUsers, unfollowUser } from "../../utils/api";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Rightbar({ user }) {
+  console.log({ user });
   const [followingUsers, setFollowingUsers] = useState([]);
-  const { user: currentUser } = useContext(AuthContext);
+  const { user: currentUser, dispatch } = useContext(AuthContext);
+  const [followed, setFollowed] = useState(false);
 
   useEffect(() => {
     try {
@@ -20,12 +22,31 @@ export default function Rightbar({ user }) {
     }
   }, [user]);
 
+  useEffect(() => {
+    setFollowed(currentUser.following.includes(user?._id));
+  }, [currentUser, user]);
+
+  const handleClick = () => {
+    try {
+      if (followed) {
+        unfollowUser(user._id, currentUser._id).then(setFollowed(false));
+        dispatch({ type: "UNFOLLOW", payload: user._id });
+      } else {
+        followUser(user._id, currentUser._id).then(setFollowed(true));
+        dispatch({ type: "FOLLOW", payload: user._id });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const ProfileRightBar = () => {
     return (
       <>
         {user.username !== currentUser._id && (
-          <button className="rightbarFollowButton">
-            <Add /> Follow
+          <button className="rightbarFollowButton" onClick={handleClick}>
+            {followed ? <Remove /> : <Add />}
+            {followed ? "Unfollow" : "Follow"}
           </button>
         )}
         <h4 className="rightbarTitle">User Information</h4>
@@ -39,7 +60,7 @@ export default function Rightbar({ user }) {
             </span>
           </div>
         </div>
-        <h4 className="rightbarTitle">User Information</h4>
+        <h4 className="rightbarTitle">Following List</h4>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
             {followingUsers.map((person) => {

@@ -45,3 +45,13 @@ export async function uploadImage(data) {
 export async function getFollowingUsers(userId) {
   return await axios.get(`/users/following/${userId}`);
 }
+
+export async function followUser(userId, currentUserId) {
+  return await axios.put(`/users/${userId}/follow`, { userId: currentUserId });
+}
+
+export async function unfollowUser(userId, currentUserId) {
+  return await axios.put(`/users/${userId}/unfollow`, {
+    userId: currentUserId,
+  });
+}

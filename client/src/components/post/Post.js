@@ -14,6 +14,8 @@ export default function Post({ post }) {
   const currentUser = useContext(AuthContext).user;
   const history = useHistory();
 
+  //TODO: change heart color to red when post is liked
+
   //fetch users
   useEffect(() => {
     getUserById(post.userId).then((response) => setUser(response.data));

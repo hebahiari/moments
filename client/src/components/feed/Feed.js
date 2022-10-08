@@ -9,6 +9,8 @@ export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
 
+  console.log(username);
+
   //fetch posts
   useEffect(() => {
     if (username) {
@@ -27,7 +29,7 @@ export default function Feed({ username }) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {username === user.username ? <Share /> : null}
+        {!username || username === user.username ? <Share /> : null}
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}
