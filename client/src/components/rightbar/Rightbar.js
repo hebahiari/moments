@@ -1,12 +1,33 @@
 import "./rightbar.css";
-import { Celebration } from "@mui/icons-material";
-// import { Users } from "../../dummyData";
+import { Celebration, Add } from "@mui/icons-material";
 import OnlineUser from "../onlineUser/OnlineUser";
+import { useContext, useEffect, useState } from "react";
+import { getFollowingUsers } from "../../utils/api";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Rightbar({ user }) {
+  const [followingUsers, setFollowingUsers] = useState([]);
+  const { user: currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    try {
+      getFollowingUsers(user._id).then((response) =>
+        setFollowingUsers(response.data)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user]);
+
   const ProfileRightBar = () => {
     return (
       <>
+        {user.username !== currentUser._id && (
+          <button className="rightbarFollowButton">
+            <Add /> Follow
+          </button>
+        )}
         <h4 className="rightbarTitle">User Information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
@@ -21,8 +42,23 @@ export default function Rightbar({ user }) {
         <h4 className="rightbarTitle">User Information</h4>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
-            {/* <img src="assets/people/2.png" alt="" className="rightbarFollowingImg" /> */}
-            <span className="rightbarFollowingName">Taffy T</span>
+            {followingUsers.map((person) => {
+              return (
+                <Link
+                  to={`/profile/${person.username}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    src={person.profilePicture}
+                    alt=""
+                    className="rightbarFollowingImg"
+                  />
+                  <span className="rightbarFollowingName">
+                    {person.username}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </>

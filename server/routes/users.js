@@ -3,7 +3,6 @@ const { resetWatchers } = require("nodemon/lib/monitor/watch");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-
 //ADD: change follow/unfollow to be one thing that just does the opposite
 
 //update user
@@ -35,7 +34,9 @@ router.get("/", async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
   try {
-    const user = userId ? await User.findById(userId) : await User.findOne({username: username})
+    const user = userId
+      ? await User.findById(userId)
+      : await User.findOne({ username: username });
     const { password, updatedAt, ...other } = user._doc;
     res.status(200).json(other);
   } catch (error) {
@@ -43,10 +44,29 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get the following users
+router.get("/following/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const following = await Promise.all(
+      user.following.map((followingId) => {
+        return User.findById(followingId);
+      })
+    );
+    let friendList = [];
+    following.map((person) => {
+      const { _id, username, profilePicture } = person;
+      friendList.push({ _id, username, profilePicture });
+    });
+    res.status(200).json(friendList);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 //follow a user
 router.put("/:id/follow", async (req, res) => {
-
-    //check that its not the same user
+  //check that its not the same user
   if (req.body.userId === req.params.id) {
     res.status(403).json("you can't follow your account");
   }
@@ -57,7 +77,7 @@ router.put("/:id/follow", async (req, res) => {
 
     // check that they're not already followed
     if (!user.followers.includes(req.body.userId)) {
-        // add to followers and following
+      // add to followers and following
       await user.updateOne({ $push: { followers: req.body.userId } });
       await currentUser.updateOne({ $push: { following: req.params.id } });
       res.status(200).json("user followed successfully");
@@ -71,8 +91,7 @@ router.put("/:id/follow", async (req, res) => {
 
 //unfollow a user
 router.put("/:id/unfollow", async (req, res) => {
-
-    //check that its not the same user
+  //check that its not the same user
   if (req.body.userId === req.params.id) {
     res.status(403).json("you can't unfollow your account");
   }
@@ -83,7 +102,7 @@ router.put("/:id/unfollow", async (req, res) => {
 
     // check that they're not already followed
     if (user.followers.includes(req.body.userId)) {
-        // add to followers and following
+      // add to followers and following
       await user.updateOne({ $pull: { followers: req.body.userId } });
       await currentUser.updateOne({ $pull: { following: req.params.id } });
       res.status(200).json("user unfollowed successfully");

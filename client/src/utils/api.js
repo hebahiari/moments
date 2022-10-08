@@ -39,6 +39,9 @@ export async function sharePost(post) {
 }
 
 export async function uploadImage(data) {
-  // fetch("/upload", options);
   await axios.post("/upload", data);
+}
+
+export async function getFollowingUsers(userId) {
+  return await axios.get(`/users/following/${userId}`);
 }

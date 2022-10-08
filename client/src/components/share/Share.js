@@ -20,15 +20,6 @@ export default function Share() {
       const fileName = "" + user._id + Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
-
-      // let options = {
-      //   method: "POST",
-      //   body: data,
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // };
       newPost.img = fileName;
       try {
         uploadImage(data);
@@ -47,14 +38,15 @@ export default function Share() {
   return (
     <div className="share">
       <div className="shareWrapper">
-        <div className="shareTop"></div>
-        <img className="shareProfileImg" src={user.profilePicture} alt="" />
-        <input
-          placeholder={`What would you like to share today, ${user.username}?`}
-          type="text"
-          className="shareInput"
-          ref={desc}
-        />
+        <div className="shareTop">
+          <img className="shareProfileImg" src={user.profilePicture} alt="" />
+          <input
+            placeholder={`What would you like to share today, ${user.username}?`}
+            type="text"
+            className="shareInput"
+            ref={desc}
+          />
+        </div>
         <hr className="shareHr" />
         <form className="shareBottom" onSubmit={handleSubmit}>
           <div className="shareOptions">

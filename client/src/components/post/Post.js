@@ -49,7 +49,12 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img src={post.img} className="postImg" alt="" />
+          <img
+            //TODO: fix image
+            src={`${post.img}`}
+            className="postImg"
+            alt=""
+          />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
