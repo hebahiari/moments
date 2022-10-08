@@ -1,6 +1,6 @@
 import "./post.css";
 import { MoreVert, Favorite } from "@mui/icons-material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getUserById, likeDislikePost } from "../../utils/api";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
@@ -8,15 +8,12 @@ import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function Post({ post }) {
-  const [like, setLike] = useState(post.like);
-  const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const [addComment, setAddComment] = useState(false);
   const currentUser = useContext(AuthContext).user;
   const history = useHistory();
-
-  // const redHeart =  (<Favorite className="likeIcon" onClick={likeHandler} />)
-
-  //TODO: change heart color to red when post is liked
+  const isLiked = post.likes.includes(currentUser._id);
+  const comment = useRef();
 
   //fetch users
   useEffect(() => {
@@ -28,9 +25,33 @@ export default function Post({ post }) {
     console.log(currentUser);
     try {
       likeDislikePost(post._id, currentUser._id).then(history.go());
-      console.log("liked!");
     } catch (error) {}
   };
+
+  const commentHandler = () => {
+    setAddComment(!addComment);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const addCommentSection = (
+    <>
+      <hr className="shareHr" />
+      <form className="commentInputForm" onSubmit={handleSubmit}>
+        <input
+          placeholder="Write your comment..."
+          type="text"
+          className="commentInput"
+          ref={comment}
+        />
+        <button className="shareButton" type="submit">
+          Post
+        </button>
+      </form>
+    </>
+  );
 
   return (
     <div className="post">
@@ -65,8 +86,8 @@ export default function Post({ post }) {
             {isLiked ? (
               <Favorite
                 className="likeIcon"
-                style={{ color: "warning" }}
                 onClick={likeHandler}
+                style={{ color: "red" }}
               />
             ) : (
               <Favorite className="likeIcon" onClick={likeHandler} />
@@ -78,9 +99,12 @@ export default function Post({ post }) {
             </span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText"> {post.comment} Comments</span>
+            <span className="postCommentText" onClick={commentHandler}>
+              {post.comments.length} Comments
+            </span>
           </div>
         </div>
+        {addComment ? addCommentSection : null}
       </div>
     </div>
   );

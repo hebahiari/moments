@@ -2,10 +2,10 @@ import "./profile.css";
 import TopBar from "../../components/topbar/TopBar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
-import Rightbar from "../../components/rightbar/Rightbar";
 import { useEffect, useState } from "react";
 import { getUserByUsername } from "../../utils/api";
 import { useParams } from "react-router";
+import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -32,7 +32,7 @@ export default function Profile() {
     <>
       <TopBar />
       <div className="profile">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
@@ -49,8 +49,8 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
+            <ProfileInfo user={user} />
             <Feed username={username} />
-            <Rightbar user={user} />
           </div>
         </div>
       </div>

@@ -42,7 +42,7 @@ export default function Share() {
           <img className="shareProfileImg" src={user.profilePicture} alt="" />
           <input
             placeholder={`What would you like to share today, ${user.username}?`}
-            type="text"
+            type="textArea"
             className="shareInput"
             ref={desc}
           />

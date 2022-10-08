@@ -1,0 +1,70 @@
+.profileInfo {
+  flex: 3;
+}
+
+.profileInfoWrapper {
+  padding: 20px 20px 0 0;
+}
+
+.profileInfoTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.profileInfoInfo {
+  margin-bottom: 30px;
+}
+
+.profileInfoInfoItem {
+  margin-bottom: 10px;
+}
+
+.profileInfoInfoKey {
+  font-weight: 500;
+  margin-right: 15px;
+  color: rgb(70, 70, 70);
+}
+
+.profileInfoInfoValue {
+  font-weight: 300;
+}
+
+.profileInfoFollowings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.profileInfoFollowing {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.profileInfoFollowingImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.profileInfoFollowButton {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: rgb(116, 175, 28);
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.profileInfoFollowButton:focus {
+  outline: none;
+}
