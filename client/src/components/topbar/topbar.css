@@ -1,12 +1,13 @@
 .topbarContainer {
   height: 60px;
   width: 100%;
-  background-color: #a0c3d2;
+  background-color: #e7971d;
   display: flex;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 999;
+  justify-content: space-between;
 }
 
 .logo {
@@ -23,11 +24,11 @@
 }
 
 .topbarLeft {
-  flex: 3;
 }
 
 .topbarCenter {
-  flex: 5;
+  max-width: 350px;
+  margin-left: 20px;
 }
 
 .searchBar {
@@ -51,7 +52,6 @@
 
 .topbarRight {
   margin: 15px;
-  flex: 4;
   display: flex;
   align-items: center;
   justify-content: flex-end;

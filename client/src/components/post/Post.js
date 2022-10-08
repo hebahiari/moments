@@ -25,7 +25,9 @@ export default function Post({ post }) {
     console.log(currentUser);
     try {
       likeDislikePost(post._id, currentUser._id).then(history.go());
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const commentHandler = () => {
@@ -34,11 +36,13 @@ export default function Post({ post }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    //TODO: add comment
   };
 
   const addCommentSection = (
     <>
       <hr className="shareHr" />
+      {/* TODO: display comments       */}
       <form className="commentInputForm" onSubmit={handleSubmit}>
         <input
           placeholder="Write your comment..."
