@@ -18,19 +18,20 @@ export default function Share() {
     if (file) {
       const data = new FormData();
       const fileName = "" + user._id + Date.now() + file.name;
-      data.append("file", file);
       data.append("name", fileName);
-      let options = {
-        method: "POST",
-        body: data,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data",
-        },
-      };
+      data.append("file", file);
+
+      // let options = {
+      //   method: "POST",
+      //   body: data,
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // };
       newPost.img = fileName;
       try {
-        uploadImage(options);
+        uploadImage(data);
       } catch (error) {
         console.log(error);
       }

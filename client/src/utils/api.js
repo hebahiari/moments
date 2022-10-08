@@ -38,7 +38,7 @@ export async function sharePost(post) {
   await axios.post("/posts", post);
 }
 
-export async function uploadImage(options) {
-  fetch("/upload", options);
-  // await axios.post("/upload", data);
+export async function uploadImage(data) {
+  // fetch("/upload", options);
+  await axios.post("/upload", data);
 }
