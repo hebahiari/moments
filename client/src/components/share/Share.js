@@ -1,5 +1,5 @@
 import "./share.css";
-import { PermMedia, EmojiEmotions, CheckCircle } from "@mui/icons-material";
+import { PermMedia, EmojiEmotions, Cancel } from "@mui/icons-material";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { sharePost, uploadImage } from "../../utils/api";
@@ -48,10 +48,15 @@ export default function Share() {
           />
         </div>
         <hr className="shareHr" />
+        {file ? (
+          <div className="shareImgContainer">
+            <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
+            <Cancel className="shareDiscard" onClick={() => setFile(null)} />
+          </div>
+        ) : null}
         <form className="shareBottom" onSubmit={handleSubmit}>
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
-              {file ? <CheckCircle style={{ color: "green" }} /> : null}
               <PermMedia className="shareIcon" />
               <span className="shareOptionText">Media</span>
               <input
