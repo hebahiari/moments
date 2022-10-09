@@ -61,7 +61,6 @@ router.put("/:id/like", async (req, res) => {
   }
 });
 
-
 // get all posts
 router.get("/timeline/all", async (req, res) => {
   try {
@@ -72,19 +71,16 @@ router.get("/timeline/all", async (req, res) => {
   }
 });
 
-
 //get all posts of a user
 router.get("/profile/:username", async (req, res) => {
   try {
-   const user = await User.findOne({username: req.params.username})
-   const posts = await Post.find({userId: user._id});
-   res.status(200).json(posts)
-
+    const user = await User.findOne({ username: req.params.username });
+    const posts = await Post.find({ userId: user._id });
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).json(error);
   }
 });
-
 
 // get all following posts
 router.get("/timeline/:userId", async (req, res) => {
@@ -101,8 +97,6 @@ router.get("/timeline/:userId", async (req, res) => {
     res.status(500).json(error);
   }
 });
-
-
 
 //get a post
 router.get("/:id", async (req, res) => {

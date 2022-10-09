@@ -38,12 +38,20 @@ export async function sharePost(post) {
   await axios.post("/posts", post);
 }
 
+export async function getPost(postId) {
+  return await axios.get(`/posts/${postId}`);
+}
+
 export async function uploadImage(data) {
   await axios.post("/upload", data);
 }
 
 export async function getFollowingUsers(userId) {
   return await axios.get(`/users/following/${userId}`);
+}
+
+export async function getFollowersUsers(userId) {
+  return await axios.get(`/users/followers/${userId}`);
 }
 
 export async function followUser(userId, currentUserId) {

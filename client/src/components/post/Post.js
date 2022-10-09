@@ -1,5 +1,5 @@
 import "./post.css";
-import { MoreVert, Favorite } from "@mui/icons-material";
+import { MoreVert, Favorite, ChatBubbleOutline } from "@mui/icons-material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { getUserById, likeDislikePost } from "../../utils/api";
 import { format } from "timeago.js";
@@ -111,12 +111,16 @@ export default function Post({ post }) {
                 style={{ color: "#303030" }}
               />
             )}
-            <span className="postLikeCounter">
+            {/* <span className="postLikeCounter">
               {post.likes.length === 0 ? null : post.likes.length}
-            </span>
+            </span> */}
+            <ChatBubbleOutline
+              style={{ color: "#303030" }}
+              onClick={commentHandler}
+            />
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText" onClick={commentHandler}>
+            <span className="postCommentText">
               {post.comments.length} Comments
             </span>
           </div>

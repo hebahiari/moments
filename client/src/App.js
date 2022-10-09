@@ -6,28 +6,30 @@ import Welcome from "./pages/welcome/Welcome";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import SinglePost from "./pages/singlePost/SinglePost";
 
 function App() {
   const { user } = useContext(AuthContext);
 
   return (
-      <Switch>
-        <Route exact path="/">
-          {user? <Home /> : <Welcome/> }
-        </Route>
-        <Route path="/welcome">
-          <Welcome />
-        </Route>
-        <Route path="/login">
-          {user? <Redirect to="/" /> : <Login />}
-        </Route>
-        <Route path="/register">
-        {user? <Redirect to="/" /> : <Register />}
-        </Route>
-        <Route path="/profile/:username">
-          <Profile />
-        </Route>
-      </Switch>
+    <Switch>
+      <Route exact path="/">
+        {user ? <Home /> : <Welcome />}
+      </Route>
+      <Route path="/welcome">
+        <Welcome />
+      </Route>
+      <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+      <Route path="/register">
+        {user ? <Redirect to="/" /> : <Register />}
+      </Route>
+      <Route path="/profile/:username">
+        <Profile />
+      </Route>
+      <Route path="/posts/:postId">
+        <SinglePost />
+      </Route>
+    </Switch>
   );
 }
 
