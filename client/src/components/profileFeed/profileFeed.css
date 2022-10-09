@@ -1,0 +1,70 @@
+.profileFeed {
+  max-width: 600px;
+}
+
+.profileFeedWrapper {
+  padding: 20px;
+}
+.profileFeedShareWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profileFeedShare {
+  width: 100%;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.profileFeedPosts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  max-width: 1000px;
+  column-count: 1;
+  column-gap: 0;
+}
+
+.postWrapper {
+  width: 100%;
+  min-width: 200px;
+  max-width: 400px;
+  max-height: 400px;
+  min-height: 100px;
+  display: inline-block;
+}
+
+.profileFeedHr {
+  margin: 30px 20px;
+  opacity: 0.5;
+}
+
+.profileFeedOptions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px;
+}
+
+.profileFeedOptionsFollowing {
+  font-weight: 600;
+  color: rgb(129, 129, 129);
+}
+
+.profileFeedOptionsAll {
+  font-weight: 600;
+  color: orange;
+}
+
+.post {
+  width: 100%;
+  max-width: 100%;
+}
+
+.postWrapper {
+  max-width: 100%;
+}

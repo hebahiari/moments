@@ -1,7 +1,7 @@
 import "./profile.css";
 import TopBar from "../../components/topbar/TopBar";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Feed from "../../components/feed/Feed";
+import ProfileFeed from "../../components/profileFeed/ProfileFeed";
 import { useEffect, useState } from "react";
 import { getUserByUsername } from "../../utils/api";
 import { useParams } from "react-router";
@@ -32,25 +32,22 @@ export default function Profile() {
     <>
       <TopBar />
       <div className="profile">
-        {/* <Sidebar /> */}
-        <div className="profileRight">
-          <div className="profileRightTop">
-            <div className="profileCover">
-              <img src={user.coverPhoto} className="profileCoverImg" alt="" />
-              <img
-                src={user.profilePicture}
-                className="profilePicture"
-                alt=""
-              />
-            </div>
-            <div className="profileInfo">
-              <h4 className="profileInfoName">{user.username}</h4>
-              <span className="profileInfoDesc">{user.desc}</span>
-            </div>
+        <div className="profileTop">
+          <div className="profileCover">
+            <img src={user.coverPhoto} className="profileCoverImg" alt="" />
+            <img src={user.profilePicture} className="profilePicture" alt="" />
           </div>
-          <div className="profileRightBottom">
-            <ProfileInfo user={user} />
-            <Feed username={username} className="profileRightBottomFeed" />
+          <div>
+            <h4 className="profileInfoName">{user.username}</h4>
+            <span className="profileInfoDesc">{user.desc}</span>
+          </div>
+        </div>
+        <div className="profileBottom">
+          <div className="profileBottomFeed">
+            <ProfileFeed username={username} />
+          </div>
+          <div className="profileBottomInfo">
+            <ProfileInfo user={user} className="profileBottomInfo" />
           </div>
         </div>
       </div>
