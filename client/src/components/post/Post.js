@@ -1,7 +1,7 @@
 import "./post.css";
 import { MoreVert, Favorite, ChatBubbleOutline } from "@mui/icons-material";
 import { useContext, useEffect, useRef, useState } from "react";
-import { getUserById, likeDislikePost } from "../../utils/api";
+import { getUserById, likeDislikePost, sendComment } from "../../utils/api";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -22,7 +22,6 @@ export default function Post({ post }) {
 
   //ADD: actual like
   const likeHandler = () => {
-    console.log(currentUser);
     try {
       likeDislikePost(post._id, currentUser._id).then(history.go());
     } catch (error) {
@@ -34,9 +33,12 @@ export default function Post({ post }) {
     setAddComment(!addComment);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //TODO: add comment
+  const handleSubmit = () => {
+    try {
+      sendComment(post._id, currentUser._id, comment).then(history.go());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   //TODO: show delete option
@@ -81,7 +83,12 @@ export default function Post({ post }) {
             >
               <span className="postUsername">{user.username}</span>
             </Link>{" "}
-            <span className="postDate">{format(post.createdAt)}</span>
+            <span
+              className="postDate"
+              onClick={() => history.push(`/posts/${post._id}`)}
+            >
+              {format(post.createdAt)}
+            </span>
           </div>
           <div className="postTopRight">
             <MoreVert className="" onClick={optionsHandler} />
@@ -120,7 +127,10 @@ export default function Post({ post }) {
             />
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">
+            <span
+              className="postCommentText"
+              onClick={() => history.push(`/posts/${post._id}`)}
+            >
               {post.comments.length} Comments
             </span>
           </div>

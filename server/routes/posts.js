@@ -97,6 +97,17 @@ router.get("/timeline/:userId", async (req, res) => {
     res.status(500).json(error);
   }
 });
+//add a comment
+router.put("/:id/comment", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    console.log({ post });
+    await post.updateOne({ $push: { comments: req.body } });
+    res.status(200).json("comment sent!");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 //get a post
 router.get("/:id", async (req, res) => {
