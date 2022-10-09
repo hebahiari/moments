@@ -1,8 +1,8 @@
-import "./login.css";
+// import "./login.css";
 import { useContext, useRef } from "react";
 import { loginCall } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 // import { CircularProgress } from '@material-ui/core';
 
 export default function Login() {
@@ -24,11 +24,11 @@ export default function Login() {
       style={{ backgroundImage: 'url("assets/website/pets.gif")' }}
     >
       <div className="loginWrapper">
-        <div className="loginLeft">
+        <div className="loginTitle">
           <h3 className="loginLogo">Petsgram</h3>
-          <span className="loginDesc">See Other Pets!</span>
+          <span className="loginDesc">Share picutres of your pets!</span>
         </div>
-        <div className="loginRight">
+        <div className="loginItems">
           <form className="loginBox" onSubmit={handleSubmit}>
             <input
               type="email"
@@ -53,6 +53,7 @@ export default function Login() {
                   "Loading ..."
                 : "Log in"}
             </button>
+            {/* //TODO: register button not working */}
             <Link to="/register">
               <button className="loginRegisterButton">Sign Up</button>
             </Link>

@@ -1,7 +1,8 @@
 import "./register.css";
 import { useContext, useRef } from "react";
-import { useHistory } from "react-router"
+import { useHistory } from "react-router";
 import { registerUser } from "../../utils/api";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const username = useRef();
@@ -23,7 +24,7 @@ export default function Register() {
       };
 
       try {
-        registerUser(user).then(history.push("/login"))
+        registerUser(user).then(history.push("/login"));
       } catch (error) {
         console.log(error);
       }
@@ -37,11 +38,11 @@ export default function Register() {
       style={{ backgroundImage: 'url("assets/website/pets.gif")' }}
     >
       <div className="loginWrapper">
-        <div className="loginLeft">
+        <div className="loginTitle">
           <h3 className="loginLogo">Petsgram</h3>
-          <span className="loginDesc">See Other Pets!</span>
+          <span className="loginDesc">Share picutres of your pets!</span>
         </div>
-        <div className="loginRight">
+        <div className="loginItems">
           <form className="loginBox" onSubmit={handleSubmit} required>
             <input
               type="text"
@@ -75,7 +76,9 @@ export default function Register() {
             <button className="loginButton" type="submit">
               Sign Up
             </button>
-            <button className="loginRegisterButton">Log In</button>
+            <Link to="/login">
+              <button className="loginRegisterButton">Log In</button>
+            </Link>
           </form>
         </div>
       </div>
