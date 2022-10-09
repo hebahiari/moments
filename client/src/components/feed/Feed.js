@@ -4,6 +4,7 @@ import Share from "../share/Share";
 import "./feed.css";
 import { getFollowingPosts, getUserPosts } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
@@ -27,10 +28,29 @@ export default function Feed({ username }) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {!username || username === user.username ? <Share /> : null}
-        {posts.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
+        <div className="feedShareWrapper">
+          <div className="feedShare">
+            {!username || username === user.username ? <Share /> : null}
+          </div>
+        </div>
+        {/* <hr className="feedHr" /> */}
+        <div className="feedOptions">
+          <Link style={{ textDecoration: "none" }} className="feedOptionsAll">
+            Around the World
+          </Link>
+          <span> | </span>
+          <Link
+            style={{ textDecoration: "none" }}
+            className="feedOptionsFollowing"
+          >
+            Following
+          </Link>
+        </div>
+        <div className="feedPosts">
+          {posts.map((post) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </div>
       </div>
     </div>
   );

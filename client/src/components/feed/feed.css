@@ -1,8 +1,51 @@
 .feed {
-  flex: 6;
-  max-width: 800px;
 }
 
 .feedWrapper {
   padding: 20px;
+}
+.feedShareWrapper {
+  display: flex;
+  justify-content: center;
+}
+.feedShare {
+  width: 60%;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.feedPosts {
+  column-count: 3;
+  column-gap: 15px;
+}
+
+.postWrapper {
+  width: 100%;
+  min-width: 200px;
+  max-width: 400px;
+  max-height: 400px;
+  min-height: 100px;
+  display: inline-block;
+}
+
+.feedHr {
+  margin: 30px 20px;
+  opacity: 0.5;
+}
+
+.feedOptions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px;
+}
+
+.feedOptionsFollowing {
+  font-weight: 600;
+  color: rgb(129, 129, 129);
+}
+
+.feedOptionsAll {
+  font-weight: 600;
+  color: orange;
 }

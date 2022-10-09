@@ -61,7 +61,7 @@
 .loginInput {
   height: 50px;
   border-radius: 10px;
-  border: 1px solid green;
+  border: 1px solid rgb(0, 0, 0);
   font-size: 18px;
   padding-left: 20px;
   margin-bottom: 15px;

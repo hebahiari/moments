@@ -25,7 +25,9 @@ export default function Login() {
     >
       <div className="loginWrapper">
         <div className="loginTitle">
-          <h3 className="loginLogo">Petsgram</h3>
+          <Link to="/welcome" style={{ textDecoration: "none" }}>
+            <h3 className="loginLogo">Petsgram</h3>
+          </Link>
           <span className="loginDesc">Share picutres of your pets!</span>
         </div>
         <div className="loginItems">
