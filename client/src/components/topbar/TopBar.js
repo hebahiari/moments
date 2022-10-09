@@ -1,5 +1,11 @@
 import "./topbar.css";
-import { Search, Person, Notifications, Menu } from "@mui/icons-material";
+import {
+  Search,
+  Person,
+  Notifications,
+  Menu,
+  Close,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -16,13 +22,22 @@ export default function TopBar() {
     <>
       <div className="topbarRightHamburgerMenu">
         <span className="topbarRightHamburgerItem">
-          <Link to="/">Home</Link>
+          <Link to="/" style={{ textDecoration: "none", color: "#555555" }}>
+            Home
+          </Link>
         </span>
         <span className="topbarRightHamburgerItem">
-          <Link to={`/profile/${user.username}`}>Profile</Link>
+          <Link
+            to={`/profile/${user.username}`}
+            style={{ textDecoration: "none", color: "#555555" }}
+          >
+            Profile
+          </Link>
         </span>
         <span className="topbarRightHamburgerItem">
-          <Link to="/">Search</Link>
+          <Link to="/" style={{ textDecoration: "none", color: "#555555" }}>
+            Search
+          </Link>
         </span>
       </div>
       <div className="topbarRightHamburgerOverlay"></div>
@@ -63,7 +78,11 @@ export default function TopBar() {
           </li>
         </ul>
         <div className="topbarRightHamburgerIcon" onClick={handleClick}>
-          <Menu />
+          {menuClicked ? (
+            <Close style={{ color: "white" }} />
+          ) : (
+            <Menu style={{ color: "white" }} />
+          )}
         </div>
         {menuClicked ? hamburgerMenuItems : null}
         {/* <div className="topbarIcons">

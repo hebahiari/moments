@@ -50,7 +50,7 @@ export default function Profile() {
           </div>
           <div className="profileRightBottom">
             <ProfileInfo user={user} />
-            <Feed username={username} />
+            <Feed username={username} className="profileRightBottomFeed" />
           </div>
         </div>
       </div>

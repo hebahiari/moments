@@ -121,7 +121,7 @@
   }
 
   .topbarRightHamburgerMenu {
-    background-color: rgb(13, 113, 180);
+    background-color: #fefdfc;
     width: 200px;
     height: 100vh;
     position: absolute;
@@ -136,6 +136,8 @@
 
   .topbarRightHamburgerItem {
     margin-top: 20px;
+    font-weight: 600;
+    color: #2b2b2b;
   }
 
   .topbarRightHamburgerOverlay {

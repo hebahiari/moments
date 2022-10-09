@@ -44,7 +44,11 @@ export default function ProfileInfo({ user }) {
       <div className="profileInfoWrapper">
         {user.username !== currentUser._id && (
           <button className="profileInfoFollowButton" onClick={handleClick}>
-            {followed ? <Remove /> : <Add />}
+            {followed ? (
+              <Remove style={{ color: "white" }} />
+            ) : (
+              <Add style={{ color: "white" }} />
+            )}
             {followed ? "Unfollow" : "Follow"}
           </button>
         )}

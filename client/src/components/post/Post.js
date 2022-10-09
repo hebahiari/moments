@@ -44,7 +44,7 @@ export default function Post({ post }) {
 
   const addCommentSection = (
     <>
-      <hr className="shareHr" />
+      <hr className="commentHr" />
       {/* TODO: display comments       */}
       <form className="commentInputForm" onSubmit={handleSubmit}>
         <input
