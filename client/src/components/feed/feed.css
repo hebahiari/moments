@@ -7,7 +7,9 @@
 .feedShareWrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
+
 .feedShare {
   width: 60%;
   max-width: 600px;
@@ -15,6 +17,8 @@
 }
 
 .feedPosts {
+  margin: auto;
+  max-width: 1000px;
   column-count: 3;
   column-gap: 15px;
 }
@@ -48,4 +52,25 @@
 .feedOptionsAll {
   font-weight: 600;
   color: orange;
+}
+
+@media (max-width: 768px) {
+  .postWrapper {
+  }
+
+  .feedPosts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: auto;
+    max-width: 1000px;
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .post {
+    width: 100%;
+  }
 }

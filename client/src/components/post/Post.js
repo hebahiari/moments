@@ -39,6 +39,9 @@ export default function Post({ post }) {
     //TODO: add comment
   };
 
+  //TODO: show delete option
+  const optionsHandler = () => {};
+
   const addCommentSection = (
     <>
       <hr className="shareHr" />
@@ -62,18 +65,26 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`profile/${user.username}`}>
+            <Link
+              to={`profile/${user.username}`}
+              style={{ textDecoration: "none" }}
+            >
               <img
                 src={user.profilePicture}
                 className="postProfileImg"
                 alt=""
               />
-              <span className="postUsername">{user.username}</span>
             </Link>
+            <Link
+              to={`profile/${user.username}`}
+              style={{ textDecoration: "none" }}
+            >
+              <span className="postUsername">{user.username}</span>
+            </Link>{" "}
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert className="" />
+            <MoreVert className="" onClick={optionsHandler} />
           </div>
         </div>
         <div className="postCenter">
@@ -94,12 +105,14 @@ export default function Post({ post }) {
                 style={{ color: "red" }}
               />
             ) : (
-              <Favorite className="likeIcon" onClick={likeHandler} />
+              <Favorite
+                className="likeIcon"
+                onClick={likeHandler}
+                style={{ color: "#303030" }}
+              />
             )}
             <span className="postLikeCounter">
-              {post.likes.length === 1
-                ? "1 Like"
-                : post.likes.length + " Likes"}
+              {post.likes.length === 0 ? null : post.likes.length}
             </span>
           </div>
           <div className="postBottomRight">
