@@ -34,20 +34,26 @@ const UserSchema = new mongoose.Schema(
       default: false,
     },
     desc: {
-        type:String,
-        max:200,
+      type: String,
+      max: 200,
     },
     pets: {
-        type:Array,
-        default: [],
+      type: Array,
+      default: [],
     },
     profilePicture: {
-      type:String,
-      default: "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
+      type: String,
+      default:
+        "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
     },
     coverPhoto: {
-      type:String,
-      default: "https://img.freepik.com/free-vector/animal-background-vector-with-cute-pets-illustration_53876-127698.jpg?w=2000"
+      type: String,
+      default:
+        "https://img.freepik.com/free-vector/animal-background-vector-with-cute-pets-illustration_53876-127698.jpg?w=2000",
+    },
+    notifications: {
+      type: Array,
+      default: [],
     },
   },
   { timestamps: true }

@@ -34,11 +34,13 @@ export async function likeDislikePost(postId, userId) {
   const res = await axios.put(`/posts/${postId}/like`, { userId: userId });
 }
 
-export async function sendComment(postId, userId, comment) {
-  await axios.put(`/posts/${postId}/comment`, {
-    userId: userId,
-    comment: comment,
-  });
+export async function sendComment(comment) {
+  console.log({ comment });
+  await axios.post(`/comments`, comment);
+}
+
+export async function getPostComments(postId) {
+  return await axios.get(`/comments/${postId}`);
 }
 
 export async function sharePost(post) {

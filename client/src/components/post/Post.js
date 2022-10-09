@@ -33,9 +33,15 @@ export default function Post({ post }) {
     setAddComment(!addComment);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newComment = {
+      userId: currentUser._id,
+      postId: post._id,
+      desc: comment.current.value,
+    };
     try {
-      sendComment(post._id, currentUser._id, comment).then(history.go());
+      sendComment(newComment);
     } catch (error) {
       console.log(error);
     }

@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const postsRouter = require("./routes/posts");
+const commentsRouter = require("./routes/comments");
 const multer = require("multer");
 const path = require("path");
 
@@ -47,6 +48,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postsRouter);
+app.use("/api/comments", commentsRouter);
 
 app.listen(8800, () => {
   console.log("server is running!!");

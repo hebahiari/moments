@@ -1,7 +1,4 @@
 .singlePostWrapper {
-  display: flex;
-  max-width: 600px;
-  justify-content: center;
-  align-items: center;
   padding: 50px;
+  max-width: 600px;
 }
