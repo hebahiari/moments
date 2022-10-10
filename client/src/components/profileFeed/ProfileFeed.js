@@ -25,6 +25,20 @@ export default function ProfileFeed({ username }) {
     }
   }, [username, user._id]);
 
+  const noPosts = (
+    <>
+      <div className="profileFeedNoPosts">
+        <div className="profileFeedNoPostsTitle">no posts yet</div>
+
+        <img
+          src="/assets/website/sadcat.gif"
+          alt=""
+          className="profileFeedNoPostsImg"
+        />
+      </div>
+    </>
+  );
+
   return (
     <div className="profileFeed">
       <div className="profileFeedWrapper">
@@ -34,6 +48,7 @@ export default function ProfileFeed({ username }) {
           </div>
         </div>
         {/* <hr className="profileFeedHr" /> */}
+        {posts.length === 0 ? <>{noPosts}</> : null}
         <div className="profileFeedPosts">
           {posts.map((post) => (
             <Post key={post._id} post={post} />

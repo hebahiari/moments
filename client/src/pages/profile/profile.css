@@ -12,6 +12,7 @@
 .profileBottom {
   display: flex;
   align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .profileCover {
@@ -60,8 +61,6 @@
   display: flex;
   justify-content: flex-end;
   flex: 9;
-  align-self: center;
-  justify-self: center;
 }
 
 @media (max-width: 768px) {

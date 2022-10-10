@@ -74,7 +74,7 @@ export default function Post({ post }) {
         <div className="postTop">
           <div className="postTopLeft">
             <Link
-              to={`profile/${user.username}`}
+              to={`/profile/${user.username}`}
               style={{ textDecoration: "none" }}
             >
               <img
@@ -84,7 +84,7 @@ export default function Post({ post }) {
               />
             </Link>
             <Link
-              to={`profile/${user.username}`}
+              to={`/profile/${user.username}`}
               style={{ textDecoration: "none" }}
             >
               <span className="postUsername">{user.username}</span>
