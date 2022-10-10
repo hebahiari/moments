@@ -14,7 +14,6 @@ import { AuthContext } from "../../context/AuthContext";
 export default function ProfileInfo({ user }) {
   const [followingUsers, setFollowingUsers] = useState([]);
   const [followersUsers, setFollowersUsers] = useState([]);
-
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
 
@@ -52,7 +51,7 @@ export default function ProfileInfo({ user }) {
   return (
     <div className="profileInfo">
       <div className="profileInfoWrapper">
-        {user.username !== currentUser._id && (
+        {user._id !== currentUser._id && (
           <button className="profileInfoFollowButton" onClick={handleClick}>
             {followed ? (
               <Remove style={{ color: "white" }} />

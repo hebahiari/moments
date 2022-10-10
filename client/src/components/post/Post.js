@@ -97,7 +97,7 @@ export default function Post({ post }) {
             </span>
           </div>
           <div className="postTopRight">
-            <BasicPopover postId={post._id} />
+            <BasicPopover postId={post._id} userId={post.userId} />
           </div>
         </div>
         <div className="postCenter">

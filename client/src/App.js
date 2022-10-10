@@ -7,6 +7,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SinglePost from "./pages/singlePost/SinglePost";
+import SearchUsername from "./pages/search/SearchUsername";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -18,6 +19,9 @@ function App() {
       </Route>
       <Route path="/welcome">
         <Welcome />
+      </Route>
+      <Route path="/search">
+        <SearchUsername />
       </Route>
       <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
       <Route path="/register">

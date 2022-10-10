@@ -4,6 +4,10 @@ export async function getFollowingPosts(id) {
   return await axios.get(`/posts/timeline/${id}`);
 }
 
+export async function getAllPosts() {
+  return await axios.get(`/posts/timeline/all`);
+}
+
 export async function getUserById(id) {
   return await axios.get(`/users?userId=${id}`);
 }

@@ -44,12 +44,12 @@
   margin: 30px;
 }
 
-.feedOptionsFollowing {
-  font-weight: 600;
+.feedOptionsGrey {
+  font-weight: 400;
   color: rgb(129, 129, 129);
 }
 
-.feedOptionsAll {
+.feedOptionsOrange {
   font-weight: 600;
   color: orange;
 }
