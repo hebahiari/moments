@@ -25,12 +25,14 @@
   margin-left: 10px;
 }
 
-.topbarLeft {
+.topbarRight {
+  width: 250px;
 }
 
 .topbarCenter {
   max-width: 350px;
   margin-left: 20px;
+  width: 250px;
 }
 
 .searchBar {

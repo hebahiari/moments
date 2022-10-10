@@ -6,11 +6,11 @@
   margin-bottom: 20px;
   max-width: 350px;
   border: 1px solid rgb(192, 192, 192);
+  display: inline-block;
 }
 
 .postTop {
   padding: 25px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,6 +59,11 @@
   align-items: center;
   justify-content: space-between;
 }
+
+/* .postCenter {
+  display: flex;
+  flex-direction: column;
+} */
 
 .postBottomLeft {
   display: flex;

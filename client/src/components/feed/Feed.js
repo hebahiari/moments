@@ -17,22 +17,29 @@ export default function Feed({ username }) {
     if (username) {
       getUserPosts(username).then((response) => setPosts(response.data));
     } else {
-      getFollowingPosts(user._id).then((response) =>
-        setFollowingPosts(
-          response.data.sort((postA, postB) => {
-            return new Date(postB.createdAt) - new Date(postA.createdAt);
-          })
-        )
-      );
-      getAllPosts().then((response) =>
-        setPosts(
-          response.data.sort((postA, postB) => {
-            return new Date(postB.createdAt) - new Date(postA.createdAt);
-          })
-        )
-      );
+      if (showAllPosts) {
+        getAllPosts().then((response) =>
+          setPosts(
+            response.data
+              .sort((postA, postB) => {
+                return new Date(postB.createdAt) - new Date(postA.createdAt);
+              })
+              .slice(0, 50)
+          )
+        );
+      } else {
+        getFollowingPosts(user._id).then((response) =>
+          setFollowingPosts(
+            response.data
+              .sort((postA, postB) => {
+                return new Date(postB.createdAt) - new Date(postA.createdAt);
+              })
+              .slice(0, 50)
+          )
+        );
+      }
     }
-  }, [username, user._id]);
+  }, [username, user._id, showAllPosts]);
 
   return (
     <div className="feed">

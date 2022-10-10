@@ -1,23 +1,14 @@
 .profileFeed {
   max-width: 600px;
   width: 100%;
-}
-
-.profileFeedWrapper {
   padding: 20px;
-}
-.profileFeedShareWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  width: 100%;
 }
 
 .profileFeedShare {
   width: 100%;
   max-width: 600px;
   min-width: 300px;
+  margin-bottom: 20px;
 }
 
 .profileFeedPosts {
@@ -29,15 +20,6 @@
   max-width: 1000px;
   column-count: 1;
   column-gap: 0;
-}
-
-.postWrapper {
-  width: 100%;
-  min-width: 200px;
-  max-width: 400px;
-  max-height: 400px;
-  min-height: 100px;
-  display: inline-block;
 }
 
 .profileFeedHr {
@@ -93,8 +75,4 @@
 .post {
   width: 100%;
   max-width: 600px;
-}
-
-.postWrapper {
-  max-width: 100%;
 }

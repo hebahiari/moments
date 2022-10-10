@@ -41,19 +41,15 @@ export default function ProfileFeed({ username }) {
 
   return (
     <div className="profileFeed">
-      <div className="profileFeedWrapper">
-        <div className="profileFeedShareWrapper">
-          <div className="profileFeedShare">
-            {!username || username === user.username ? <Share /> : null}
-          </div>
-        </div>
-        {/* <hr className="profileFeedHr" /> */}
-        {posts.length === 0 ? <>{noPosts}</> : null}
-        <div className="profileFeedPosts">
-          {posts.map((post) => (
-            <Post key={post._id} post={post} />
-          ))}
-        </div>
+      <div className="profileFeedShare">
+        {!username || username === user.username ? <Share /> : null}
+      </div>
+      {/* <hr className="profileFeedHr" /> */}
+      {posts.length === 0 ? <>{noPosts}</> : null}
+      <div className="profileFeedPosts">
+        {posts.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
       </div>
     </div>
   );

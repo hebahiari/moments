@@ -43,25 +43,29 @@ export default function Share() {
   return (
     <div className="share">
       <div className="shareWrapper">
-        <div className="shareTop">
-          <img className="shareProfileImg" src={user.profilePicture} alt="" />
-          <input
-            placeholder={`What would you like to share today, ${user.username}?`}
-            type="textArea"
-            className="shareInput"
-            required
-            ref={desc}
-          />
-        </div>
-        <hr className="shareHr" />
-        {file ? (
-          <div className="shareImgContainer">
-            <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
-            <Cancel className="shareDiscard" onClick={() => setFile(null)} />
+        <form className="shareForm" onSubmit={handleSubmit}>
+          <div className="shareTop">
+            <img className="shareProfileImg" src={user.profilePicture} alt="" />
+            <input
+              placeholder={`What would you like to share today, ${user.username}?`}
+              type="text"
+              className="shareInput"
+              required
+              ref={desc}
+            />
           </div>
-        ) : null}
-        <form className="shareBottom" onSubmit={handleSubmit}>
-          <div className="shareOptions">
+          <hr className="shareHr" />
+          {file ? (
+            <div className="shareImgContainer">
+              <img
+                src={URL.createObjectURL(file)}
+                alt=""
+                className="shareImg"
+              />
+              <Cancel className="shareDiscard" onClick={() => setFile(null)} />
+            </div>
+          ) : null}
+          <div className="shareBottom">
             <label htmlFor="file" className="shareOption">
               <PermMedia className="shareIcon" />
               <span className="shareOptionText">Media</span>
@@ -73,14 +77,10 @@ export default function Share() {
                 onChange={(event) => setFile(event.target.files[0])}
               ></input>
             </label>
-            {/* <div className="shareOption">
-              <EmojiEmotions className="shareIcon" />
-              <span className="shareOptionText">Feeling</span>
-            </div> */}
+            <button className="shareButton" type="submit">
+              Share
+            </button>
           </div>
-          <button className="shareButton" type="submit">
-            Share
-          </button>
         </form>
       </div>
     </div>

@@ -6,7 +6,7 @@ export default function SearchUsername() {
   return (
     <div>
       <TopBar />
-      <div className="searchBar">
+      <div className="searchBarFull">
         <Search className="icon" />
         <input
           type="text"

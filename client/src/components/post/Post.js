@@ -70,80 +70,74 @@ export default function Post({ post }) {
 
   return (
     <div className="post">
-      <div className="postWrapper">
-        <div className="postTop">
-          <div className="postTopLeft">
-            <Link
-              to={`/profile/${user.username}`}
-              style={{ textDecoration: "none" }}
-            >
-              <img
-                src={user.profilePicture}
-                className="postProfileImg"
-                alt=""
-              />
-            </Link>
-            <Link
-              to={`/profile/${user.username}`}
-              style={{ textDecoration: "none" }}
-            >
-              <span className="postUsername">{user.username}</span>
-            </Link>{" "}
-            <span
-              className="postDate"
-              onClick={() => history.push(`/posts/${post._id}`)}
-            >
-              {format(post.createdAt)}
-            </span>
-          </div>
-          <div className="postTopRight">
-            <BasicPopover postId={post._id} userId={post.userId} />
-          </div>
+      <div className="postTop">
+        <div className="postTopLeft">
+          <Link
+            to={`/profile/${user.username}`}
+            style={{ textDecoration: "none" }}
+          >
+            <img src={user.profilePicture} className="postProfileImg" alt="" />
+          </Link>
+          <Link
+            to={`/profile/${user.username}`}
+            style={{ textDecoration: "none" }}
+          >
+            <span className="postUsername">{user.username}</span>
+          </Link>{" "}
+          <span
+            className="postDate"
+            onClick={() => history.push(`/posts/${post._id}`)}
+          >
+            {format(post.createdAt)}
+          </span>
         </div>
-        <div className="postCenter">
-          <span className="postText">{post?.desc}</span>
-          <img
-            //TODO: fix image
-            src={`${post.img}`}
-            className="postImg"
-            alt=""
-          />
+        <div className="postTopRight">
+          <BasicPopover postId={post._id} userId={post._userId} />
         </div>
-        <div className="postBottom">
-          <div className="postBottomLeft">
-            {isLiked ? (
-              <Favorite
-                className="likeIcon"
-                onClick={likeHandler}
-                style={{ color: "red" }}
-              />
-            ) : (
-              <Favorite
-                className="likeIcon"
-                onClick={likeHandler}
-                style={{ color: "#303030" }}
-              />
-            )}
-            {/* <span className="postLikeCounter">
+      </div>
+      <div className="postCenter">
+        <span className="postText">{post?.desc}</span>
+        <img
+          //TODO: fix image
+          src={`${post.img}`}
+          className="postImg"
+          alt=""
+        />
+      </div>
+      <div className="postBottom">
+        <div className="postBottomLeft">
+          {isLiked ? (
+            <Favorite
+              className="likeIcon"
+              onClick={likeHandler}
+              style={{ color: "red" }}
+            />
+          ) : (
+            <Favorite
+              className="likeIcon"
+              onClick={likeHandler}
+              style={{ color: "#303030" }}
+            />
+          )}
+          {/* <span className="postLikeCounter">
               {post.likes.length === 0 ? null : post.likes.length}
             </span> */}
-            <ChatBubbleOutline
-              style={{ color: "#303030" }}
-              onClick={commentHandler}
-            />
-          </div>
-          <div className="postBottomRight">
-            <span
-              className="postCommentText"
-              onClick={() => history.push(`/posts/${post._id}`)}
-            >
-              {/* {post.comments.length}  */}
-              Comments
-            </span>
-          </div>
+          <ChatBubbleOutline
+            style={{ color: "#303030" }}
+            onClick={commentHandler}
+          />
         </div>
-        {addComment ? addCommentSection : null}
+        <div className="postBottomRight">
+          <span
+            className="postCommentText"
+            onClick={() => history.push(`/posts/${post._id}`)}
+          >
+            {/* {post.comments.length}  */}
+            Comments
+          </span>
+        </div>
       </div>
+      {addComment ? addCommentSection : null}
     </div>
   );
 }

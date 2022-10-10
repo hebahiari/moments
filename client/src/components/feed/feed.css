@@ -23,15 +23,6 @@
   column-gap: 15px;
 }
 
-.postWrapper {
-  width: 100%;
-  min-width: 200px;
-  max-width: 400px;
-  max-height: 400px;
-  min-height: 100px;
-  display: inline-block;
-}
-
 .feedHr {
   margin: 30px 20px;
   opacity: 0.5;
@@ -55,9 +46,6 @@
 }
 
 @media (max-width: 768px) {
-  .postWrapper {
-  }
-
   .feedPosts {
     display: flex;
     flex-direction: column;
