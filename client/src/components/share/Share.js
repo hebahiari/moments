@@ -3,11 +3,13 @@ import { PermMedia, EmojiEmotions, Cancel } from "@mui/icons-material";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { sharePost, uploadImage } from "../../utils/api";
+import { useHistory } from "react-router-dom";
 
 export default function Share() {
   const { user } = useContext(AuthContext);
   const desc = useRef();
   const [file, setFile] = useState("");
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,7 +31,7 @@ export default function Share() {
     }
 
     try {
-      sharePost(newPost);
+      sharePost(newPost).then(history.go());
     } catch (error) {
       console.log(error);
     }

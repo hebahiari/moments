@@ -16,14 +16,16 @@ router.post("/", async (req, res) => {
 });
 
 // delete a post
-router.delete("/:id", async (req, res) => {
+router.delete("/:id/:userId", async (req, res) => {
+  const userId = req.params.userId;
   try {
     const post = await Post.findById(req.params.id);
-    if (post.userId !== req.body.userId) {
+    if (post.userId !== userId) {
       res.status(403).json("you can only make changes to your posts");
+    } else {
+      await post.deleteOne();
+      res.status(200).json("the post has been deleted");
     }
-    await post.deleteOne();
-    res.status(200).json("the post has been deleted");
   } catch (error) {
     res.status(500).json(error);
   }

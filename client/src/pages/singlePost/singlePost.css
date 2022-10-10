@@ -30,3 +30,7 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
+
+.commentsText {
+  margin-top: 20px;
+}

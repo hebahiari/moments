@@ -72,3 +72,7 @@ export async function unfollowUser(userId, currentUserId) {
     userId: currentUserId,
   });
 }
+
+export async function deletePost(postId, userId) {
+  return await axios.delete(`/posts/${postId}/${userId}`);
+}

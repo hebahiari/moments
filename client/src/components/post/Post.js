@@ -6,6 +6,7 @@ import { format } from "timeago.js";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import { BasicPopover } from "../popover/BasicPopover";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
@@ -48,9 +49,6 @@ export default function Post({ post }) {
       console.log(error);
     }
   };
-
-  //TODO: show delete option
-  const optionsHandler = () => {};
 
   const addCommentSection = (
     <>
@@ -99,7 +97,7 @@ export default function Post({ post }) {
             </span>
           </div>
           <div className="postTopRight">
-            <MoreVert className="" onClick={optionsHandler} />
+            <BasicPopover postId={post._id} />
           </div>
         </div>
         <div className="postCenter">
@@ -139,7 +137,8 @@ export default function Post({ post }) {
               className="postCommentText"
               onClick={() => history.push(`/posts/${post._id}`)}
             >
-              {post.comments.length} Comments
+              {/* {post.comments.length}  */}
+              Comments
             </span>
           </div>
         </div>
