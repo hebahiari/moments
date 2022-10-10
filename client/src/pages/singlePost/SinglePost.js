@@ -42,7 +42,9 @@ export default function SinglePost() {
         <div className="commentsWrapper">
           <h1 className="commentsTitle">Comments</h1>
           <div className="comments">
-            {" "}
+            {comments.length === 0 ? (
+              <div className="commentsText">No Comments!</div>
+            ) : null}
             {comments?.length
               ? comments.map((comment) => <Comment comment={comment} />)
               : null}

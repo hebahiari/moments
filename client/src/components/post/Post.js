@@ -3,13 +3,15 @@ import { MoreVert, Favorite, ChatBubbleOutline } from "@mui/icons-material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { getUserById, likeDislikePost, sendComment } from "../../utils/api";
 import { format } from "timeago.js";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
-  const [addComment, setAddComment] = useState(false);
+  const [addComment, setAddComment] = useState(
+    useParams().postId ? true : false
+  );
   const currentUser = useContext(AuthContext).user;
   const history = useHistory();
   const isLiked = post.likes.includes(currentUser._id);
