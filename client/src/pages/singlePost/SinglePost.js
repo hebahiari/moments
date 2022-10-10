@@ -16,7 +16,13 @@ export default function SinglePost() {
 
     try {
       getPost(postId).then((response) => setPost(response.data));
-      getPostComments(postId).then((response) => setComments(response.data));
+      getPostComments(postId).then((response) =>
+        setComments(
+          response.data.sort((postA, postB) => {
+            return new Date(postB.createdAt) - new Date(postA.createdAt);
+          })
+        )
+      );
     } catch (error) {
       if (error.name === "AbortError") {
         // Ignore `AbortError`
@@ -34,9 +40,13 @@ export default function SinglePost() {
       <div className="singlePostWrapper">
         {post._id ? <Post post={post} /> : null}
         <div className="commentsWrapper">
-          {comments?.length
-            ? comments.map((comment) => <Comment comment={comment} />)
-            : null}
+          <h1 className="commentsTitle">Comments</h1>
+          <div className="comments">
+            {" "}
+            {comments?.length
+              ? comments.map((comment) => <Comment comment={comment} />)
+              : null}
+          </div>
         </div>
       </div>
     </>

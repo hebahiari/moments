@@ -18,26 +18,23 @@ export default function Comments(comment) {
 
   return (
     <>
-      <div className="postTop">
-        <div className="postTopLeft">
-          <Link
-            to={`profile/${user.username}`}
-            style={{ textDecoration: "none" }}
-          >
-            <img src={user.profilePicture} className="postProfileImg" alt="" />
-          </Link>
-          <Link
-            to={`profile/${user.username}`}
-            style={{ textDecoration: "none" }}
-          >
-            <span className="postUsername">{user.username}</span>
-          </Link>
-          <span className="postDate">{format(comment.createdAt)}</span>
-        </div>
-        <div className="postTopRight"></div>
+      <div className="postTopLeft">
+        <Link
+          to={`profile/${user.username}`}
+          style={{ textDecoration: "none" }}
+        >
+          <img src={user.profilePicture} className="postProfileImg" alt="" />
+        </Link>
+        <Link
+          to={`profile/${user.username}`}
+          style={{ textDecoration: "none" }}
+        >
+          <span className="postUsername">{user.username}:</span>
+        </Link>{" "}
+        <div className="postText">{comment.comment.desc}</div>
+        {/* <span className="postDate">{format(comment.createdAt)}</span> */}
       </div>
-      <div className="postText">{comment.comment.desc}</div>
-      <hr className="commentHr" />
+      <div className="postTopRight"></div>
     </>
   );
 }

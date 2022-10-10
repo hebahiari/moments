@@ -43,6 +43,7 @@
 
 .postText {
   padding: 25px;
+  word-wrap: normal;
 }
 
 .postImg {

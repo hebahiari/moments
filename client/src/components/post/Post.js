@@ -41,7 +41,7 @@ export default function Post({ post }) {
       desc: comment.current.value,
     };
     try {
-      sendComment(newComment);
+      sendComment(newComment).then(history.go());
     } catch (error) {
       console.log(error);
     }
