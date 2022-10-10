@@ -10,6 +10,8 @@ const postsRouter = require("./routes/posts");
 const commentsRouter = require("./routes/comments");
 const multer = require("multer");
 const path = require("path");
+const multerS3 = require("multer-s3");
+const { S3Client } = require("@aws-sdk/client-s3");
 
 dotenv.config();
 
@@ -25,17 +27,32 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 //TODO: replace this section && switch to S3 storage bucket
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/images");
+
+const s3 = new S3Client({
+  region: "us-west-1",
+  credentials: {
+    accessKeyId: process.env.ACCESS_KEY_AWS,
+    secretAccessKey: process.env.ACCESS_SECRET_AWS,
   },
-  filename: (req, file, cb) => {
-    console.log("----------");
-    cb(null, req.body.name);
-  },
+  sslEnabled: false,
+  s3ForcePathStyle: true,
+  signatureVersion: "v4",
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "petsgram-app",
+    // acl: "public-read",
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, cb) {
+      cb(null, req.body.name);
+    },
+  }),
+});
+
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
     return res.status(200).json("File uploaded");
@@ -43,6 +60,27 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     console.log(error);
   }
 });
+
+///
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/images");
+//   },
+//   filename: (req, file, cb) => {
+//     console.log("----------");
+//     cb(null, req.body.name);
+//   },
+// });
+// const upload = multer({ storage })
+// app.post("/api/upload", upload.single("file"), (req, res) => {
+//   try {
+//     return res.status(200).json("File uploaded");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
 ////////
 
 app.use("/api/users", usersRouter);
