@@ -39,15 +39,17 @@ export default function SinglePost() {
       <TopBar />
       <div className="singlePostWrapper">
         {post._id ? <Post post={post} /> : null}
-        <div className="commentsWrapper">
-          <h1 className="commentsTitle">Comments</h1>
-          <div className="comments">
-            {comments.length === 0 ? (
-              <div className="commentsText">No Comments!</div>
-            ) : null}
-            {comments?.length
-              ? comments.map((comment) => <Comment comment={comment} />)
-              : null}
+        <div className="commentsSection">
+          <div className="commentsWrapper">
+            <h1 className="commentsTitle">Comments</h1>
+            <div className="comments">
+              {comments.length === 0 ? (
+                <div className="commentsText">No Comments!</div>
+              ) : null}
+              {comments?.length
+                ? comments.map((comment) => <Comment comment={comment} />)
+                : null}
+            </div>
           </div>
         </div>
       </div>
