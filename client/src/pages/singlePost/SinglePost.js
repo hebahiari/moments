@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getPost, getPostComments } from "../../utils/api";
 import { useEffect, useState } from "react";
 import Post from "../../components/post/Post";
-import Comments from "../../components/comments/Comments";
+import Comment from "../../components/comment/Comment";
 
 export default function SinglePost() {
   const postId = useParams().postId;
@@ -15,10 +15,8 @@ export default function SinglePost() {
     const abortController = new AbortController();
 
     try {
-      getPost(postId)
-        .then((response) => setPost(response.data))
-        .then(getPostComments(postId))
-        .then((response) => setComments(response));
+      getPost(postId).then((response) => setPost(response.data));
+      getPostComments(postId).then((response) => setComments(response.data));
     } catch (error) {
       if (error.name === "AbortError") {
         // Ignore `AbortError`
@@ -35,7 +33,11 @@ export default function SinglePost() {
       <TopBar />
       <div className="singlePostWrapper">
         {post._id ? <Post post={post} /> : null}
-        {comments.length ? <Comments comments={comments} /> : null}
+        <div className="commentsWrapper">
+          {comments?.length
+            ? comments.map((comment) => <Comment comment={comment} />)
+            : null}
+        </div>
       </div>
     </>
   );
