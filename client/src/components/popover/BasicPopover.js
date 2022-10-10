@@ -13,8 +13,6 @@ export function BasicPopover({ postId, userId }) {
   const currentUser = React.useContext(AuthContext).user;
   const history = useHistory();
 
-  console.log(userId, currentUser._id);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

@@ -56,7 +56,7 @@ export async function getPost(postId) {
 }
 
 export async function uploadImage(data) {
-  await axios.post("/upload", data);
+  return await axios.post("/upload", data);
 }
 
 export async function getFollowingUsers(userId) {

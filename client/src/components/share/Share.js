@@ -19,21 +19,24 @@ export default function Share() {
     };
     if (file) {
       const data = new FormData();
-      const fileName = "" + user._id + Date.now() + file.name;
-      data.append("name", fileName);
+      data.append("name", file.name);
       data.append("file", file);
-      newPost.img = fileName;
+      newPost.img = file.location;
       try {
-        uploadImage(data);
+        uploadImage(data)
+          .then((response) => {
+            newPost.img = response.data;
+          })
+          .then(() => sharePost(newPost).then(history.go()));
       } catch (error) {
         console.log(error);
       }
-    }
-
-    try {
-      sharePost(newPost).then(history.go());
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        sharePost(newPost).then(history.go());
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -46,6 +49,7 @@ export default function Share() {
             placeholder={`What would you like to share today, ${user.username}?`}
             type="textArea"
             className="shareInput"
+            required
             ref={desc}
           />
         </div>

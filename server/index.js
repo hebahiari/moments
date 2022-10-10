@@ -12,6 +12,7 @@ const multer = require("multer");
 const path = require("path");
 const multerS3 = require("multer-s3");
 const { S3Client } = require("@aws-sdk/client-s3");
+const shortId = require("shortid");
 
 dotenv.config();
 
@@ -43,45 +44,24 @@ const upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: "petsgram-app",
-    // acl: "public-read",
+    acl: "public-read",
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      cb(null, req.body.name);
+      cb(null, shortId.generate() + "-" + file.originalname);
     },
   }),
 });
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
-    return res.status(200).json("File uploaded");
+    const url = req.file.location;
+    return res.status(200).json(url);
   } catch (error) {
     console.log(error);
   }
 });
-
-///
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "public/images");
-//   },
-//   filename: (req, file, cb) => {
-//     console.log("----------");
-//     cb(null, req.body.name);
-//   },
-// });
-// const upload = multer({ storage })
-// app.post("/api/upload", upload.single("file"), (req, res) => {
-//   try {
-//     return res.status(200).json("File uploaded");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-////////
 
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
