@@ -7,7 +7,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SinglePost from "./pages/singlePost/SinglePost";
-import SearchUsername from "./pages/search/SearchUsername";
+import Search from "./pages/search/Search";
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -21,7 +22,7 @@ function App() {
         <Welcome />
       </Route>
       <Route path="/search">
-        <SearchUsername />
+        <Search />
       </Route>
       <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
       <Route path="/register">
@@ -32,6 +33,9 @@ function App() {
       </Route>
       <Route path="/posts/:postId">
         <SinglePost />
+      </Route>
+      <Route>
+        <NotFound />
       </Route>
     </Switch>
   );

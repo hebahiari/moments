@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getUserByUsername } from "../../utils/api";
 import { useParams } from "react-router";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
+import { Edit } from "@mui/icons-material";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -36,6 +37,9 @@ export default function Profile() {
           <div className="profileCover">
             <img src={user.coverPhoto} className="profileCoverImg" alt="" />
             <img src={user.profilePicture} className="profilePicture" alt="" />
+            <div className="profilePictureEditButton">
+              <Edit />
+            </div>
           </div>
           <div>
             <h4 className="profileInfoName">{user.username}</h4>

@@ -6,17 +6,19 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function TopBar() {
   const { user } = useContext(AuthContext);
   const [menuClicked, setMenuClicked] = useState(false);
+  const history = useHistory();
+  const searchUsername = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("searching....");
+    history.push(`/search?username=${searchUsername.current.value}`);
   };
 
   const handleClick = () => {
@@ -59,6 +61,7 @@ export default function TopBar() {
               type="text"
               placeholder="Search Usernames"
               className="searchInput"
+              ref={searchUsername}
             />
           </form>
         </div>

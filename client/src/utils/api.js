@@ -31,16 +31,16 @@ export async function loginCall(userCredentials, dispatch) {
 }
 
 export async function registerUser(user) {
-  const res = await axios.post("/auth/register", user);
+  return await axios.post("/auth/register", user);
 }
 
 export async function likeDislikePost(postId, userId) {
-  const res = await axios.put(`/posts/${postId}/like`, { userId: userId });
+  return await axios.put(`/posts/${postId}/like`, { userId: userId });
 }
 
 export async function sendComment(comment) {
   console.log({ comment });
-  await axios.post(`/comments`, comment);
+  return await axios.post(`/comments`, comment);
 }
 
 export async function getPostComments(postId) {
@@ -48,7 +48,7 @@ export async function getPostComments(postId) {
 }
 
 export async function sharePost(post) {
-  await axios.post("/posts", post);
+  return await axios.post("/posts", post);
 }
 
 export async function getPost(postId) {
@@ -79,4 +79,8 @@ export async function unfollowUser(userId, currentUserId) {
 
 export async function deletePost(postId, userId) {
   return await axios.delete(`/posts/${postId}/${userId}`);
+}
+
+export async function findMatchingUsernames(username) {
+  return await axios.get(`/users/search/${username}`);
 }

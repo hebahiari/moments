@@ -29,6 +29,19 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//get matching usernames
+router.get("/search/:username", async (req, res) => {
+  const searchedUsername = req.params.username;
+  try {
+    const foundUsers = await User.find({
+      username: { $regex: searchedUsername, $options: "i" },
+    });
+    res.status(200).json(foundUsers);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 //get a user
 router.get("/", async (req, res) => {
   const userId = req.query.userId;

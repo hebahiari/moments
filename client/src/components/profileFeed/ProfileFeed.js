@@ -32,7 +32,7 @@ export default function ProfileFeed({ username }) {
         {!username || username === user.username ? <Share /> : null}
       </div>
       {/* <hr className="profileFeedHr" /> */}
-      {posts.length === 0 ? <NoPosts /> : null}
+      {posts.length === 0 ? <NoPosts message={"no posts yet!"} /> : null}
       <div className="profileFeedPosts">
         {posts.map((post) => (
           <Post key={post._id} post={post} />

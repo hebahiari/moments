@@ -74,7 +74,9 @@ export default function Feed({ username }) {
             : followingPosts.map((post) => <Post key={post._id} post={post} />)}
         </div>
         <div className="feedNoPosts">
-          {followingPosts.length === 0 && !showAllPosts ? <NoPosts /> : null}
+          {followingPosts.length === 0 && !showAllPosts ? (
+            <NoPosts message={"no posts here!"} />
+          ) : null}
         </div>
       </div>
     </div>
