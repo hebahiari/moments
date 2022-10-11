@@ -42,7 +42,35 @@
 }
 
 .profilePictureEditButton {
-  position: relative;
+  position: absolute;
+  top: 250px;
+  left: 52%;
+  right: auto;
+  width: 30px;
+  height: 30px;
+  background-color: #ffa000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+}
+
+.coverPhotoEditButton {
+  position: absolute;
+  top: 200px;
+  left: 97%;
+  right: auto;
+  width: 30px;
+  height: 30px;
+  background-color: #ffa000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
 }
 
 .profileBottomInfo {

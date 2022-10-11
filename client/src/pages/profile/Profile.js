@@ -2,15 +2,18 @@ import "./profile.css";
 import TopBar from "../../components/topbar/TopBar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ProfileFeed from "../../components/profileFeed/ProfileFeed";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getUserByUsername } from "../../utils/api";
 import { useParams } from "react-router";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import { Edit } from "@mui/icons-material";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Profile() {
   const [user, setUser] = useState({});
   const { username } = useParams();
+  const { user: currentUser } = useContext(AuthContext);
+  const [file, setFile] = useState("");
 
   // get user
   useEffect(() => {
@@ -29,6 +32,10 @@ export default function Profile() {
     return () => abortController.abort();
   }, [username]);
 
+  const handleEditProfilePicture = () => {};
+
+  const handleEditCoverPhoto = () => {};
+
   return (
     <>
       <TopBar />
@@ -36,10 +43,23 @@ export default function Profile() {
         <div className="profileTop">
           <div className="profileCover">
             <img src={user.coverPhoto} className="profileCoverImg" alt="" />
+            {currentUser.username === username ? (
+              <div
+                className="coverPhotoEditButton"
+                onClick={handleEditCoverPhoto}
+              >
+                <Edit />
+              </div>
+            ) : null}
             <img src={user.profilePicture} className="profilePicture" alt="" />
-            <div className="profilePictureEditButton">
-              <Edit />
-            </div>
+            {currentUser.username === username ? (
+              <div
+                className="profilePictureEditButton"
+                onClick={handleEditProfilePicture}
+              >
+                <Edit />
+              </div>
+            ) : null}
           </div>
           <div>
             <h4 className="profileInfoName">{user.username}</h4>

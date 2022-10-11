@@ -39,13 +39,16 @@ export default function Search() {
             className="searchInput"
           />
         </div>
-        <div className="searchResults">
-          {found.length == 0 ? (
-            <NoPosts message={"no results found"} />
-          ) : (
-            found.map((person) => <UserIcon person={person} />)
-          )}
-        </div>
+
+        {found.length == 0 ? (
+          <NoPosts message={"no results found"} />
+        ) : (
+          <div className="searchResults">
+            {found.map((person) => (
+              <UserIcon person={person} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
