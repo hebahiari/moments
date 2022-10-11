@@ -105,4 +105,8 @@
     align-items: center;
     padding-left: 0;
   } */
+
+  .coverPhotoEditButton {
+    left: 90%;
+  }
 }

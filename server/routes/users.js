@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { resetWatchers } = require("nodemon/lib/monitor/watch");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
@@ -142,6 +141,20 @@ router.put("/:id/unfollow", async (req, res) => {
     } else {
       res.status(403).json("you don't follow this user!");
     }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+//change profile picture
+router.put("/:id/img", async (req, res) => {
+  const img = req.body.img;
+
+  try {
+    // find the current user
+    const user = await User.findById(req.params.id);
+    await user.updateOne({ profilePicture: img });
+    res.status(200).json("picture updated!");
   } catch (error) {
     res.status(500).json(error);
   }

@@ -2,8 +2,6 @@ import "./userIcon.css";
 import { Link } from "react-router-dom";
 
 export default function UserIcon({ person }) {
-  console.log("hellooooooo");
-  console.log({ person });
   return (
     <Link
       className="user"

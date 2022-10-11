@@ -5,8 +5,8 @@ import ProfileFeed from "../../components/profileFeed/ProfileFeed";
 import { useContext, useEffect, useState } from "react";
 import {
   getUserByUsername,
-  uploadProfileImage,
-  uploadCoverPhoto,
+  uploadImage,
+  updateProfilePicture,
 } from "../../utils/api";
 import { useParams } from "react-router";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
@@ -19,7 +19,6 @@ export default function Profile() {
   const { username } = useParams();
   const { user: currentUser } = useContext(AuthContext);
   const [file, setFile] = useState("");
-  const [uploaded, setUploaded] = useState(false);
   const history = useHistory();
 
   // get user
@@ -39,17 +38,24 @@ export default function Profile() {
     return () => abortController.abort();
   }, [username]);
 
-  // useEffect(() => {
-  //   const data = new FormData();
-  //   data.append("name", file.name);
-  //   data.append("file", file);
-  //   try {
-  //     uploadProfileImage(data).then(history.go());
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [uploaded]);
+  useEffect(() => {
+    if (file) {
+      console.log("changing .... ");
+      const data = new FormData();
+      data.append("name", file.name);
+      data.append("file", file);
+      try {
+        console.log("uploading ... ");
+        uploadImage(data).then((response) =>
+          updateProfilePicture(response.data, currentUser._id).history.go()
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [file]);
 
+  //TODO
   const handleEditCoverPhoto = () => {};
 
   return (
@@ -76,9 +82,9 @@ export default function Profile() {
                   type="file"
                   id="file"
                   accept=".png,.jpg,.jpeg"
-                  onChange={(event) =>
-                    setFile(event.target.files[0]).setUploaded(true)
-                  }
+                  onChange={(event) => {
+                    setFile(event.target.files[0]);
+                  }}
                 ></input>
               </label>
             ) : null}
