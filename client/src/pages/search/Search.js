@@ -5,6 +5,7 @@ import useQuery from "../../utils/useQuery";
 import { useEffect, useState } from "react";
 import { findMatchingUsernames } from "../../utils/api";
 import NoPosts from "../../components/noPosts/NoPosts";
+import UserIcon from "../../components/userIcon/UserIcon";
 
 export default function Search() {
   // getting the searched username
@@ -42,7 +43,7 @@ export default function Search() {
           {found.length == 0 ? (
             <NoPosts message={"no results found"} />
           ) : (
-            found.toString()
+            found.map((person) => <UserIcon person={person} />)
           )}
         </div>
       </div>

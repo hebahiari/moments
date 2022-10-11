@@ -10,6 +10,7 @@ import {
 } from "../../utils/api";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import UserIcon from "../userIcon/UserIcon";
 
 export default function ProfileInfo({ user }) {
   const [followingUsers, setFollowingUsers] = useState([]);
@@ -75,22 +76,7 @@ export default function ProfileInfo({ user }) {
           <div className="profileInfoFollowings">
             {followingUsers.length ? (
               followingUsers.map((person) => {
-                return (
-                  <Link
-                    className="profileInfoFollowing"
-                    to={`/profile/${person.username}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <img
-                      src={person.profilePicture}
-                      alt=""
-                      className="profileInfoFollowingImg"
-                    />
-                    <span className="profileInfoFollowingName">
-                      {person.username}
-                    </span>
-                  </Link>
-                );
+                return <UserIcon person={person} />;
               })
             ) : (
               <span className="profileInfoInfoValue">not following anyone</span>
@@ -102,22 +88,7 @@ export default function ProfileInfo({ user }) {
           <div className="profileInfoFollowings">
             {followersUsers.length ? (
               followersUsers.map((person) => {
-                return (
-                  <Link
-                    to={`/profile/${person.username}`}
-                    style={{ textDecoration: "none" }}
-                    className="profileInfoFollowing"
-                  >
-                    <img
-                      src={person.profilePicture}
-                      alt=""
-                      className="profileInfoFollowingImg"
-                    />
-                    <span className="profileInfoFollowingName">
-                      {person.username}
-                    </span>
-                  </Link>
-                );
+                return <UserIcon person={person} />;
               })
             ) : (
               <span className="profileInfoInfoValue">no followers</span>

@@ -26,7 +26,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   background-color: white;
   border-radius: 10px;
   -webkit-box-shadow: 5px 5px 15px -9px rgba(0, 0, 0, 0.34);
