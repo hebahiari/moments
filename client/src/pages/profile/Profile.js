@@ -47,7 +47,9 @@ export default function Profile() {
       try {
         console.log("uploading ... ");
         uploadImage(data).then((response) =>
-          updateProfilePicture(response.data, currentUser._id).history.go()
+          updateProfilePicture(response.data, currentUser._id).then(
+            history.go()
+          )
         );
       } catch (error) {
         console.log(error);
