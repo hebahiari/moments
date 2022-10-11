@@ -1,18 +1,18 @@
-.profileInfo {
+/* .profileInfo {
   display: flex;
   justify-content: flex-start;
-}
+} */
 
 .profileInfoName {
   font-size: 20px;
 }
 
-.profileInfoWrapper {
+/* .profileInfoWrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-}
+} */
 
 .profileInfoTitle {
   font-size: 18px;

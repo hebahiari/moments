@@ -5,9 +5,8 @@ const bcrypt = require("bcrypt");
 //Register
 
 router.post("/register", async (req, res) => {
+  //ADD: verification that email is not already in use
 
-    //ADD: verification that email is not already in use
-    
   try {
     // generate encypted password
     const salt = await bcrypt.genSalt(10);
@@ -24,8 +23,8 @@ router.post("/register", async (req, res) => {
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json(error)  
-}
+    res.status(500).json(error);
+  }
 });
 
 //Login
@@ -33,21 +32,24 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // check if user exists
+    console.log(req.body);
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(404).json("User not found");
+    if (!user) {
+      res.status(404).json("User not found");
+    } else {
+      // validate password
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
 
-    // validate password
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-
-    !validPassword && res.status(400).json("wrong password!");
-
-    res.status(200).json(user);
+      !validPassword
+        ? res.status(400).json("wrong password!")
+        : res.status(200).json(user);
+    }
   } catch (error) {
-res.status(500).json(error)  
-}
+    res.status(500).json(error);
+  }
 });
 
 module.exports = router;

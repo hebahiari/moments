@@ -49,32 +49,32 @@ export default function ProfileInfo({ user }) {
   };
 
   return (
-    <div className="profileInfo">
-      <div className="profileInfoWrapper">
-        {user._id !== currentUser._id && (
-          <button className="profileInfoFollowButton" onClick={handleClick}>
-            {followed ? (
-              <Remove style={{ color: "white" }} />
-            ) : (
-              <Add style={{ color: "white" }} />
-            )}
-            {followed ? "Unfollow" : "Follow"}
-          </button>
-        )}
-        <h4 className="profileInfoTitle">User Information</h4>
-        <div className="profileInfoSections">
-          <div className="profileInfoSection">
-            <span className="profileInfoInfoKey">Pets:</span>
-            <span className="profileInfoInfoValue">
-              {user.pets && user.pets.length
-                ? user.pets.join("! ")
-                : "No data yet"}
-            </span>
-          </div>
-          <div className="profileInfoSection">
-            <h4 className="profileInfoInfoKey">Following:</h4>
-            <div className="profileInfoFollowings">
-              {followingUsers.map((person) => {
+    <>
+      {user._id !== currentUser._id && (
+        <button className="profileInfoFollowButton" onClick={handleClick}>
+          {followed ? (
+            <Remove style={{ color: "white" }} />
+          ) : (
+            <Add style={{ color: "white" }} />
+          )}
+          {followed ? "Unfollow" : "Follow"}
+        </button>
+      )}
+      <h4 className="profileInfoTitle">User Information</h4>
+      <div className="profileInfoSections">
+        <div className="profileInfoSection">
+          <span className="profileInfoInfoKey">Pets:</span>
+          <span className="profileInfoInfoValue">
+            {user.pets && user.pets.length
+              ? user.pets.join("! ")
+              : "no data yet"}
+          </span>
+        </div>
+        <div className="profileInfoSection">
+          <h4 className="profileInfoInfoKey">Following:</h4>
+          <div className="profileInfoFollowings">
+            {followingUsers.length ? (
+              followingUsers.map((person) => {
                 return (
                   <Link
                     className="profileInfoFollowing"
@@ -91,35 +91,40 @@ export default function ProfileInfo({ user }) {
                     </span>
                   </Link>
                 );
-              })}
-            </div>
+              })
+            ) : (
+              <span className="profileInfoInfoValue">not following anyone</span>
+            )}
           </div>
-          <div className="profileInfoSection">
-            <h4 className="profileInfoInfoKey">Followers:</h4>
-            <div className="profileInfoFollowings">
-              <div className="profileInfoFollowing">
-                {followersUsers.map((person) => {
-                  return (
-                    <Link
-                      to={`/profile/${person.username}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <img
-                        src={person.profilePicture}
-                        alt=""
-                        className="profileInfoFollowingImg"
-                      />
-                      <span className="profileInfoFollowingName">
-                        {person.username}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
+        </div>
+        <div className="profileInfoSection">
+          <h4 className="profileInfoInfoKey">Followers:</h4>
+          <div className="profileInfoFollowings">
+            {followersUsers.length ? (
+              followersUsers.map((person) => {
+                return (
+                  <Link
+                    to={`/profile/${person.username}`}
+                    style={{ textDecoration: "none" }}
+                    className="profileInfoFollowing"
+                  >
+                    <img
+                      src={person.profilePicture}
+                      alt=""
+                      className="profileInfoFollowingImg"
+                    />
+                    <span className="profileInfoFollowingName">
+                      {person.username}
+                    </span>
+                  </Link>
+                );
+              })
+            ) : (
+              <span className="profileInfoInfoValue">no followers</span>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

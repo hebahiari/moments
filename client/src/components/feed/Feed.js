@@ -5,6 +5,7 @@ import "./feed.css";
 import { getFollowingPosts, getUserPosts, getAllPosts } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import NoPosts from "../noPosts/NoPosts";
 
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
@@ -68,13 +69,12 @@ export default function Feed({ username }) {
           </span>
         </div>
         <div className="feedPosts">
-          {showAllPosts ? (
-            posts.map((post) => <Post key={post._id} post={post} />)
-          ) : followingPosts.length ? (
-            followingPosts.map((post) => <Post key={post._id} post={post} />)
-          ) : (
-            <span>No Posts</span>
-          )}
+          {showAllPosts
+            ? posts.map((post) => <Post key={post._id} post={post} />)
+            : followingPosts.map((post) => <Post key={post._id} post={post} />)}
+        </div>
+        <div className="feedNoPosts">
+          {followingPosts.length === 0 && !showAllPosts ? <NoPosts /> : null}
         </div>
       </div>
     </div>

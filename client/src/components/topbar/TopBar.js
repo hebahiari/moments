@@ -14,6 +14,11 @@ export default function TopBar() {
   const { user } = useContext(AuthContext);
   const [menuClicked, setMenuClicked] = useState(false);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("searching....");
+  };
+
   const handleClick = () => {
     setMenuClicked(!menuClicked);
   };
@@ -49,11 +54,13 @@ export default function TopBar() {
       <div className="topbarCenter">
         <div className="searchBar">
           <Search className="icon" />
-          <input
-            type="text"
-            placeholder="Search Moments"
-            className="searchInput"
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Search Usernames"
+              className="searchInput"
+            />
+          </form>
         </div>
       </div>
       <div className="topbarLeft">
