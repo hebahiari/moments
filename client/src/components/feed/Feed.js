@@ -51,26 +51,30 @@ export default function Feed({ username }) {
         </div>
         {/* <hr className="feedHr" /> */}
         <div className="feedOptions">
-          <Link
+          <span
             onClick={() => setShowAllPosts(true)}
             style={{ textDecoration: "none" }}
             className={showAllPosts ? "feedOptionsOrange" : "feedOptionsGrey"}
           >
             Around the World
-          </Link>
+          </span>
           <span> | </span>
-          <Link
+          <span
             onClick={() => setShowAllPosts(false)}
             style={{ textDecoration: "none" }}
             className={!showAllPosts ? "feedOptionsOrange" : "feedOptionsGrey"}
           >
             Following
-          </Link>
+          </span>
         </div>
         <div className="feedPosts">
-          {showAllPosts
-            ? posts.map((post) => <Post key={post._id} post={post} />)
-            : followingPosts.map((post) => <Post key={post._id} post={post} />)}
+          {showAllPosts ? (
+            posts.map((post) => <Post key={post._id} post={post} />)
+          ) : followingPosts.length ? (
+            followingPosts.map((post) => <Post key={post._id} post={post} />)
+          ) : (
+            <span>No Posts</span>
+          )}
         </div>
       </div>
     </div>

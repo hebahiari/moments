@@ -13,10 +13,12 @@ export default function Post({ post }) {
   const [addComment, setAddComment] = useState(
     useParams().postId ? true : false
   );
+
   const currentUser = useContext(AuthContext).user;
   const history = useHistory();
   const isLiked = post.likes.includes(currentUser._id);
   const comment = useRef();
+  const [liked, setLiked] = useState(isLiked);
 
   //fetch users
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function Post({ post }) {
   //ADD: actual like
   const likeHandler = () => {
     try {
-      likeDislikePost(post._id, currentUser._id).then(history.go());
+      likeDislikePost(post._id, currentUser._id).then(() => setLiked(!liked));
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +94,7 @@ export default function Post({ post }) {
           </span>
         </div>
         <div className="postTopRight">
-          <BasicPopover postId={post._id} userId={post._userId} />
+          <BasicPopover postId={post._id} userId={post.userId} />
         </div>
       </div>
       <div className="postCenter">
@@ -106,7 +108,7 @@ export default function Post({ post }) {
       </div>
       <div className="postBottom">
         <div className="postBottomLeft">
-          {isLiked ? (
+          {liked ? (
             <Favorite
               className="likeIcon"
               onClick={likeHandler}
