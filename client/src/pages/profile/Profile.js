@@ -3,17 +3,24 @@ import TopBar from "../../components/topbar/TopBar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ProfileFeed from "../../components/profileFeed/ProfileFeed";
 import { useContext, useEffect, useState } from "react";
-import { getUserByUsername } from "../../utils/api";
+import {
+  getUserByUsername,
+  uploadProfileImage,
+  uploadCoverPhoto,
+} from "../../utils/api";
 import { useParams } from "react-router";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import { Edit } from "@mui/icons-material";
 import { AuthContext } from "../../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState({});
   const { username } = useParams();
   const { user: currentUser } = useContext(AuthContext);
   const [file, setFile] = useState("");
+  const [uploaded, setUploaded] = useState(false);
+  const history = useHistory();
 
   // get user
   useEffect(() => {
@@ -32,7 +39,16 @@ export default function Profile() {
     return () => abortController.abort();
   }, [username]);
 
-  const handleEditProfilePicture = () => {};
+  // useEffect(() => {
+  //   const data = new FormData();
+  //   data.append("name", file.name);
+  //   data.append("file", file);
+  //   try {
+  //     uploadProfileImage(data).then(history.go());
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [uploaded]);
 
   const handleEditCoverPhoto = () => {};
 
@@ -53,12 +69,18 @@ export default function Profile() {
             ) : null}
             <img src={user.profilePicture} className="profilePicture" alt="" />
             {currentUser.username === username ? (
-              <div
-                className="profilePictureEditButton"
-                onClick={handleEditProfilePicture}
-              >
+              <label htmlFor="file" className="profilePictureEditButton">
                 <Edit />
-              </div>
+                <input
+                  style={{ display: "none" }}
+                  type="file"
+                  id="file"
+                  accept=".png,.jpg,.jpeg"
+                  onChange={(event) =>
+                    setFile(event.target.files[0]).setUploaded(true)
+                  }
+                ></input>
+              </label>
             ) : null}
           </div>
           <div>

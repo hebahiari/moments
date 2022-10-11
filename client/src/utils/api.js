@@ -84,3 +84,11 @@ export async function deletePost(postId, userId) {
 export async function findMatchingUsernames(username) {
   return await axios.get(`/users/search/${username}`);
 }
+
+export async function uploadProfileImage(userId, file) {
+  return await axios.put(`/upload/profile-picture/${userId}`, file);
+}
+
+export async function uploadCoverPhoto(userId, file) {
+  return await axios.put(`/upload/cover/${userId}`, file);
+}
