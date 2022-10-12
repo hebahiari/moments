@@ -52,20 +52,16 @@
 | /users/search/:username	            | returns a list of matching usernames               | GET     |
 | /users/:userId/img                   | updates the profile photo of the current user      | PUT     |
 | /users/following/:userId	            | returns a list of followed users                   | GET     |
-
 | /posts/timeline/all	               | returns a list of all posts                        | GET     |
 | /posts/timeline/:id	               | returns a list of followed users's posts           | GET     |
 | /posts/profile/:username	            | remove a list of posts of the specified user       | GET     |
 | /posts/:postId/like	               | updates the list of likes of the specified post    | PUT     |
 | /posts	                              | creates a new post                                 | POST    |
 | /posts/:postId/:userId	            | deletes a post                                     | DELETE  |
-
 | /auth/login           	            | verifies user credintials                          | POST    |
 | /auth/register                       | registers a user                                   | POST    |
-
 | /comments                 	         | creates a new comment                              | POST    |
 | /comments/:postId	                  | returns a list of comments for the specified post  | GET     |
-
 | /upload	                           | uploads a file to the s3 bucket                    | POST    |
 
 
