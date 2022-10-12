@@ -5,7 +5,11 @@ export default function NoPosts({ message }) {
     <div className="noPosts">
       <div className="noPostsTitle">{message}</div>
 
-      <img src="/assets/website/sadcat.gif" alt="" className="noPostsImg" />
+      <img
+        src="https://petsgram-app.s3.us-west-1.amazonaws.com/sadcat.gif"
+        alt=""
+        className="noPostsImg"
+      />
     </div>
   );
 }

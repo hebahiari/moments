@@ -51,7 +51,7 @@ export default function Search() {
           </form>
         </div>
 
-        {found.length == 0 ? (
+        {found.length === 0 ? (
           <NoPosts message={`no results found for "${username}"`} />
         ) : (
           <div className="searchResults">

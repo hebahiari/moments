@@ -14,12 +14,13 @@
 
 .logo {
   font-size: 30px;
-  margin-left: 20px;
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;
 }
-
+.topbarRightMenuItemNotification {
+  display: none;
+}
 .icon {
   font-size: 20px !important;
   margin-left: 10px;

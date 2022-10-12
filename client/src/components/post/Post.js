@@ -124,8 +124,9 @@ export default function Post({ post }) {
           {/* <span className="postLikeCounter">
               {post.likes.length === 0 ? null : post.likes.length}
             </span> */}
-          <ChatBubbleOutline
-            style={{ color: "#303030" }}
+          <img
+            src="https://petsgram-app.s3.us-west-1.amazonaws.com/chat-6820229_1280.png"
+            className="commentIcon"
             onClick={commentHandler}
           />
         </div>
@@ -135,7 +136,7 @@ export default function Post({ post }) {
             onClick={() => history.push(`/posts/${post._id}`)}
           >
             {/* {post.comments.length}  */}
-            Comments
+            view comments
           </span>
         </div>
       </div>

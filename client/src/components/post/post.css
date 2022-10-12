@@ -75,6 +75,12 @@
   cursor: pointer;
 }
 
+.commentIcon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
 .postLikeCounter {
   font-size: 15px;
 }

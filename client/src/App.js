@@ -11,7 +11,15 @@ import Search from "./pages/search/Search";
 import NotFound from "./pages/notFound/NotFound";
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
+
+  if (!user) {
+    let storedUser = localStorage.getItem("storedUser");
+    if (storedUser) {
+      storedUser = JSON.parse(storedUser);
+      dispatch({ type: "LOGIN_SUCCESS", payload: storedUser });
+    }
+  }
 
   return (
     <Switch>

@@ -1,5 +1,5 @@
 import "./register.css";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { useHistory } from "react-router";
 import { registerUser } from "../../utils/api";
 import { Link } from "react-router-dom";
@@ -35,7 +35,10 @@ export default function Register() {
   return (
     <div
       className="login"
-      style={{ backgroundImage: 'url("assets/website/pets.gif")' }}
+      style={{
+        backgroundImage:
+          'url("https://petsgram-app.s3.us-west-1.amazonaws.com/wallpaper-pets.gif")',
+      }}
     >
       <div className="loginWrapper">
         <div className="loginTitle">
@@ -53,12 +56,14 @@ export default function Register() {
               placeholder="Username"
               ref={username}
               required
+              minLength="8"
             />
             <input
               type="email"
               className="loginInput"
               placeholder="Email"
               ref={email}
+              minLength="8"
             />
             <input
               type="password"

@@ -63,14 +63,15 @@ export default function ProfileInfo({ user }) {
       )}
       <h4 className="profileInfoTitle">User Information</h4>
       <div className="profileInfoSections">
-        <div className="profileInfoSection">
+        {/* TODO: add pets */}
+        {/* <div className="profileInfoSection">
           <span className="profileInfoInfoKey">Pets:</span>
           <span className="profileInfoInfoValue">
             {user.pets && user.pets.length
               ? user.pets.join("! ")
               : "no data yet"}
           </span>
-        </div>
+        </div> */}
         <div className="profileInfoSection">
           <h4 className="profileInfoInfoKey">Following:</h4>
           <div className="profileInfoFollowings">

@@ -1,6 +1,5 @@
 import "./profile.css";
 import TopBar from "../../components/topbar/TopBar";
-import Sidebar from "../../components/sidebar/Sidebar";
 import ProfileFeed from "../../components/profileFeed/ProfileFeed";
 import { useContext, useEffect, useState } from "react";
 import {
@@ -67,14 +66,15 @@ export default function Profile() {
         <div className="profileTop">
           <div className="profileCover">
             <img src={user.coverPhoto} className="profileCoverImg" alt="" />
-            {currentUser.username === username ? (
+            {/* TODO: ability to edit cover photo */}
+            {/* {currentUser.username === username ? (
               <div
                 className="coverPhotoEditButton"
                 onClick={handleEditCoverPhoto}
               >
                 <Edit />
               </div>
-            ) : null}
+            ) : null} */}
             <img src={user.profilePicture} className="profilePicture" alt="" />
             {currentUser.username === username ? (
               <label htmlFor="file" className="profilePictureEditButton">

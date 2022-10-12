@@ -73,10 +73,11 @@ export default function TopBar() {
       </div>
       <div className="topbarRight">
         <ul className="topbarRightMenu">
-          <li className="topbarRightMenuItem">
+          <li className="topbarRightMenuItemNotification">
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </li>
+          {/* //TODO add notifications */}
           <li className="topbarRightMenuItem">
             <Link to={`/profile/${user.username}`}>
               <img
