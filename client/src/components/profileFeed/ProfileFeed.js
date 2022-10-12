@@ -30,10 +30,13 @@ export default function ProfileFeed({ username }) {
 
   return (
     <div className="profileFeed">
-      <div className="profileFeedShare">
-        {/*  if its the current user's profile, show share component */}
-        {!username || username === user.username ? <Share /> : null}
-      </div>
+      {/*  if its the current user's profile, show share component */}
+      {!username || username === user.username ? (
+        <div className="profileFeedShare">
+          <Share />
+        </div>
+      ) : null}
+
       {posts.length === 0 ? <NoPosts message={"no posts yet!"} /> : null}
       <div className="profileFeedPosts">
         {posts.map((post) => (

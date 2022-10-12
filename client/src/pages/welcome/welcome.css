@@ -1,6 +1,6 @@
 .welcomeWrapper {
-  background-size: cover;
   background: no-repeat center center fixed;
+  background-size: cover;
   height: 100vh;
   overflow: hidden;
 }
@@ -8,7 +8,7 @@
 .welcomeLogin {
   align-items: center;
   display: flex;
-  height: 500px;
+  height: 450px;
   justify-content: center;
 }
 
@@ -52,4 +52,10 @@
   height: 40px;
   margin: 0 10px;
   width: 100px;
+}
+
+@media (min-width: 768px) {
+  .welcomeLogin {
+    height: 550px;
+  }
 }

@@ -11,9 +11,9 @@
 }
 
 .profileBottom {
-  align-items: flex-start;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column-reverse;
 }
 
 .profileCover {
@@ -67,7 +67,7 @@
   display: flex;
   height: 30px;
   justify-content: center;
-  left: 97%;
+  left: 90%;
   position: absolute;
   right: auto;
   top: 200px;
@@ -75,10 +75,12 @@
 }
 
 .profileBottomInfo {
+  padding: 20px;
   flex: 3;
 }
 
 .profileBottomLeft {
+  display: none;
   flex: 3;
 }
 
@@ -96,21 +98,19 @@
   justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .profileBottom {
-    align-items: center;
-    flex-direction: column-reverse;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
-  /* .profileBottomInfo {
-      align-items: center;
-      padding-left: 0;
-    } */
 
   .coverPhotoEditButton {
-    left: 90%;
+    left: 97%;
   }
 
   .profileBottomLeft {
-    display: none;
+    display: flex;
+    flex: 3;
   }
 }
