@@ -44,7 +44,6 @@
 ## Documentation for API 
 | Route                                | Description                                        | Methods |
 | ------------------------------------ | -------------------------------------------------- | ------- |
-
 | /users?userId=id                     | returns a user's details                           | GET     | 
 | /users?username=username             | returns a user's details                           | GET     |  
 | /users/followers/:userId             | returns a list of followers for a specific user    | GET     |
