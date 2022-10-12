@@ -1,7 +1,7 @@
 ## Links
 * Deployed App: [Petsgram website](https://main.diaw7mtof8uhl.amplifyapp.com/)
 
-![homepage](/screenshots/homepage.JPG)
+![welcome](/screenshots/welcome.gif)
 
 ## Summary
 //TODO
@@ -23,14 +23,11 @@
 
 # Screenshots
 
-## Welcome
-![welcome](/screenshots/welcome.gif)
+## Register
+![register](/screenshots/register.PNG)
 
 ## Home Screen
 ![homepage](/screenshots/homepage.PNG)
-
-## Register
-![register](/screenshots/register.PNG)
 
 ## Profile
 ![profile](/screenshots/profile.PNG)
