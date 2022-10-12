@@ -27,16 +27,16 @@
 ![welcome](/screenshots/welcome.gif)
 
 ## Home Screen
-![homepage](/screenshots/homepage.png)
+![homepage](/screenshots/homepage.PNG)
 
 ## Register
-![register](/screenshots/register.png)
+![register](/screenshots/register.PNG)
 
 ## Profile
-![profile](/screenshots/profile.png)
+![profile](/screenshots/profile.PNG)
 
 ## Search
-![search](/screenshots/search.png)
+![search](/screenshots/search.PNG)
 
 
 ## Documentation for API 
