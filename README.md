@@ -1,5 +1,5 @@
 ## Links
-* Deployed App: [Petsgram website](https://main.diaw7mtof8uhl.amplifyapp.com/)
+* Deployed App: [Petsgram website](https://main.diaw7mtof8uhl.amplifyapp.com/) <== Feel free to share a picture of your pet!
 
 [![welcome](/screenshots/welcome.gif)](https://main.diaw7mtof8uhl.amplifyapp.com/)
 
