@@ -38,13 +38,12 @@ export default function Profile() {
   }, [username]);
 
   useEffect(() => {
+    // when an img is uploaded, change the profile photo
     if (file) {
-      console.log("changing .... ");
       const data = new FormData();
       data.append("name", file.name);
       data.append("file", file);
       try {
-        console.log("uploading ... ");
         uploadImage(data).then((response) =>
           updateProfilePicture(response.data, currentUser._id).then(
             history.go()
@@ -56,7 +55,7 @@ export default function Profile() {
     }
   }, [file]);
 
-  //TODO
+  //TODO add cover photo
   const handleEditCoverPhoto = () => {};
 
   return (

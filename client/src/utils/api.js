@@ -1,5 +1,5 @@
 import axios from "axios";
-
+//server's URL
 const API_BASE_URL = "http://54.193.51.33:8800/api";
 
 export async function getFollowingPosts(id) {
