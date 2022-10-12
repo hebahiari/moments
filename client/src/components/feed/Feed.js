@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";
 
-export default function Feed({ username }) {
+export default function Feed() {
   const [posts, setPosts] = useState([]);
   const [followingPosts, setFollowingPosts] = useState([]);
   const [showAllPosts, setShowAllPosts] = useState(true);
@@ -15,39 +15,41 @@ export default function Feed({ username }) {
 
   //fetch posts
   useEffect(() => {
-    if (username) {
-      getUserPosts(username).then((response) => setPosts(response.data));
+    // get posts for around the world tab
+    if (showAllPosts) {
+      getAllPosts().then((response) =>
+        setPosts(
+          response.data
+            //sort results by most recent
+            .sort((postA, postB) => {
+              return new Date(postB.createdAt) - new Date(postA.createdAt);
+            })
+            // limit the results to 50
+            .slice(0, 50)
+        )
+      );
     } else {
-      if (showAllPosts) {
-        getAllPosts().then((response) =>
-          setPosts(
-            response.data
-              .sort((postA, postB) => {
-                return new Date(postB.createdAt) - new Date(postA.createdAt);
-              })
-              .slice(0, 50)
-          )
-        );
-      } else {
-        getFollowingPosts(user._id).then((response) =>
-          setFollowingPosts(
-            response.data
-              .sort((postA, postB) => {
-                return new Date(postB.createdAt) - new Date(postA.createdAt);
-              })
-              .slice(0, 50)
-          )
-        );
-      }
+      //get only following posts
+      getFollowingPosts(user._id).then((response) =>
+        setFollowingPosts(
+          response.data
+            //sort results by most recent
+            .sort((postA, postB) => {
+              return new Date(postB.createdAt) - new Date(postA.createdAt);
+            })
+            // limit the results to 50
+            .slice(0, 50)
+        )
+      );
     }
-  }, [username, user._id, showAllPosts]);
+  }, [user._id, showAllPosts]);
 
   return (
     <div className="feed">
       <div className="feedWrapper">
         <div className="feedShareWrapper">
           <div className="feedShare">
-            {!username || username === user.username ? <Share /> : null}
+            <Share />
           </div>
         </div>
         {/* <hr className="feedHr" /> */}

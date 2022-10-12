@@ -1,6 +1,5 @@
 import "./profileInfo.css";
 import { Add, Remove } from "@mui/icons-material";
-import OnlineUser from "../onlineUser/OnlineUser";
 import { useContext, useEffect, useState } from "react";
 import {
   followUser,

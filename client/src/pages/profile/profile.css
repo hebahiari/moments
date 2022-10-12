@@ -75,11 +75,10 @@
 
 .profileBottomInfo {
   flex: 3;
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center; */
-  padding: 20px;
+}
+
+.profileBottomLeft {
+  flex: 3;
 }
 
 .profileInfoName {
@@ -92,8 +91,8 @@
 
 .profileBottomFeed {
   display: flex;
-  justify-content: flex-end;
-  flex: 9;
+  justify-content: center;
+  flex: 6;
 }
 
 @media (max-width: 768px) {
@@ -108,5 +107,9 @@
 
   .coverPhotoEditButton {
     left: 90%;
+  }
+
+  .profileBottomLeft {
+    display: none;
   }
 }

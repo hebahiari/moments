@@ -1,5 +1,5 @@
 import "./post.css";
-import { MoreVert, Favorite, ChatBubbleOutline } from "@mui/icons-material";
+import { Favorite } from "@mui/icons-material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { getUserById, likeDislikePost, sendComment } from "../../utils/api";
 import { format } from "timeago.js";
@@ -10,6 +10,7 @@ import { BasicPopover } from "../popover/BasicPopover";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
+  // only show add comment section initally if its the single post page
   const [addComment, setAddComment] = useState(
     useParams().postId ? true : false
   );
@@ -25,19 +26,21 @@ export default function Post({ post }) {
     getUserById(post.userId).then((response) => setUser(response.data));
   }, [post.userId]);
 
-  //ADD: actual like
   const likeHandler = () => {
     try {
+      //api checks if its liked or not and does the opposite
       likeDislikePost(post._id, currentUser._id).then(() => setLiked(!liked));
     } catch (error) {
       console.log(error);
     }
   };
 
+  // displays/hides the add comment section when comment icon is pressed
   const commentHandler = () => {
     setAddComment(!addComment);
   };
 
+  //submit new comment
   const handleSubmit = (event) => {
     event.preventDefault();
     const newComment = {
@@ -55,7 +58,6 @@ export default function Post({ post }) {
   const addCommentSection = (
     <>
       <hr className="commentHr" />
-      {/* TODO: display comments       */}
       <form className="commentInputForm" onSubmit={handleSubmit}>
         <input
           placeholder="Write your comment..."
@@ -99,12 +101,7 @@ export default function Post({ post }) {
       </div>
       <div className="postCenter">
         <span className="postText">{post?.desc}</span>
-        <img
-          //TODO: fix image
-          src={`${post.img}`}
-          className="postImg"
-          alt=""
-        />
+        <img src={`${post.img}`} className="postImg" alt="" />
       </div>
       <div className="postBottom">
         <div className="postBottomLeft">
@@ -121,6 +118,7 @@ export default function Post({ post }) {
               style={{ color: "#303030" }}
             />
           )}
+          {/* add number of likes? */}
           {/* <span className="postLikeCounter">
               {post.likes.length === 0 ? null : post.likes.length}
             </span> */}
@@ -135,6 +133,7 @@ export default function Post({ post }) {
             className="postCommentText"
             onClick={() => history.push(`/posts/${post._id}`)}
           >
+            {/* TODO: add number of comments */}
             {/* {post.comments.length}  */}
             view comments
           </span>

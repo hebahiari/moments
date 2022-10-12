@@ -17,6 +17,7 @@ export default function Share() {
       userId: user._id,
       desc: desc.current.value,
     };
+    // if the new posts includes a file when submitting
     if (file) {
       const data = new FormData();
       data.append("name", file.name);

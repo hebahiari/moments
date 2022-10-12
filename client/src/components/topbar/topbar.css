@@ -1,26 +1,28 @@
 .topbarContainer {
-  height: 60px;
-  width: 100%;
-  background-color: #e7971d;
-  display: flex;
+  -webkit-box-shadow: 0px 5px 11px 0px rgba(0, 0, 0, 0.21);
   align-items: center;
+  background-color: #e7971d;
+  box-shadow: 0px 5px 11px 0px rgba(0, 0, 0, 0.21);
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
   position: sticky;
   top: 0;
+  width: 100%;
   z-index: 999;
-  justify-content: space-between;
-  -webkit-box-shadow: 0px 5px 11px 0px rgba(0, 0, 0, 0.21);
-  box-shadow: 0px 5px 11px 0px rgba(0, 0, 0, 0.21);
 }
 
 .logo {
-  font-size: 30px;
-  font-weight: 600;
   color: #ffffff;
   cursor: pointer;
+  font-size: 30px;
+  font-weight: 600;
 }
+
 .topbarRightMenuItemNotification {
   display: none;
 }
+
 .icon {
   font-size: 20px !important;
   margin-left: 10px;
@@ -31,25 +33,25 @@
 }
 
 .topbarCenter {
-  max-width: 350px;
   margin-left: 20px;
+  max-width: 350px;
   width: 250px;
 }
 
 .searchBar {
-  width: 100%;
-  height: 30px;
+  align-items: center;
   background-color: #ffffff;
   border-radius: 30px;
-  display: flex;
-  align-items: center;
   border: 1px solid rgb(192, 192, 192);
+  display: flex;
+  height: 30px;
+  width: 100%;
 }
 
 .searchInput {
+  background-color: #ffffff;
   border: none;
   width: 100%;
-  background-color: #ffffff;
 }
 
 .searchInput:focus {
@@ -57,11 +59,11 @@
 }
 
 .topbarRight {
-  margin: 15px;
-  display: flex;
   align-items: center;
-  justify-content: flex-end;
   color: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px;
 }
 
 .topbarIcons {
@@ -69,38 +71,38 @@
 }
 
 .topbarIconsItem {
-  margin-right: 15px;
   cursor: pointer;
+  margin-right: 15px;
   position: relative;
 }
 
 .topbarIconBadge {
-  width: 15px;
-  height: 15px;
+  align-items: center;
   background-color: #c44721;
   border-radius: 50%;
+  bottom: -5px;
   color: #ffffff;
+  display: flex;
+  font-size: 12px;
+  height: 15px;
+  justify-content: center;
   position: absolute;
   top: 10px;
-  bottom: -5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  width: 15px;
 }
 
 .topbarImage {
-  width: 32px;
-  height: 32px;
   border-radius: 50%;
+  height: 32px;
+  width: 32px;
 }
 
 /* menu styling */
 .topbarRightMenu {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
   gap: 10px;
+  justify-content: space-between;
 }
 
 .topbarRightMenu li {
@@ -115,6 +117,7 @@
   .searchBar {
     display: none;
   }
+
   .topbarRightHamburgerIcon {
     display: block;
   }
@@ -124,31 +127,31 @@
   }
 
   .topbarRightHamburgerMenu {
+    align-items: center;
     background-color: #fefdfc;
-    width: 200px;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+    justify-content: flex-start;
     position: absolute;
     right: 0;
     top: 60px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
+    width: 200px;
     z-index: 3;
   }
 
   .topbarRightHamburgerItem {
-    margin-top: 20px;
-    font-weight: 600;
     color: #2b2b2b;
+    font-weight: 600;
+    margin-top: 20px;
   }
 
   .topbarRightHamburgerOverlay {
     background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
     height: 100vh;
-    width: 100vw;
-    top: 60px;
+    position: absolute;
     right: 0;
+    top: 60px;
+    width: 100vw;
   }
 }

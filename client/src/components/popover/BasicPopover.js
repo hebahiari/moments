@@ -22,7 +22,7 @@ export function BasicPopover({ postId, userId }) {
   };
 
   const handleCopy = () => {
-    //add actual link
+    //TODO: add actual link
     navigator.clipboard.writeText(`posts/${postId}`);
   };
 

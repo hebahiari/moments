@@ -1,5 +1,6 @@
 import "./noPosts.css";
 
+// displays a sad cat and a message depending on whats missing
 export default function NoPosts({ message }) {
   return (
     <div className="noPosts">

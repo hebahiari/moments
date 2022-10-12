@@ -97,6 +97,7 @@ export default function Profile() {
           </div>
         </div>
         <div className="profileBottom">
+          <div className="profileBottomLeft"></div>
           <div className="profileBottomFeed">
             <ProfileFeed username={username} />
           </div>

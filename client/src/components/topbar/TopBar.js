@@ -1,11 +1,5 @@
 import "./topbar.css";
-import {
-  Search,
-  Person,
-  Notifications,
-  Menu,
-  Close,
-} from "@mui/icons-material";
+import { Search, Notifications, Menu, Close } from "@mui/icons-material";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -18,10 +12,12 @@ export default function TopBar() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // go to search page
     history.push(`/search?username=${searchUsername.current.value}`);
   };
 
   const handleClick = () => {
+    // collapse/open menu
     setMenuClicked(!menuClicked);
   };
 

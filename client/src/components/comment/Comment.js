@@ -9,13 +9,14 @@ export default function Comments(comment) {
   const [user, setUser] = useState({});
   console.log(comment.comment);
 
-  //fetch users
+  //fetch the profile of the user that posted the comment
   useEffect(() => {
     getUserById(comment.comment.userId).then((response) =>
       setUser(response.data)
     );
   }, [comment.userId]);
 
+  //display the comment
   return (
     <>
       <div className="postTopLeft">
@@ -30,7 +31,7 @@ export default function Comments(comment) {
           style={{ textDecoration: "none" }}
         >
           <span className="postUsername">{user.username}:</span>
-        </Link>{" "}
+        </Link>
         <div className="postText">{comment.comment.desc}</div>
         {/* <span className="postDate">{format(comment.createdAt)}</span> */}
       </div>
