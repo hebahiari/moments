@@ -15,6 +15,7 @@
 ### <u>Client</u>
 * Built with create-react-app.
 * Uses [react-router](https://reactrouter.com/) for front-end routing
+* Styled with flexbox, mobile first responsive design
 ### <u>Server</u>
 * Node and Express
 ### <u>Database</u>
