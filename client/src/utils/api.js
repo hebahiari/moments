@@ -1,7 +1,8 @@
 import axios from "axios";
 //server's URL
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:8800";
+  // process.env.REACT_APP_API_BASE_URL ||
+  "https://petsgram-website-backend.herokuapp.com/";
 
 // to users
 export async function getUserById(id) {
