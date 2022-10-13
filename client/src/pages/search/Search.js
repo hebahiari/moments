@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 export default function Search() {
   // getting the searched username
-  let username;
+  let username = null;
   const [found, setFound] = useState([]);
   const history = useHistory();
   const searchUsername = useRef();
@@ -51,7 +51,7 @@ export default function Search() {
           </form>
         </div>
 
-        {found.length === 0 ? (
+        {username && found.length === 0 ? (
           <NoPosts message={`no results found for "${username}"`} />
         ) : (
           <div className="searchResults">

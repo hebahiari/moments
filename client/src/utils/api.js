@@ -86,7 +86,7 @@ export async function loginCall(userCredentials, dispatch) {
 }
 
 export async function registerUser(user) {
-  return await axios.post("${API_BASE_URL}/auth/register", user);
+  return await axios.post(`${API_BASE_URL}/auth/register`, user);
 }
 
 // to comments
