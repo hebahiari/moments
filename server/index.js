@@ -69,6 +69,6 @@ app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/comments", commentsRouter);
 
-app.listen(8800, () => {
+app.listen(process.env.PORT || 8800, () => {
   console.log("server is running!!");
 });
