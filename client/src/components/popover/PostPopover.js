@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 
 export function PostPopover({ postId, userId }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [copied, setCopied] = React.useState(false);
   const currentUser = React.useContext(AuthContext).user;
   const history = useHistory();
 
@@ -24,6 +25,7 @@ export function PostPopover({ postId, userId }) {
   const handleCopy = () => {
     //TODO: add actual link
     navigator.clipboard.writeText(`posts/${postId}`);
+    setCopied(true);
   };
 
   const handleDelete = () => {
@@ -58,7 +60,7 @@ export function PostPopover({ postId, userId }) {
       >
         <Typography sx={{ p: 2 }}>
           <div className="popoverItem" onClick={handleCopy}>
-            copy link
+            {!copied ? "copy link" : "copied!"}
           </div>
           {userId === currentUser._id ? (
             <>

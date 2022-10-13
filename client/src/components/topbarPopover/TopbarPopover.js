@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-export default function TopbarPopover({ user }) {
+export default function TopbarPopover({ user, handleLogout }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -50,10 +50,7 @@ export default function TopbarPopover({ user }) {
             </Link>
           </span>
           <hr className="TopbarPopoverHr" />
-          <span
-            className="topbarRightHamburgerItem"
-            //   onClick={handleLogout}
-          >
+          <span className="topbarRightHamburgerItem" onClick={handleLogout}>
             logout
           </span>
         </Typography>

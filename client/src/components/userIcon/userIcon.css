@@ -6,7 +6,6 @@
   flex-direction: column;
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 20px;
   margin-right: 10px;
 }
 
@@ -16,4 +15,8 @@
   margin-bottom: 5px;
   object-fit: cover;
   width: 50px;
+}
+
+.userName {
+  max-width: 50px;
 }

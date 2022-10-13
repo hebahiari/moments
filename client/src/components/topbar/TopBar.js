@@ -87,7 +87,7 @@ export default function TopBar() {
           </li>
           {/* //TODO add notifications */}
           <li className="topbarRightMenuItem">
-            <TopbarPopover user={user} />
+            <TopbarPopover user={user} handleLogout={handleLogout} />
           </li>
         </ul>
         <div className="topbarRightHamburgerIcon" onClick={handleClick}>
