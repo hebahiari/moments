@@ -1,9 +1,7 @@
-#Petsgram
-
 ## Links
-* Deployed App: [Petsgram website](https://main.diaw7mtof8uhl.amplifyapp.com/)
+* Deployed App: [Petsgram website](https://main.diaw7mtof8uhl.amplifyapp.com/) <== Feel free to share a picture of your pet!
 
-![homepage](/screenshots/homepage.JPG)
+[![welcome](/screenshots/welcome.gif)](https://main.diaw7mtof8uhl.amplifyapp.com/)
 
 ## Summary
 //TODO
@@ -17,6 +15,7 @@
 ### <u>Client</u>
 * Built with create-react-app.
 * Uses [react-router](https://reactrouter.com/) for front-end routing
+* Styled with flexbox, mobile first responsive design
 ### <u>Server</u>
 * Node and Express
 ### <u>Database</u>
@@ -25,20 +24,17 @@
 
 # Screenshots
 
-## Welcome
-![welcome](/screenshots/welcome.JPG)
+## Register
+![register](/screenshots/register.PNG)
 
 ## Home Screen
-![homepage](/screenshots/homepage.JPG)
-
-## Register
-![register](/screenshots/register.JPG)
+![homepage](/screenshots/homepage.PNG)
 
 ## Profile
-![profile](/screenshots/profile.JPG)
+![profile](/screenshots/profile.PNG)
 
 ## Search
-![search](/screenshots/search.JPG)
+![search](/screenshots/search.PNG)
 
 
 ## Documentation for API 
