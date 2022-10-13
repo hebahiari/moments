@@ -56,7 +56,7 @@ const upload = multer({
   }),
 });
 
-app.post("/api/upload", upload.single("file"), (req, res) => {
+app.post("/upload", upload.single("file"), (req, res) => {
   try {
     const url = req.file.location;
     return res.status(200).json(url);
@@ -65,10 +65,10 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   }
 });
 
-app.use("/api/users", usersRouter);
-app.use("/api/auth", authRouter);
-app.use("/api/posts", postsRouter);
-app.use("/api/comments", commentsRouter);
+app.use("/users", usersRouter);
+app.use("/auth", authRouter);
+app.use("/posts", postsRouter);
+app.use("/comments", commentsRouter);
 
 app.listen(8800, () => {
   console.log("server is running!!");
