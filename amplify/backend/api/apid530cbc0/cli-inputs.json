@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/auth": {
+      "name": "/auth",
+      "lambdaFunction": "petsgram93067d07",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
