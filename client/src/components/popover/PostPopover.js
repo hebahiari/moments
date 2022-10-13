@@ -3,12 +3,12 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { MoreVert } from "@mui/icons-material";
-import "./BasicPopover.css";
+import "./postPopover.css";
 import { deletePost } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
-export function BasicPopover({ postId, userId }) {
+export function PostPopover({ postId, userId }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const currentUser = React.useContext(AuthContext).user;
   const history = useHistory();

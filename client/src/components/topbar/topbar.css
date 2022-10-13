@@ -119,9 +119,10 @@
 }
 
 .topbarRightHamburgerItem {
-  color: #2b2b2b;
+  color: #555555;
   font-weight: 600;
   margin-top: 20px;
+  cursor: pointer;
 }
 
 .topbarRightHamburgerOverlay {

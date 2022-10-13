@@ -6,7 +6,7 @@ import { format } from "timeago.js";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
-import { BasicPopover } from "../popover/BasicPopover";
+import { PostPopover } from "../popover/PostPopover";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
@@ -96,7 +96,7 @@ export default function Post({ post }) {
           </span>
         </div>
         <div className="postTopRight">
-          <BasicPopover postId={post._id} userId={post.userId} />
+          <PostPopover postId={post._id} userId={post.userId} />
         </div>
       </div>
       <div className="postCenter">

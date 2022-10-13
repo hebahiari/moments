@@ -3,12 +3,13 @@ import { Search, Notifications, Menu, Close } from "@mui/icons-material";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import TopbarPopover from "../topbarPopover/TopbarPopover";
 
 export default function TopBar() {
-  const { user } = useContext(AuthContext);
   const [menuClicked, setMenuClicked] = useState(false);
   const history = useHistory();
   const searchUsername = useRef();
+  const { user, dispatch } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +20,11 @@ export default function TopBar() {
   const handleClick = () => {
     // collapse/open menu
     setMenuClicked(!menuClicked);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    history.push("/welcome");
   };
 
   const hamburgerMenuItems = (
@@ -38,9 +44,15 @@ export default function TopBar() {
           </Link>
         </span>
         <span className="topbarRightHamburgerItem">
-          <Link to="/" style={{ textDecoration: "none", color: "#555555" }}>
+          <Link
+            to="/search"
+            style={{ textDecoration: "none", color: "#555555" }}
+          >
             Search
           </Link>
+        </span>
+        <span className="topbarRightHamburgerItem" onClick={handleLogout}>
+          Log out
         </span>
       </div>
       <div className="topbarRightHamburgerOverlay"></div>
@@ -75,13 +87,7 @@ export default function TopBar() {
           </li>
           {/* //TODO add notifications */}
           <li className="topbarRightMenuItem">
-            <Link to={`/profile/${user.username}`}>
-              <img
-                src={user.profilePicture}
-                alt="profile"
-                className="topbarImage"
-              />
-            </Link>
+            <TopbarPopover user={user} />
           </li>
         </ul>
         <div className="topbarRightHamburgerIcon" onClick={handleClick}>
