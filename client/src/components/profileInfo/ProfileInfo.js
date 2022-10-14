@@ -7,6 +7,7 @@ import {
   unfollowUser,
   getFollowersUsers,
   getUserByUsername,
+  userFollowsProfile,
 } from "../../utils/api";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -15,7 +16,7 @@ import UserIcon from "../userIcon/UserIcon";
 export default function ProfileInfo() {
   const [followingUsers, setFollowingUsers] = useState([]);
   const [followersUsers, setFollowersUsers] = useState([]);
-  const { user: currentUser, dispatch } = useContext(AuthContext);
+  const { user: currentUser } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
   const [user, setUser] = useState({});
   const { username } = useParams();
@@ -26,7 +27,7 @@ export default function ProfileInfo() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     if (user?._id) {
@@ -36,22 +37,23 @@ export default function ProfileInfo() {
       getFollowersUsers(user._id).then((response) =>
         setFollowersUsers(response.data)
       );
-      console.log({ user });
     }
   }, [user]);
 
-  // useEffect(() => {
-  //   setFollowed(currentUser.following.includes(user?._id));
-  // }, [currentUser, user]);
+  useEffect(() => {
+    if (user?._id && currentUser?._id) {
+      userFollowsProfile(user._id, currentUser._id).then((response) =>
+        setFollowed(response.data)
+      );
+    }
+  }, [user, currentUser]);
 
   const handleClick = () => {
     try {
       if (followed) {
         unfollowUser(user._id, currentUser._id).then(setFollowed(false));
-        dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
         followUser(user._id, currentUser._id).then(setFollowed(true));
-        dispatch({ type: "FOLLOW", payload: user._id });
       }
     } catch (error) {
       console.log(error);

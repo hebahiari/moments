@@ -43,6 +43,12 @@ export async function getFollowingUsers(userId) {
   return await axios.get(`${API_BASE_URL}/users/following/${userId}`);
 }
 
+export async function userFollowsProfile(userId, currentUserId) {
+  return await axios.get(
+    `${API_BASE_URL}/users/${userId}/followers/${currentUserId}`
+  );
+}
+
 // to posts
 export async function getFollowingPosts(userId) {
   return await axios.get(`${API_BASE_URL}/posts/timeline/${userId}`);
@@ -98,7 +104,6 @@ export async function registerUser(user) {
 // to comments
 
 export async function sendComment(comment) {
-  console.log({ comment });
   return await axios.post(`${API_BASE_URL}/comments`, comment);
 }
 

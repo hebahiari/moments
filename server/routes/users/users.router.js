@@ -28,10 +28,16 @@ router
   .all(methodNotAllowed);
 
 router
+  .route("/:userId/unfollow")
+  .put(controller.updateUnfollow)
+  .all(methodNotAllowed);
+
+router
   .route("/:userId/img")
   .put(controller.updatePicture)
   .all(methodNotAllowed);
 
+router.route("/:userId/followers/:currentUserId").get(controller.isAFollower);
 // router
 //   .route("/:userId")
 //   .put(controller.update)

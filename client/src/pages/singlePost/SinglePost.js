@@ -49,7 +49,9 @@ export default function SinglePost() {
                 <div className="commentsText">No Comments!</div>
               ) : null}
               {comments?.length
-                ? comments.map((comment) => <Comment comment={comment} />)
+                ? comments.map((comment) => (
+                    <Comment comment={comment} key={comment._id} />
+                  ))
                 : null}
             </div>
           </div>

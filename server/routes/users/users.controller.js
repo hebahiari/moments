@@ -30,7 +30,6 @@ const bcrypt = require("bcrypt");
 
 //user exists in database
 async function userExists(req, res, next) {
-  //TODO: add error for undefined
   let user;
   if (req.query.username) {
     user = await User.findOne({ username: req.query.username });
@@ -38,6 +37,11 @@ async function userExists(req, res, next) {
     user = await User.findById(req.query.userId);
   } else if (req.params.userId) {
     user = await User.findById(req.params.userId);
+  } else {
+    next({
+      message: `please add a userId to this request`,
+      status: 400,
+    });
   }
 
   if (!user) {
@@ -104,19 +108,19 @@ async function listFollowers(req, res) {
 //follow a user // change it into follow/unfollow //TODO
 async function updateFollow(req, res) {
   //check that its not the same user
-  if (req.body.userId === req.params.id) {
+  if (req.body.userId === req.params.userId) {
     res.status(403).json("you can't follow your account");
   }
   // find the current user and the followed user
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.userId);
     const currentUser = await User.findById(req.body.userId);
 
     // check that they're not already followed
     if (!user.followers.includes(req.body.userId)) {
       // add to followers and following
       await user.updateOne({ $push: { followers: req.body.userId } });
-      await currentUser.updateOne({ $push: { following: req.params.id } });
+      await currentUser.updateOne({ $push: { following: req.params.userId } });
       res.status(200).json("user followed successfully");
     } else {
       res.status(403).json("you already follow this user!");
@@ -126,30 +130,30 @@ async function updateFollow(req, res) {
   }
 }
 
-//unfollow a user
-// router.put("/:id/unfollow", async (req, res) => {
-//   //check that its not the same user
-//   if (req.body.userId === req.params.id) {
-//     res.status(403).json("you can't unfollow your account");
-//   }
-//   // find the current user and the followed user
-//   try {
-//     const user = await User.findById(req.params.id);
-//     const currentUser = await User.findById(req.body.userId);
+//unfollow a user //TODO switch to follow/unfollow
+async function updateUnfollow(req, res) {
+  //check that its not the same user
+  if (req.body.userId === req.params.userId) {
+    res.status(403).json("you can't unfollow your account");
+  }
+  // find the current user and the followed user
+  try {
+    const user = await User.findById(req.params.userId);
+    const currentUser = await User.findById(req.body.userId);
 
-//     // check that they're not already followed
-//     if (user.followers.includes(req.body.userId)) {
-//       // add to followers and following
-//       await user.updateOne({ $pull: { followers: req.body.userId } });
-//       await currentUser.updateOne({ $pull: { following: req.params.id } });
-//       res.status(200).json("user unfollowed successfully");
-//     } else {
-//       res.status(403).json("you don't follow this user!");
-//     }
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// });
+    // check that they're not already followed
+    if (user.followers.includes(req.body.userId)) {
+      // add to followers and following
+      await user.updateOne({ $pull: { followers: req.body.userId } });
+      await currentUser.updateOne({ $pull: { following: req.params.userId } });
+      res.status(200).json("user unfollowed successfully");
+    } else {
+      res.status(403).json("you don't follow this user!");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
 
 //change profile picture //errors handled
 async function updatePicture(req, res) {
@@ -169,6 +173,21 @@ async function remove(req, res) {
   }
 }
 
+async function isAFollower(req, res) {
+  const { userId, currentUserId } = req.params;
+  if (!userId || !currentUserId) {
+    next({
+      message: `this request requires a username and a userId`,
+      status: 400,
+    });
+  }
+
+  let currentUser = await User.findById(req.params.currentUserId);
+  let result = currentUser.following.includes(userId);
+  console.log({ result });
+  res.status(200).json(result);
+}
+
 module.exports = {
   delete: [asyncErrorBoundary(remove)],
   read: [userExists, asyncErrorBoundary(read)],
@@ -178,8 +197,10 @@ module.exports = {
     asyncErrorBoundary(updatePicture),
   ],
   updateFollow: [asyncErrorBoundary(updateFollow)],
+  updateUnfollow: [asyncErrorBoundary(updateUnfollow)],
   listFollowers: [userExists, asyncErrorBoundary(listFollowers)],
   listFollowing: [userExists, asyncErrorBoundary(listFollowing)],
   search: [asyncErrorBoundary(search)],
+  isAFollower: [asyncErrorBoundary(isAFollower)],
   //   update: [asyncErrorBoundary(update)],
 };
