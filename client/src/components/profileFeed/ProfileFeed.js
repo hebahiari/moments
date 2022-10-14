@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { Link, useParams } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";
 
-export default function ProfileFeed({ userId }) {
+export default function ProfileFeed() {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
   const { username } = useParams();

@@ -98,10 +98,10 @@ export default function Profile() {
         <div className="profileBottom">
           <div className="profileBottomLeft"></div>
           <div className="profileBottomFeed">
-            <ProfileFeed userId={user._id} username={username} />
+            <ProfileFeed />
           </div>
           <div className="profileBottomInfo">
-            {/* <ProfileInfo user={user} className="profileBottomInfo" /> */}
+            <ProfileInfo user={user} className="profileBottomInfo" />
           </div>
         </div>
       </div>

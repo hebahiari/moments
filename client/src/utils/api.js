@@ -1,8 +1,7 @@
 import axios from "axios";
 //server's URL
-const API_BASE_URL =
-  // process.env.REACT_APP_API_BASE_URL;
-  "https://petsgram-website-backend.herokuapp.com";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// "https://petsgram-website-backend.herokuapp.com";
 
 // to users
 export async function getUserById(userId) {
@@ -34,7 +33,9 @@ export async function findMatchingUsernames(username) {
 }
 
 export async function updateProfilePicture(img, userId) {
-  return await axios.put(`${API_BASE_URL}/users/${userId}/img`, { img: img });
+  return await axios.put(`${API_BASE_URL}/users/${userId}/img`, {
+    data: { img: img },
+  });
 }
 
 export async function getFollowingUsers(userId) {

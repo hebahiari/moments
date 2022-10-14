@@ -100,7 +100,7 @@ async function listFollowers(req, res) {
   res.status(200).json(friendList);
 }
 
-//follow a user // change it into follow/unfollow
+//follow a user // change it into follow/unfollow //TODO
 async function updateFollow(req, res) {
   //check that its not the same user
   if (req.body.userId === req.params.id) {
@@ -150,23 +150,19 @@ async function updateFollow(req, res) {
 //   }
 // });
 
-//change profile picture
+//change profile picture //errors handled
 async function updatePicture(req, res) {
   const img = req.body.data.img;
-  const user = res.locals.user;
+  const user = await User.findById(req.params.userId);
   await user.updateOne({ profilePicture: img });
   res.status(200).json("picture updated!");
 }
 
 //delete user
 async function remove(req, res) {
-  if (req.body.userId === req.params.id || req.body.isAdmin) {
-    try {
-      const user = await User.findByIdAndDelete(req.params.id);
-      res.status(200).json("Account has been deleted");
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+  if (req.body.userId === req.params.userId) {
+    const user = await User.findByIdAndDelete(req.params.id);
+    res.status(200).json("Account has been deleted");
   } else {
     return res.status(403).json("you cannot make changes to this account");
   }

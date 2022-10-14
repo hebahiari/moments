@@ -10,11 +10,6 @@ const methodNotAllowed = require("../errors/methodNotAllowed");
 
 router.route("/search/:username").get(controller.search).all(methodNotAllowed);
 
-router
-  .route("/:userId")
-  // .put(controller.update)
-  .all(methodNotAllowed);
-
 router.route("/").get(controller.read).all(methodNotAllowed);
 
 router
@@ -32,12 +27,15 @@ router
   .put(controller.updateFollow)
   .all(methodNotAllowed);
 
-router.route("/:id/img").put(controller.updatePicture).all(methodNotAllowed);
-
 router
-  .route("/:userId")
-  //   .put(controller.update)
-  .put(controller.delete)
+  .route("/:userId/img")
+  .put(controller.updatePicture)
   .all(methodNotAllowed);
+
+// router
+//   .route("/:userId")
+//   .put(controller.update)
+//   .delete(controller.delete)
+//   .all(methodNotAllowed);
 
 module.exports = router;
