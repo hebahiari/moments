@@ -22,7 +22,7 @@ export default function TopbarPopover({ user, handleLogout }) {
   return (
     <div>
       <img
-        src={user.profilePicture}
+        src={user?.profilePicture}
         alt="profile"
         className="topbarImage"
         aria-describedby={id}
@@ -43,7 +43,7 @@ export default function TopbarPopover({ user, handleLogout }) {
         <Typography sx={{ p: 2 }}>
           <span className="topbarRightHamburgerItem">
             <Link
-              to={`/profile/${user.username}`}
+              to={`/profile/${user?.username}`}
               style={{ textDecoration: "none", color: "#555555" }}
             >
               profile

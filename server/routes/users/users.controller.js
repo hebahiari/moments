@@ -30,6 +30,7 @@ const bcrypt = require("bcrypt");
 
 //user exists in database
 async function userExists(req, res, next) {
+  //TODO: add error for undefined
   let user;
   if (req.query.username) {
     user = await User.findOne({ username: req.query.username });

@@ -17,7 +17,7 @@ export default function Post({ post }) {
 
   const currentUser = useContext(AuthContext).user;
   const history = useHistory();
-  const isLiked = post.likes.includes(currentUser._id);
+  const isLiked = post.likes.includes(currentUser?._id);
   const comment = useRef();
   const [liked, setLiked] = useState(isLiked);
 
@@ -29,7 +29,7 @@ export default function Post({ post }) {
   const likeHandler = () => {
     try {
       //api checks if its liked or not and does the opposite
-      likeDislikePost(post._id, currentUser._id).then(() => setLiked(!liked));
+      likeDislikePost(post._id, currentUser?._id).then(() => setLiked(!liked));
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +44,7 @@ export default function Post({ post }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newComment = {
-      userId: currentUser._id,
+      userId: currentUser?._id,
       postId: post._id,
       desc: comment.current.value,
     };

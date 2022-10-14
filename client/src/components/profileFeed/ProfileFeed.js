@@ -27,12 +27,12 @@ export default function ProfileFeed() {
     } catch (error) {
       console.log(error);
     }
-  }, [username, user._id]);
+  }, [username, user?._id]);
 
   return (
     <div className="profileFeed">
       {/*  if its the current user's profile, show share component */}
-      {!username || username === user.username ? (
+      {!username || username === user?.username ? (
         <div className="profileFeedShare">
           <Share />
         </div>

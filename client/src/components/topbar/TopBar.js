@@ -37,7 +37,7 @@ export default function TopBar() {
         </span>
         <span className="topbarRightHamburgerItem">
           <Link
-            to={`/profile/${user.username}`}
+            to={`/profile/${user?.username}`}
             style={{ textDecoration: "none", color: "#555555" }}
           >
             Profile

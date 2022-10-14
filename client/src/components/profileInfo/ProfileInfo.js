@@ -21,24 +21,28 @@ export default function ProfileInfo() {
   const { username } = useParams();
 
   useEffect(() => {
-    // try {
-    getUserByUsername(username).then((response) => setUser(response));
-    //TODO: fix this
-    //       getFollowingUsers(user._id).then((response) =>
-    //         setFollowingUsers(response.data)
-    //       );
-    //       getFollowersUsers(user._id).then((response) =>
-    //         setFollowersUsers(response.data)
-    //       );
-    //     });
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  }, [username]);
+    try {
+      getUserByUsername(username).then((response) => setUser(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
-    setFollowed(currentUser.following.includes(user?._id));
-  }, [currentUser, user]);
+    if (user?._id) {
+      getFollowingUsers(user._id).then((response) =>
+        setFollowingUsers(response.data)
+      );
+      getFollowersUsers(user._id).then((response) =>
+        setFollowersUsers(response.data)
+      );
+      console.log({ user });
+    }
+  }, [user]);
+
+  // useEffect(() => {
+  //   setFollowed(currentUser.following.includes(user?._id));
+  // }, [currentUser, user]);
 
   const handleClick = () => {
     try {
@@ -56,7 +60,7 @@ export default function ProfileInfo() {
 
   return (
     <>
-      {user._id !== currentUser._id && (
+      {user?._id !== currentUser?._id && (
         <button className="profileInfoFollowButton" onClick={handleClick}>
           {followed ? (
             <Remove style={{ color: "white" }} />

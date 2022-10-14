@@ -20,12 +20,10 @@ export default function SinglePost() {
       );
       getPostComments(postId, abortController.signal).then((response) =>
         setComments(
-          response.data
-            .sort((postA, postB) => {
-              return new Date(postB.createdAt) - new Date(postA.createdAt);
-            })
-            .catch((error) => console.log(error))
-        )
+          response.data.sort((postA, postB) => {
+            return new Date(postB.createdAt) - new Date(postA.createdAt);
+          })
+        ).catch((error) => console.log(error))
       );
     } catch (error) {
       if (error.name === "AbortError") {

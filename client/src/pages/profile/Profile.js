@@ -74,7 +74,7 @@ export default function Profile() {
       <div className="profile">
         <div className="profileTop">
           <div className="profileCover">
-            <img src={user.coverPhoto} className="profileCoverImg" alt="" />
+            <img src={user?.coverPhoto} className="profileCoverImg" alt="" />
             {/* TODO: ability to edit cover photo */}
             {/* {currentUser.username === username ? (
               <div
@@ -84,8 +84,8 @@ export default function Profile() {
                 <Edit />
               </div>
             ) : null} */}
-            <img src={user.profilePicture} className="profilePicture" alt="" />
-            {currentUser.username === username ? (
+            <img src={user?.profilePicture} className="profilePicture" alt="" />
+            {currentUser?.username === username ? (
               <label htmlFor="file" className="profilePictureEditButton">
                 <Edit />
                 <input

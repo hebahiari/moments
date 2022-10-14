@@ -31,7 +31,7 @@ export function PostPopover({ postId, userId }) {
   const handleDelete = () => {
     try {
       if (window.confirm("Delete post?")) {
-        deletePost(postId, currentUser._id).then(history.go());
+        deletePost(postId, currentUser?._id).then(history.go());
       }
     } catch (error) {
       console.log(error);
@@ -62,7 +62,7 @@ export function PostPopover({ postId, userId }) {
           <div className="popoverItem" onClick={handleCopy}>
             {!copied ? "copy link" : "copied!"}
           </div>
-          {userId === currentUser._id ? (
+          {userId === currentUser?._id ? (
             <>
               <hr className="popoverHr" />
               <div className="popoverItem" onClick={handleDelete}>
