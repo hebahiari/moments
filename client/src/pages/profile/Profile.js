@@ -12,6 +12,7 @@ import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import { Edit } from "@mui/icons-material";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import NotFound from "../notFound/NotFound";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -67,6 +68,12 @@ export default function Profile() {
 
   //TODO add cover photo
   const handleEditCoverPhoto = () => {};
+
+  if (!user._id) {
+    return <NotFound />;
+  } else {
+    console.log({ user });
+  }
 
   return (
     <>

@@ -5,6 +5,7 @@ import { getPost, getPostComments } from "../../utils/api";
 import { useEffect, useState } from "react";
 import Post from "../../components/post/Post";
 import Comment from "../../components/comment/Comment";
+import NotFound from "../notFound/NotFound";
 
 export default function SinglePost() {
   const postId = useParams().postId;
@@ -35,6 +36,10 @@ export default function SinglePost() {
     }
     return () => abortController.abort();
   }, [postId]);
+
+  if (!post._id) {
+    return <NotFound />;
+  }
 
   return (
     <>

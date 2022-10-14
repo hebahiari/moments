@@ -24,6 +24,7 @@ export default function TopBar() {
 
   const handleLogout = () => {
     localStorage.clear();
+    dispatch({ type: "LOGOUT" });
     history.push("/welcome");
   };
 
