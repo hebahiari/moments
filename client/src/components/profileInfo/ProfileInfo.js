@@ -6,29 +6,35 @@ import {
   getFollowingUsers,
   unfollowUser,
   getFollowersUsers,
+  getUserByUsername,
 } from "../../utils/api";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import UserIcon from "../userIcon/UserIcon";
 
-export default function ProfileInfo({ user }) {
+export default function ProfileInfo() {
   const [followingUsers, setFollowingUsers] = useState([]);
   const [followersUsers, setFollowersUsers] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
+  const [user, setUser] = useState({});
+  const { username } = useParams();
 
   useEffect(() => {
-    try {
-      getFollowingUsers(user._id).then((response) =>
-        setFollowingUsers(response.data)
-      );
-      getFollowersUsers(user._id).then((response) =>
-        setFollowersUsers(response.data)
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }, [user]);
+    // try {
+    getUserByUsername(username).then((response) => setUser(response));
+    //TODO: fix this
+    //       getFollowingUsers(user._id).then((response) =>
+    //         setFollowingUsers(response.data)
+    //       );
+    //       getFollowersUsers(user._id).then((response) =>
+    //         setFollowersUsers(response.data)
+    //       );
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  }, [username]);
 
   useEffect(() => {
     setFollowed(currentUser.following.includes(user?._id));
