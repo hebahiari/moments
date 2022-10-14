@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
-import { getFollowingPosts, getUserPosts, getAllPosts } from "../../utils/api";
+import { getFollowingPosts, getAllPosts } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";

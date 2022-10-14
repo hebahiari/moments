@@ -5,7 +5,8 @@ const User = require("../../models/User");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
 
-async function userExists(req, res, next) {
+// userId is in the request and the user is found in the database
+async function userIdExists(req, res, next) {
   let user = null;
   let userId = null;
   if (req.params.userId) {
@@ -14,7 +15,7 @@ async function userExists(req, res, next) {
     userId = req.body.data.userId;
   } else {
     next({
-      message: `please add a userId/username to this request`,
+      message: `please add a userId to this request`,
       status: 400,
     });
   }
@@ -39,6 +40,32 @@ async function userExists(req, res, next) {
   }
 }
 
+// username is in the request and user is found in the database
+async function usernameExists(req, res, next) {
+  let { username } = req.params;
+
+  if (!username) {
+    next({
+      message: `please add a username to this request`,
+      status: 400,
+    });
+  }
+
+  let user = null;
+  user = await User.findOne({ username: username });
+
+  if (!user) {
+    next({
+      message: `this userId (${username}) does not exist`,
+      status: 404,
+    });
+  } else {
+    res.locals.user = user;
+    next();
+  }
+}
+
+// postId is in the request and the post is found in the database
 async function postExists(req, res, next) {
   let post = null;
   const postId = req.params.postId;
@@ -56,6 +83,7 @@ async function postExists(req, res, next) {
   }
 }
 
+// the current user owns the posts thats being updated
 async function userOwnsPost(req, res, next) {
   let post = res.locals.post;
   let user = res.locals.user;
@@ -162,20 +190,20 @@ module.exports = {
   list: asyncErrorBoundary(list),
   read: [postExists, asyncErrorBoundary(read)],
   update: [
-    userExists,
+    userIdExists,
     postExists,
     userOwnsPost,
     hasProperties("desc"),
     asyncErrorBoundary(update),
   ],
-  delete: [userExists, postExists, userOwnsPost, asyncErrorBoundary(remove)],
+  delete: [userIdExists, postExists, userOwnsPost, asyncErrorBoundary(remove)],
   //   addComment: asyncErrorBoundary(addComment),
-  listFollowed: [userExists, asyncErrorBoundary(listFollowed)],
-  listUserPosts: [userExists, asyncErrorBoundary(listUserPosts)],
-  like: [userExists, postExists, asyncErrorBoundary(like)],
+  listFollowed: [userIdExists, asyncErrorBoundary(listFollowed)],
+  listUserPosts: [usernameExists, asyncErrorBoundary(listUserPosts)],
+  like: [userIdExists, postExists, asyncErrorBoundary(like)],
   create: [
     hasProperties("userId", "desc"),
-    userExists,
+    userIdExists,
     asyncErrorBoundary(create),
   ],
 };

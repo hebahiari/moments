@@ -16,7 +16,7 @@ router
   .all(methodNotAllowed);
 
 router
-  .route("/profile/:userId")
+  .route("/profile/:username")
   .get(controller.listUserPosts)
   .all(methodNotAllowed);
 
