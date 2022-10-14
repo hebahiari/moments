@@ -25,7 +25,9 @@ export default function Profile() {
     const abortController = new AbortController();
 
     try {
-      getUserByUsername(username).then((response) => setUser(response.data));
+      getUserByUsername(username, abortController.signal).then((response) =>
+        setUser(response.data)
+      );
     } catch (error) {
       if (error.name === "AbortError") {
         // Ignore `AbortError`
@@ -39,20 +41,28 @@ export default function Profile() {
 
   useEffect(() => {
     // when an img is uploaded, change the profile photo
+    const abortController = new AbortController();
+
     if (file) {
       const data = new FormData();
       data.append("name", file.name);
       data.append("file", file);
       try {
-        uploadImage(data).then((response) =>
-          updateProfilePicture(response.data, currentUser._id).then(
-            history.go()
+        uploadImage(data, abortController.signal).then((response) =>
+          updateProfilePicture(
+            response.data,
+            currentUser._id,
+            abortController.signal
           )
+            .then(history.go())
+            .catch((error) => console.log(error))
         );
       } catch (error) {
         console.log(error);
       }
     }
+
+    return () => abortController.abort();
   }, [file]);
 
   //TODO add cover photo

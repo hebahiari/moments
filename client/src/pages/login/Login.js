@@ -1,5 +1,5 @@
 // import "./login.css";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { loginCall } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -9,13 +9,14 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
-    );
+    ).catch((error) => setLoginError(error));
   };
 
   return (
@@ -58,6 +59,7 @@ export default function Login() {
                   "Logging in.."
                 : "Log in"}
             </button>
+            {loginError ? loginError : null}
             <Link to="/register">
               <button className="loginRegisterButton">Sign Up</button>
             </Link>

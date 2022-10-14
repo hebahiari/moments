@@ -15,12 +15,16 @@ export default function SinglePost() {
     const abortController = new AbortController();
 
     try {
-      getPost(postId).then((response) => setPost(response.data));
-      getPostComments(postId).then((response) =>
+      getPost(postId, abortController.signal).then((response) =>
+        setPost(response.data)
+      );
+      getPostComments(postId, abortController.signal).then((response) =>
         setComments(
-          response.data.sort((postA, postB) => {
-            return new Date(postB.createdAt) - new Date(postA.createdAt);
-          })
+          response.data
+            .sort((postA, postB) => {
+              return new Date(postB.createdAt) - new Date(postA.createdAt);
+            })
+            .catch((error) => console.log(error))
         )
       );
     } catch (error) {
