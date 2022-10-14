@@ -64,6 +64,7 @@ export default function Post({ post }) {
           type="text"
           className="commentInput"
           ref={comment}
+          required
         />
         <button className="shareButton" type="submit">
           Post

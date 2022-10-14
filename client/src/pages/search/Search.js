@@ -47,6 +47,7 @@ export default function Search() {
               placeholder="Search Usernames"
               className="searchInput"
               ref={searchUsername}
+              required
             />
           </form>
         </div>

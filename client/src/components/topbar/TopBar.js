@@ -70,6 +70,7 @@ export default function TopBar() {
               placeholder="Search Usernames"
               className="searchInput"
               ref={searchUsername}
+              required
             />
           </form>
         </div>
