@@ -1,7 +1,7 @@
 import axios from "axios";
 //server's URL
 const API_BASE_URL =
-  // process.env.REACT_APP_API_BASE_URL ||
+  // process.env.REACT_APP_API_BASE_URL;
   "https://petsgram-website-backend.herokuapp.com";
 
 // to users
@@ -50,8 +50,8 @@ export async function getAllPosts() {
   return await axios.get(`${API_BASE_URL}/posts/timeline/all`);
 }
 
-export async function getUserPosts(userId) {
-  return await axios.get(`${API_BASE_URL}/posts/profile/${userId}`);
+export async function getUserPosts(username) {
+  return await axios.get(`${API_BASE_URL}/posts/profile/${username}`);
 }
 
 export async function likeDislikePost(postId, userId) {

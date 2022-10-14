@@ -4,18 +4,19 @@ import Share from "../share/Share";
 import "./profileFeed.css";
 import { getUserPosts } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";
 
-export default function ProfileFeed({ userId, username }) {
+export default function ProfileFeed({ userId }) {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
+  const { username } = useParams();
 
   //fetch posts
   useEffect(() => {
     try {
       // get the posts of the username
-      getUserPosts(userId).then((response) =>
+      getUserPosts(username).then((response) =>
         setPosts(
           // sort by date
           response.data.sort((postA, postB) => {

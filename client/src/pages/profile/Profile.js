@@ -101,7 +101,7 @@ export default function Profile() {
             <ProfileFeed userId={user._id} username={username} />
           </div>
           <div className="profileBottomInfo">
-            <ProfileInfo user={user} className="profileBottomInfo" />
+            {/* <ProfileInfo user={user} className="profileBottomInfo" /> */}
           </div>
         </div>
       </div>
