@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
-const postsRouter = require("./routes/posts");
+const postsRouter = require("./routes/posts/posts.router");
 const commentsRouter = require("./routes/comments");
 const multer = require("multer");
 const path = require("path");
@@ -14,6 +14,9 @@ const multerS3 = require("multer-s3");
 const { S3Client } = require("@aws-sdk/client-s3");
 const shortId = require("shortid");
 const cors = require("cors");
+const errorHandler = require("./routes/errors/errorHandler");
+const notFound = require("./routes/errors/notFound");
+
 app.use(cors());
 
 dotenv.config();
@@ -68,6 +71,9 @@ app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/comments", commentsRouter);
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(process.env.PORT || 8800, () => {
   console.log("server is running!!");

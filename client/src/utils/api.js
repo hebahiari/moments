@@ -5,8 +5,8 @@ const API_BASE_URL =
   "https://petsgram-website-backend.herokuapp.com";
 
 // to users
-export async function getUserById(id) {
-  return await axios.get(`${API_BASE_URL}/users?userId=${id}`);
+export async function getUserById(userId) {
+  return await axios.get(`${API_BASE_URL}/users?userId=${userId}`);
 }
 
 export async function getUserByUsername(username) {
@@ -42,26 +42,28 @@ export async function getFollowingUsers(userId) {
 }
 
 // to posts
-export async function getFollowingPosts(id) {
-  return await axios.get(`${API_BASE_URL}/posts/timeline/${id}`);
+export async function getFollowingPosts(userId) {
+  return await axios.get(`${API_BASE_URL}/posts/timeline/${userId}`);
 }
 
 export async function getAllPosts() {
   return await axios.get(`${API_BASE_URL}/posts/timeline/all`);
 }
 
-export async function getUserPosts(username) {
-  return await axios.get(`${API_BASE_URL}/posts/profile/${username}`);
+export async function getUserPosts(userId) {
+  return await axios.get(`${API_BASE_URL}/posts/profile/${userId}`);
 }
 
 export async function likeDislikePost(postId, userId) {
-  return await axios.put(`${API_BASE_URL}/posts/${postId}/like`, {
-    userId: userId,
+  return await axios.put(`${API_BASE_URL}/posts/like/${postId}`, {
+    data: {
+      userId: userId,
+    },
   });
 }
 
 export async function sharePost(post) {
-  return await axios.post(`${API_BASE_URL}/posts`, post);
+  return await axios.post(`${API_BASE_URL}/posts`, { data: post });
 }
 
 export async function getPost(postId) {
@@ -71,6 +73,8 @@ export async function getPost(postId) {
 export async function deletePost(postId, userId) {
   return await axios.delete(`${API_BASE_URL}/posts/${postId}/${userId}`);
 }
+
+//TODO: update post
 
 // to auth
 
