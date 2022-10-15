@@ -1,7 +1,7 @@
 ## Links
-* Deployed App: [Petsgram website](https://main.diaw7mtof8uhl.amplifyapp.com/) <== Feel free to share a picture of your pet!
+* Deployed App: [Petsgram website](https://pets-gram.herokuapp.com/) <== Feel free to share a picture of your pet!
 
-[![welcome](/screenshots/welcome.gif)](https://main.diaw7mtof8uhl.amplifyapp.com/)
+[![welcome](/screenshots/welcome.gif)](https://pets-gram.herokuapp.com/)
 
 ## Summary
 //TODO
