@@ -56,6 +56,7 @@ const UserSchema = new mongoose.Schema(
       default: [
         {
           desc: "Welcome to Petsgram! you can now share, comment, post, like and follow!",
+          opened: false,
         },
       ],
     },

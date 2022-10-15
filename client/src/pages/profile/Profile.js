@@ -6,6 +6,7 @@ import {
   getUserByUsername,
   uploadImage,
   updateProfilePicture,
+  updateCoverPhoto,
 } from "../../utils/api";
 import { useParams } from "react-router";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
@@ -19,6 +20,7 @@ export default function Profile() {
   const { username } = useParams();
   const { user: currentUser } = useContext(AuthContext);
   const [file, setFile] = useState("");
+  const [coverPhoto, setCoverPhoto] = useState("");
   const history = useHistory();
 
   // get user
@@ -66,8 +68,31 @@ export default function Profile() {
     return () => abortController.abort();
   }, [file]);
 
-  //TODO add cover photo
-  const handleEditCoverPhoto = () => {};
+  useEffect(() => {
+    // when an cover photo is uploaded, change the profile photo
+    const abortController = new AbortController();
+
+    if (coverPhoto) {
+      const data = new FormData();
+      data.append("name", coverPhoto.name);
+      data.append("file", coverPhoto);
+      try {
+        uploadImage(data, abortController.signal).then((response) =>
+          updateCoverPhoto(
+            response.data,
+            currentUser._id,
+            abortController.signal
+          )
+            .then(history.go())
+            .catch((error) => console.log(error))
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return () => abortController.abort();
+  }, [file]);
 
   if (!user._id) {
     return <NotFound />;
@@ -83,14 +108,20 @@ export default function Profile() {
           <div className="profileCover">
             <img src={user?.coverPhoto} className="profileCoverImg" alt="" />
             {/* TODO: ability to edit cover photo */}
-            {/* {currentUser.username === username ? (
-              <div
-                className="coverPhotoEditButton"
-                onClick={handleEditCoverPhoto}
-              >
+            {currentUser.username === username ? (
+              <label htmlFor="file" className="coverPhotoEditButton">
                 <Edit />
-              </div>
-            ) : null} */}
+                <input
+                  style={{ display: "none" }}
+                  type="file"
+                  // id="file"
+                  accept=".png,.jpg,.jpeg"
+                  onChange={(event) => {
+                    setCoverPhoto(event.target.files[0]);
+                  }}
+                ></input>
+              </label>
+            ) : null}
             <img src={user?.profilePicture} className="profilePicture" alt="" />
             {currentUser?.username === username ? (
               <label htmlFor="file" className="profilePictureEditButton">

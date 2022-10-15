@@ -38,6 +38,11 @@ router
   .all(methodNotAllowed);
 
 router
+  .route("/:userId/cover")
+  .put(controller.updateCover)
+  .all(methodNotAllowed);
+
+router
   .route("/:userId/notifications")
   .get(controller.listNotifications)
   .all(methodNotAllowed);

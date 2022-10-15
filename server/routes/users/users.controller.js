@@ -172,7 +172,15 @@ async function updatePicture(req, res) {
   const img = req.body.data.img;
   const user = await User.findById(req.params.userId);
   await user.updateOne({ profilePicture: img });
-  res.status(200).json("picture updated!");
+  res.status(200).json("profile picture updated!");
+}
+
+//change cover photo //errors handled
+async function updateCover(req, res) {
+  const cover = req.body.data.cover;
+  const user = await User.findById(req.params.userId);
+  await user.updateOne({ coverPhoto: cover });
+  res.status(200).json("cover picture updated!");
 }
 
 //delete user
@@ -224,6 +232,11 @@ module.exports = {
     userExists,
     hasProperties("img"),
     asyncErrorBoundary(updatePicture),
+  ],
+  updateCover: [
+    userExists,
+    hasProperties("cover"),
+    asyncErrorBoundary(updateCover),
   ],
   updateFollow: [asyncErrorBoundary(updateFollow)],
   updateUnfollow: [asyncErrorBoundary(updateUnfollow)],

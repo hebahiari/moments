@@ -80,7 +80,7 @@ export default function NotificationsPopover({
               >
                 {notification.desc}
               </div>
-              <hr className="notificationsHr" />
+              {/* <hr className="notificationsHr" /> */}
             </>
           ))}
         </Typography>
