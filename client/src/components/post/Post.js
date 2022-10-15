@@ -1,7 +1,12 @@
 import "./post.css";
-import { Favorite } from "@mui/icons-material";
+import { CommentTwoTone, Favorite } from "@mui/icons-material";
 import { useContext, useEffect, useRef, useState } from "react";
-import { getUserById, likeDislikePost, sendComment } from "../../utils/api";
+import {
+  getPostComments,
+  getUserById,
+  likeDislikePost,
+  sendComment,
+} from "../../utils/api";
 import { format } from "timeago.js";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -10,6 +15,7 @@ import { PostPopover } from "../popover/PostPopover";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
+  const [comments, setComments] = useState([]);
   // only show add comment section initally if its the single post page
   const [addComment, setAddComment] = useState(
     useParams().postId ? true : false
@@ -21,10 +27,15 @@ export default function Post({ post }) {
   const comment = useRef();
   const [liked, setLiked] = useState(isLiked);
 
-  //fetch users
+  //fetch the user that made the post
   useEffect(() => {
     getUserById(post.userId).then((response) => setUser(response.data));
-  }, [post.userId]);
+  }, [post?.userId]);
+
+  //fetch comments on the post
+  useEffect(() => {
+    getPostComments(post._id).then((response) => setComments(response.data));
+  }, [post?._id]);
 
   const likeHandler = () => {
     try {
@@ -136,7 +147,7 @@ export default function Post({ post }) {
           >
             {/* TODO: add number of comments */}
             {/* {post.comments.length}  */}
-            view comments
+            {comments.length} comments
           </span>
         </div>
       </div>
