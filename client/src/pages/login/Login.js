@@ -1,5 +1,5 @@
 // import "./login.css";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { loginCall } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -9,19 +9,20 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
-  const [loginError, setLoginError] = useState();
+
+  let loginError = null;
+  if (error) {
+    console.log(error.response.data);
+    loginError = error.response.data;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("submit");
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
-    ).then(() => {
-      if (error) {
-        console.log(error.response.data);
-        setLoginError(error.response.data);
-      }
-    });
+    );
   };
 
   return (
@@ -54,7 +55,8 @@ export default function Login() {
               placeholder="Password"
               ref={password}
               required
-              minLength={5}
+              minLength={6}
+              autocomplete="on"
             />
             {loginError ? <div className="loginError">{loginError}</div> : null}
             <span className="loginForgot">Forgot Password?</span>

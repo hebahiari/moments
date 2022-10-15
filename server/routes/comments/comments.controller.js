@@ -1,10 +1,11 @@
 const router = require("express").Router();
-const Comment = require("../models/Comment");
+const Comment = require("../../models/Comment");
+const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
 
 //ADD: error handling
 
 //get comments for a post
-router.get("/:postId", async (req, res) => {
+async function list(req, res) {
   const postId = req.params.postId;
   try {
     const comments = await Comment.find({ postId: postId });
@@ -12,10 +13,10 @@ router.get("/:postId", async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
-});
+}
 
 //add a comment
-router.post("/", async (req, res) => {
+async function create(req, res) {
   const newComment = new Comment(req.body);
   try {
     const savedComment = await newComment.save();
@@ -23,6 +24,9 @@ router.post("/", async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
-});
+}
 
-module.exports = router;
+module.exports = {
+  list: [asyncErrorBoundary(list)],
+  create: [asyncErrorBoundary(create)],
+};

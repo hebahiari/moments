@@ -44,7 +44,7 @@
 }
 
 .loginError {
-  background-color: rgb(238, 173, 173);
+  background-color: rgb(255, 81, 0);
   border-radius: 10px;
   display: flex;
   align-items: center;

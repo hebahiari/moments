@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
-const hasProperties = require("../errors/hasProperties");
+const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
+const hasProperties = require("../../errors/hasProperties");
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 

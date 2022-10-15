@@ -2,8 +2,8 @@ const router = require("express").Router();
 const Comment = require("../../models/Comment");
 const Post = require("../../models/Post");
 const User = require("../../models/User");
-const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
-const hasProperties = require("../errors/hasProperties");
+const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
+const hasProperties = require("../../errors/hasProperties");
 
 // userId is in the request and the user is found in the database
 async function userIdExists(req, res, next) {

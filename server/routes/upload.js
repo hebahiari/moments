@@ -3,6 +3,7 @@ const multerS3 = require("multer-s3");
 const { S3Client } = require("@aws-sdk/client-s3");
 const shortId = require("shortid");
 const multer = require("multer");
+const dotenv = require("dotenv").config();
 
 //upload an image for a post
 //TODO: replace this section && switch to S3 storage bucket
@@ -32,7 +33,8 @@ const upload = multer({
   }),
 });
 
-router.post("/api/upload", upload.single("file"), (req, res) => {
+router.post("/", upload.single("file"), (req, res) => {
+  console.log("inside router!");
   try {
     const url = req.file.location;
     return res.status(200).json(url);

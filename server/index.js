@@ -1,77 +1,44 @@
+//libraries
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const helmet = require("helmet");
 const morgan = require("morgan");
-const usersRouter = require("./routes/users/users.router");
-const authRouter = require("./routes/auth");
-const postsRouter = require("./routes/posts/posts.router");
-const commentsRouter = require("./routes/comments");
 const multer = require("multer");
 const path = require("path");
 const multerS3 = require("multer-s3");
-const { S3Client } = require("@aws-sdk/client-s3");
 const shortId = require("shortid");
+const { S3Client } = require("@aws-sdk/client-s3");
 const cors = require("cors");
-const errorHandler = require("./routes/errors/errorHandler");
-const notFound = require("./routes/errors/notFound");
+//routers
+const usersRouter = require("./routes/users/users.router");
+const authRouter = require("./routes/auth/auth.router");
+const postsRouter = require("./routes/posts/posts.router");
+const commentsRouter = require("./routes/comments/comments.router");
+const uploadRouter = require("./routes/upload");
+//errors
+const errorHandler = require("./errors/errorHandler");
+const notFound = require("./errors/notFound");
 
-app.use(cors());
-
-dotenv.config();
+const app = express();
 
 mongoose.connect(process.env.MONGO_URL);
 
-app.use("/images", express.static(path.join(__dirname, "public/images")));
-//////
+app.use(cors());
 
-//middleware
+// middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("dev"));
 
-//TODO: replace this section && switch to S3 storage bucket
-
-const s3 = new S3Client({
-  region: "us-west-1",
-  credentials: {
-    accessKeyId: process.env.ACCESS_KEY_AWS,
-    secretAccessKey: process.env.ACCESS_SECRET_AWS,
-  },
-  sslEnabled: false,
-  s3ForcePathStyle: true,
-  signatureVersion: "v4",
-});
-
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: "petsgram-app",
-    acl: "public-read",
-    metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
-    },
-    key: function (req, file, cb) {
-      cb(null, shortId.generate() + "-" + file.originalname);
-    },
-  }),
-});
-
-app.post("/upload", upload.single("file"), (req, res) => {
-  try {
-    const url = req.file.location;
-    return res.status(200).json(url);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
+// routing
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/comments", commentsRouter);
+app.use("/upload", uploadRouter);
 
+// errors
 app.use(notFound);
 app.use(errorHandler);
 

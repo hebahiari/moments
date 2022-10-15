@@ -72,6 +72,7 @@ export default function Register() {
               ref={password}
               required
               minLength="6"
+              autocomplete="on"
             />
             <input
               type="password"
@@ -80,6 +81,7 @@ export default function Register() {
               ref={confirmPassword}
               required
               minLength="6"
+              autocomplete="on"
             />
             <button className="loginButton" type="submit">
               Sign Up

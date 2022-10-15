@@ -1,11 +1,12 @@
 const router = require("express").Router();
-const User = require("../models/User");
+const User = require("../../models/User");
 const bcrypt = require("bcrypt");
+const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
 
 //Register
 
-router.post("/register", async (req, res) => {
-  //ADD: verification that email is not already in use
+async function register(req, res) {
+  //TODO: verification that email and username dont already in use
 
   try {
     // generate encypted password
@@ -25,11 +26,10 @@ router.post("/register", async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
-});
+}
 
 //Login
-
-router.post("/login", async (req, res) => {
+async function login(req, res) {
   try {
     // check if user exists
     console.log(req.body);
@@ -52,6 +52,9 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
-});
+}
 
-module.exports = router;
+module.exports = {
+  login: [asyncErrorBoundary(login)],
+  register: [asyncErrorBoundary(register)],
+};
