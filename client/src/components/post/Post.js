@@ -113,7 +113,12 @@ export default function Post({ post }) {
       </div>
       <div className="postCenter">
         <span className="postText">{post?.desc}</span>
-        <img src={`${post.img}`} className="postImg" alt="" />
+        <img
+          src={`${post.img}`}
+          className="postImg"
+          alt=""
+          onClick={() => history.push(`/posts/${post._id}`)}
+        />
       </div>
       <div className="postBottom">
         <div className="postBottomLeft">
