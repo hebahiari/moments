@@ -1,15 +1,28 @@
 import "./topbar.css";
 import { Search, Notifications, Menu, Close } from "@mui/icons-material";
 import { Link, useHistory } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import TopbarPopover from "../topbarPopover/TopbarPopover";
+import NotificationsPopover from "../notificationsPopover/NotificationsPopover";
+import { getUserNotifications } from "../../utils/api";
 
 export default function TopBar() {
   const [menuClicked, setMenuClicked] = useState(false);
   const history = useHistory();
   const searchUsername = useRef();
   const { user, dispatch } = useContext(AuthContext);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    try {
+      getUserNotifications(user._id).then((response) =>
+        setNotifications(response.data)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user?._id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,6 +40,9 @@ export default function TopBar() {
     dispatch({ type: "LOGOUT" });
     history.push("/welcome");
   };
+
+  //TODO
+  const handleOpenNotifications = () => {};
 
   const hamburgerMenuItems = (
     <>
@@ -84,10 +100,12 @@ export default function TopBar() {
       <div className="topbarRight">
         <ul className="topbarRightMenu">
           <li className="topbarRightMenuItemNotification">
-            <Notifications />
-            <span className="topbarIconBadge">1</span>
+            <NotificationsPopover
+              user={user}
+              notifications={notifications}
+              handleLogout={handleOpenNotifications}
+            />
           </li>
-          {/* //TODO add notifications */}
           <li className="topbarRightMenuItem">
             <TopbarPopover user={user} handleLogout={handleLogout} />
           </li>
@@ -100,19 +118,6 @@ export default function TopBar() {
           )}
         </div>
         {menuClicked ? hamburgerMenuItems : null}
-        {/* <div className="topbarIcons">
-          <div className="topbarIconsItem">
-            <Notifications />
-            <span className="topbarIconBadge">1</span>
-          </div>
-        </div>
-        <Link to={`/profile/${user.username}`}>
-          <img
-            src={user.profilePicture}
-            alt="profile"
-            className="topbarImage"
-          />
-        </Link> */}
       </div>
     </div>
   );

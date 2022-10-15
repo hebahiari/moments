@@ -1,0 +1,14 @@
+.notification {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.notificationNew {
+  margin: 10px;
+  cursor: pointer;
+  color: red;
+}
+
+.topbarIconBadgeHide {
+  display: none;
+}

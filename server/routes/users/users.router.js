@@ -37,6 +37,16 @@ router
   .put(controller.updatePicture)
   .all(methodNotAllowed);
 
+router
+  .route("/:userId/notifications")
+  .get(controller.listNotifications)
+  .all(methodNotAllowed);
+
+router
+  .route("/:userId/clear")
+  .put(controller.clearNotifications)
+  .all(methodNotAllowed);
+
 router.route("/:userId/followers/:currentUserId").get(controller.isAFollower);
 // router
 //   .route("/:userId")

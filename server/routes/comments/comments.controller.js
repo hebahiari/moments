@@ -56,6 +56,7 @@ async function create(req, res) {
           notifications: {
             desc: `${commenter.username} commented on your post`,
             postId: post._id.toString(),
+            opened: false,
           },
         },
       });

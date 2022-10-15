@@ -133,6 +133,7 @@ async function like(req, res) {
           notifications: {
             desc: `${user.username} liked your post`,
             postId: post._id.toString(),
+            opened: false,
           },
         },
       });

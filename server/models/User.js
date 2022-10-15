@@ -53,7 +53,11 @@ const UserSchema = new mongoose.Schema(
     },
     notifications: {
       type: Array,
-      default: [],
+      default: [
+        {
+          desc: "Welcome to Petsgram! you can now share, comment, post, like and follow!",
+        },
+      ],
     },
   },
   { timestamps: true }

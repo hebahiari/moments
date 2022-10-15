@@ -50,7 +50,7 @@ async function userExists(req, res, next) {
       status: 404,
     });
   } else {
-    const { password, updatedAt, ...other } = user._doc;
+    const { password, updatedAt, notifications, ...other } = user._doc;
     res.locals.user = other;
     next();
   }
@@ -128,6 +128,7 @@ async function updateFollow(req, res) {
           notifications: {
             desc: `${currentUser.username} followed you`,
             username: currentUser.username,
+            opened: false,
           },
         },
       });
@@ -184,6 +185,17 @@ async function remove(req, res) {
   }
 }
 
+//change opened notifications to read
+async function clearNotifications(req, res) {
+  const user = await User.findById(req.params.userId);
+  let notifications = user.notifications;
+  notifications.forEach((notification) => (notification.opened = true));
+  console.log(notifications);
+  await user.updateOne({ $set: { notifications: notifications } });
+  res.status(200).json("notifications cleared");
+}
+
+//check if currentuser follows user
 async function isAFollower(req, res) {
   const { userId, currentUserId } = req.params;
   if (!userId || !currentUserId) {
@@ -197,6 +209,12 @@ async function isAFollower(req, res) {
   let result = currentUser.following.includes(userId);
   console.log({ result });
   res.status(200).json(result);
+}
+
+//get user notifications
+async function listNotifications(req, res) {
+  const user = await User.findById(req.params.userId);
+  res.status(200).json(user.notifications);
 }
 
 module.exports = {
@@ -213,5 +231,7 @@ module.exports = {
   listFollowing: [userExists, asyncErrorBoundary(listFollowing)],
   search: [asyncErrorBoundary(search)],
   isAFollower: [asyncErrorBoundary(isAFollower)],
+  clearNotifications: [userExists, asyncErrorBoundary(clearNotifications)],
+  listNotifications: [userExists, asyncErrorBoundary(listNotifications)],
   //   update: [asyncErrorBoundary(update)],
 };
