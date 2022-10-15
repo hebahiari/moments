@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema(
     coverPhoto: {
       type: String,
       default:
-        "https://img.freepik.com/free-vector/animal-background-vector-with-cute-pets-illustration_53876-127698.jpg?w=2000",
+        "https://petsgram-app.s3.us-west-1.amazonaws.com/cover-photo.jpg",
     },
     notifications: {
       type: Array,

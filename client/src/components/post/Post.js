@@ -145,8 +145,6 @@ export default function Post({ post }) {
             className="postCommentText"
             onClick={() => history.push(`/posts/${post._id}`)}
           >
-            {/* TODO: add number of comments */}
-            {/* {post.comments.length}  */}
             {comments.length} comments
           </span>
         </div>
