@@ -6,18 +6,17 @@ const hasProperties = require("../../errors/hasProperties");
 
 //TODO: fix this
 async function uniqueCredentials(req, res, next) {
-  console.log("data", req.body);
   const { username, email } = req.body.data;
 
-  const userByUsername = User.find({ username: username });
-  const userByEmail = User.find({ email: email });
+  const userByUsername = await User.find({ username: username });
+  const userByEmail = await User.find({ email: email });
 
-  if (userByEmail) {
+  if (userByEmail.length) {
     next({
       message: `email already exists`,
       status: 400,
     });
-  } else if (userByUsername) {
+  } else if (userByUsername.length) {
     next({
       message: `username already exists`,
       status: 400,
@@ -29,8 +28,6 @@ async function uniqueCredentials(req, res, next) {
 
 //Register
 async function register(req, res) {
-  //TODO: verification that email and username dont already in use
-
   try {
     // generate encypted password
     const salt = await bcrypt.genSalt(10);
@@ -80,7 +77,7 @@ module.exports = {
   login: [hasProperties("email", "password"), asyncErrorBoundary(login)],
   register: [
     hasProperties("email", "password", "username"),
-    // uniqueCredentials,
+    uniqueCredentials,
     asyncErrorBoundary(register),
   ],
 };

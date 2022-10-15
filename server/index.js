@@ -34,11 +34,11 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 // routing
-app.use("/users", usersRouter);
-app.use("/auth", authRouter);
-app.use("/posts", postsRouter);
-app.use("/comments", commentsRouter);
-app.use("/upload", uploadRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/posts", postsRouter);
+app.use("/api/comments", commentsRouter);
+app.use("/api/upload", uploadRouter);
 
 // errors
 app.use(notFound);

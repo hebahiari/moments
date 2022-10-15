@@ -1,9 +1,9 @@
 import axios from "axios";
 
 //server's URL
-const API_BASE_URL = "";
+const API_BASE_URL = "api";
 // process.env.REACT_APP_API_BASE_URL;
-// "https://petsgram-website-backend.herokuapp.com";
+// "https://petsgram-website-backend.herokuapp.com/api/";
 
 // to users
 export async function getUserById(userId) {

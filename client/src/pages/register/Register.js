@@ -1,5 +1,5 @@
 import "./register.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { registerUser } from "../../utils/api";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ export default function Register() {
   const password = useRef();
   const confirmPassword = useRef();
   const history = useHistory();
+  const [loginError, setLoginError] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,12 +25,17 @@ export default function Register() {
       };
 
       try {
-        registerUser(user).then(history.push("/login"));
+        registerUser(user)
+          .then(() => {
+            history.push("/login");
+          })
+          .catch((response) => {
+            setLoginError(response.response.data.error);
+          });
       } catch (error) {
         console.log(error);
       }
     }
-    // loginCall({ email: email.current.value, password: password.current.value }, dispatch);
   };
 
   return (
@@ -83,6 +89,11 @@ export default function Register() {
               minLength="6"
               autocomplete="on"
             />
+            {loginError ? (
+              <div className="loginError" style={{ marginBottom: "0px" }}>
+                {loginError}
+              </div>
+            ) : null}
             <button className="loginButton" type="submit">
               Sign Up
             </button>
