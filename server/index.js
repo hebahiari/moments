@@ -26,6 +26,8 @@ mongoose.connect(process.env.MONGO_URL);
 
 app.use(cors());
 
+app.use("/", express.static(path.join(__dirname, "../client/build")));
+
 // middleware
 app.use(express.json());
 app.use(helmet());
