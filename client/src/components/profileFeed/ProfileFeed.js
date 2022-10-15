@@ -14,9 +14,10 @@ export default function ProfileFeed() {
 
   //fetch posts
   useEffect(() => {
+    const abortController = new AbortController();
     try {
       // get the posts of the username
-      getUserPosts(username).then((response) =>
+      getUserPosts(username, abortController.signal).then((response) =>
         setPosts(
           // sort by date
           response.data.sort((postA, postB) => {
@@ -27,6 +28,7 @@ export default function ProfileFeed() {
     } catch (error) {
       console.log(error);
     }
+    return () => abortController.abort();
   }, [username, user?._id]);
 
   return (

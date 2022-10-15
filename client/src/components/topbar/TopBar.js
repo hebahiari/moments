@@ -15,13 +15,15 @@ export default function TopBar() {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
+    const abortController = new AbortController();
     try {
-      getUserNotifications(user._id).then((response) =>
+      getUserNotifications(user._id, abortController.signal).then((response) =>
         setNotifications(response.data)
       );
     } catch (error) {
       console.log(error);
     }
+    return () => abortController.abort();
   }, [user?._id]);
 
   const handleSubmit = (event) => {

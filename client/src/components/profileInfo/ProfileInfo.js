@@ -22,30 +22,40 @@ export default function ProfileInfo() {
   const { username } = useParams();
 
   useEffect(() => {
+    const abortController = new AbortController();
     try {
-      getUserByUsername(username).then((response) => setUser(response.data));
+      getUserByUsername(username, abortController.signal).then((response) =>
+        setUser(response.data)
+      );
     } catch (error) {
       console.log(error);
     }
+    return () => abortController.abort();
   }, [username]);
 
   useEffect(() => {
+    const abortController = new AbortController();
     if (user?._id) {
-      getFollowingUsers(user._id).then((response) =>
+      getFollowingUsers(user._id, abortController.signal).then((response) =>
         setFollowingUsers(response.data)
       );
-      getFollowersUsers(user._id).then((response) =>
+      getFollowersUsers(user._id, abortController.signal).then((response) =>
         setFollowersUsers(response.data)
       );
     }
+    return () => abortController.abort();
   }, [user]);
 
   useEffect(() => {
+    const abortController = new AbortController();
     if (user?._id && currentUser?._id) {
-      userFollowsProfile(user._id, currentUser._id).then((response) =>
-        setFollowed(response.data)
-      );
+      userFollowsProfile(
+        user._id,
+        currentUser._id,
+        abortController.signal
+      ).then((response) => setFollowed(response.data));
     }
+    return () => abortController.abort();
   }, [user, currentUser]);
 
   const handleClick = () => {

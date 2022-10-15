@@ -15,9 +15,11 @@ export default function Feed() {
 
   //fetch posts
   useEffect(() => {
+    const abortController = new AbortController();
+
     // get posts for around the world tab
     if (showAllPosts) {
-      getAllPosts().then((response) =>
+      getAllPosts(abortController.signal).then((response) =>
         setPosts(
           response.data
             //sort results by most recent
@@ -30,7 +32,7 @@ export default function Feed() {
       );
     } else {
       //get only following posts
-      getFollowingPosts(user._id).then((response) =>
+      getFollowingPosts(user._id, abortController.signal).then((response) =>
         setFollowingPosts(
           response.data
             //sort results by most recent
@@ -42,6 +44,7 @@ export default function Feed() {
         )
       );
     }
+    return () => abortController.abort();
   }, [user._id, showAllPosts]);
 
   return (

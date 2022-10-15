@@ -14,7 +14,6 @@ export default function SinglePost() {
 
   useEffect(() => {
     const abortController = new AbortController();
-
     try {
       getPost(postId, abortController.signal).then((response) =>
         setPost(response.data)

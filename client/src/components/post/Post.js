@@ -29,12 +29,22 @@ export default function Post({ post }) {
 
   //fetch the user that made the post
   useEffect(() => {
-    getUserById(post.userId).then((response) => setUser(response.data));
+    const abortController = new AbortController();
+
+    getUserById(post.userId, abortController.signal).then((response) =>
+      setUser(response.data)
+    );
+    return () => abortController.abort();
   }, [post?.userId]);
 
   //fetch comments on the post
   useEffect(() => {
-    getPostComments(post._id).then((response) => setComments(response.data));
+    const abortController = new AbortController();
+
+    getPostComments(post._id, abortController.signal).then((response) =>
+      setComments(response.data)
+    );
+    return () => abortController.abort();
   }, [post?._id]);
 
   const likeHandler = () => {

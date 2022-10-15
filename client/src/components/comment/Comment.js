@@ -11,9 +11,13 @@ export default function Comments(comment) {
 
   //fetch the profile of the user that posted the comment
   useEffect(() => {
-    getUserById(comment.comment.userId).then((response) =>
-      setUser(response.data)
+    const abortController = new AbortController();
+
+    getUserById(comment.comment.userId, abortController.signal).then(
+      (response) => setUser(response.data)
     );
+
+    return () => abortController.abort();
   }, [comment.userId]);
 
   //display the comment

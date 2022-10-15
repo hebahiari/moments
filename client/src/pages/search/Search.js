@@ -26,13 +26,15 @@ export default function Search() {
   };
 
   useEffect(() => {
+    const abortController = new AbortController();
     try {
-      findMatchingUsernames(username).then((response) =>
+      findMatchingUsernames(username, abortController.signal).then((response) =>
         setFound(response.data)
       );
     } catch (error) {
       console.log(error);
     }
+    return () => abortController.abort();
   }, [username]);
 
   return (
