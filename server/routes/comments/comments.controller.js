@@ -3,6 +3,7 @@ const Comment = require("../../models/Comment");
 const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
 const hasProperties = require("../../errors/hasProperties");
 const Post = require("../../models/Post");
+const User = require("../../models/User");
 
 //ADD: error handling
 
@@ -22,6 +23,7 @@ async function postExists(req, res, next) {
       status: 404,
     });
   } else {
+    res.locals.post = post;
     next();
   }
 }
@@ -40,9 +42,25 @@ async function list(req, res) {
 //add a comment
 async function create(req, res) {
   const newComment = new Comment(req.body.data);
-  console.log(req.body.data);
+  const post = res.locals.post;
+  const commenter = await User.findById(req.body.data.userId);
+  const poster = await User.findById(post.userId);
+  console.log({ commenter, poster });
   try {
     const savedComment = await newComment.save();
+
+    //send notification
+    if (commenter.username !== poster.username) {
+      await poster.updateOne({
+        $push: {
+          notifications: {
+            desc: `${commenter.username} commented on your post`,
+            postId: post._id.toString(),
+          },
+        },
+      });
+    }
+
     res.status(200).json(savedComment);
   } catch (error) {
     res.status(500).json(error);

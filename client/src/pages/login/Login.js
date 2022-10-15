@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { loginCall } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 // import { CircularProgress } from "@material-ui/core";
 
 export default function Login() {
@@ -61,11 +62,13 @@ export default function Login() {
             {loginError ? <div className="loginError">{loginError}</div> : null}
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginButton" type="submit">
-              {isFetching
-                ? //ADD: fix this situation
-                  // <CircularProgress size="20px" color="white" />
-                  "Logging in.."
-                : "Log in"}
+              {isFetching ? (
+                //ADD: fix this situation
+                // <CircularProgress size="20px" color="white" />
+                <Loading style={{ backgroundColor: "white" }} />
+              ) : (
+                "Log in"
+              )}
             </button>
 
             <Link to="/register">

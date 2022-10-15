@@ -121,8 +121,19 @@ async function updateFollow(req, res) {
       // add to followers and following
       await user.updateOne({ $push: { followers: req.body.userId } });
       await currentUser.updateOne({ $push: { following: req.params.userId } });
+
+      //send notifications
+      await user.updateOne({
+        $push: {
+          notifications: {
+            desc: `${currentUser.username} followed you`,
+            username: currentUser.username,
+          },
+        },
+      });
       res.status(200).json("user followed successfully");
     } else {
+      //TODO: unfollow
       res.status(403).json("you already follow this user!");
     }
   } catch (error) {

@@ -122,10 +122,21 @@ async function remove(req, res) {
 async function like(req, res) {
   let post = res.locals.post;
   let user = res.locals.user;
-  console.log({ post });
-
+  let poster = await User.findById(post.userId);
   if (!post.likes.includes(user._id.toString())) {
     await post.updateOne({ $push: { likes: user._id.toString() } });
+
+    //send notification
+    if (post.userId !== user._id.toString()) {
+      await poster.updateOne({
+        $push: {
+          notifications: {
+            desc: `${user.username} liked your post`,
+            postId: post._id.toString(),
+          },
+        },
+      });
+    }
     res.status(200).json("post liked!");
   } else {
     await post.updateOne({ $pull: { likes: user._id.toString() } });
