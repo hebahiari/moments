@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema(
     profilePicture: {
       type: String,
       default:
-        "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
+        "https://petsgram-app.s3.us-west-1.amazonaws.com/default-profile-picture.jpg",
     },
     coverPhoto: {
       type: String,
