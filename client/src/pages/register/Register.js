@@ -1,8 +1,9 @@
 import "./register.css";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useHistory } from "react-router";
-import { registerUser } from "../../utils/api";
+import { getUserById, getUserByUsername, registerUser } from "../../utils/api";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Register() {
   const username = useRef();
@@ -11,6 +12,7 @@ export default function Register() {
   const confirmPassword = useRef();
   const history = useHistory();
   const [loginError, setLoginError] = useState(null);
+  const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,9 +28,13 @@ export default function Register() {
 
       try {
         registerUser(user)
-          .then(() => {
-            history.push("/login");
-          })
+          .then(() =>
+            getUserByUsername(user.username).then((response) => {
+              localStorage.setItem("storedUser", JSON.stringify(response.data));
+              dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
+              history.push("/");
+            })
+          )
           .catch((response) => {
             setLoginError(response.response.data.error);
           });

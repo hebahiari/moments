@@ -1,5 +1,5 @@
 import "./topbar.css";
-import { Search, Notifications, Menu, Close } from "@mui/icons-material";
+import { Search, Menu, Close } from "@mui/icons-material";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";

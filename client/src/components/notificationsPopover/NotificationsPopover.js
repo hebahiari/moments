@@ -3,9 +3,7 @@ import { Notifications } from "@mui/icons-material";
 import * as React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { clearNotifications, deletePost } from "../../utils/api";
-import { AuthContext } from "../../context/AuthContext";
+import { clearNotifications } from "../../utils/api";
 import { useHistory } from "react-router-dom";
 
 export default function NotificationsPopover({
@@ -14,8 +12,6 @@ export default function NotificationsPopover({
   notifications,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [copied, setCopied] = React.useState(false);
-  const currentUser = React.useContext(AuthContext).user;
   const history = useHistory();
 
   const handleClick = (event) => {
@@ -47,7 +43,7 @@ export default function NotificationsPopover({
       />
       <span
         className={
-          notifications?.filter((notification) => notification.opened == false)
+          notifications?.filter((notification) => notification.opened === false)
             .length
             ? "topbarIconBadge"
             : "topbarIconBadgeHide"
@@ -55,7 +51,7 @@ export default function NotificationsPopover({
         onClick={handleOpenNotifications}
       >
         {
-          notifications?.filter((notification) => notification.opened == false)
+          notifications?.filter((notification) => notification.opened === false)
             .length
         }
       </span>
