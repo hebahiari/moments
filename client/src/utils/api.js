@@ -39,6 +39,12 @@ export async function updateProfilePicture(img, userId) {
   });
 }
 
+export async function updateCoverPhoto(cover, userId) {
+  return await axios.put(`${API_BASE_URL}/users/${userId}/cover`, {
+    data: { cover: cover },
+  });
+}
+
 export async function getFollowingUsers(userId) {
   return await axios.get(`${API_BASE_URL}/users/following/${userId}`);
 }
@@ -47,6 +53,14 @@ export async function userFollowsProfile(userId, currentUserId) {
   return await axios.get(
     `${API_BASE_URL}/users/${userId}/followers/${currentUserId}`
   );
+}
+
+export async function clearNotifications(userId) {
+  return await axios.put(`${API_BASE_URL}/users/${userId}/clear`);
+}
+
+export async function getUserNotifications(userId) {
+  return await axios.get(`${API_BASE_URL}/users/${userId}/notifications`);
 }
 
 // to posts
