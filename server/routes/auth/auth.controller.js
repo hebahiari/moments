@@ -2,21 +2,44 @@ const router = require("express").Router();
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
+const hasProperties = require("../../errors/hasProperties");
+
+//TODO: fix this
+async function uniqueCredentials(req, res, next) {
+  console.log("data", req.body);
+  const { username, email } = req.body.data;
+
+  const userByUsername = User.find({ username: username });
+  const userByEmail = User.find({ email: email });
+
+  if (userByEmail) {
+    next({
+      message: `email already exists`,
+      status: 400,
+    });
+  } else if (userByUsername) {
+    next({
+      message: `username already exists`,
+      status: 400,
+    });
+  } else {
+    next();
+  }
+}
 
 //Register
-
 async function register(req, res) {
   //TODO: verification that email and username dont already in use
 
   try {
     // generate encypted password
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await bcrypt.hash(req.body.data.password, salt);
 
     // create a new user
     const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
+      username: req.body.data.username,
+      email: req.body.data.email,
       password: hashedPassword,
     });
 
@@ -32,14 +55,13 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     // check if user exists
-    console.log(req.body);
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.data.email });
     if (!user) {
       res.status(404).json("email not found");
     } else {
       // validate password
       const validPassword = await bcrypt.compare(
-        req.body.password,
+        req.body.data.password,
         user.password
       );
 
@@ -55,6 +77,10 @@ async function login(req, res) {
 }
 
 module.exports = {
-  login: [asyncErrorBoundary(login)],
-  register: [asyncErrorBoundary(register)],
+  login: [hasProperties("email", "password"), asyncErrorBoundary(login)],
+  register: [
+    hasProperties("email", "password", "username"),
+    // uniqueCredentials,
+    asyncErrorBoundary(register),
+  ],
 };

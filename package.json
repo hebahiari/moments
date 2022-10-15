@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "cd server && npm run start",
-    "build": "cd server && npm install && cd ../client && npm install && npm run build"
+    "build": "cd server && npm install && cd ../client && npm install && npm run build",
+    "push": "git push heroku main"
   }
 }

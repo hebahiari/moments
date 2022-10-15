@@ -1,8 +1,30 @@
 const router = require("express").Router();
 const Comment = require("../../models/Comment");
 const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
+const hasProperties = require("../../errors/hasProperties");
+const Post = require("../../models/Post");
 
 //ADD: error handling
+
+async function postExists(req, res, next) {
+  postId = req.params.postId ? req.params.postId : req.body.data.postId;
+
+  if (!postId) {
+    next({
+      message: `please add a postId to this request`,
+      status: 400,
+    });
+  }
+  const post = await Post.findById(postId);
+  if (!post) {
+    next({
+      message: `this userId (${postId}) is does not exist`,
+      status: 404,
+    });
+  } else {
+    next();
+  }
+}
 
 //get comments for a post
 async function list(req, res) {
@@ -17,7 +39,8 @@ async function list(req, res) {
 
 //add a comment
 async function create(req, res) {
-  const newComment = new Comment(req.body);
+  const newComment = new Comment(req.body.data);
+  console.log(req.body.data);
   try {
     const savedComment = await newComment.save();
     res.status(200).json(savedComment);
@@ -27,6 +50,10 @@ async function create(req, res) {
 }
 
 module.exports = {
-  list: [asyncErrorBoundary(list)],
-  create: [asyncErrorBoundary(create)],
+  list: [postExists, asyncErrorBoundary(list)],
+  create: [
+    hasProperties("desc", "userId", "postId"),
+    postExists,
+    asyncErrorBoundary(create),
+  ],
 };

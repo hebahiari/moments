@@ -24,7 +24,9 @@ export function PostPopover({ postId, userId }) {
 
   const handleCopy = () => {
     //TODO: add actual link
-    navigator.clipboard.writeText(`posts/${postId}`);
+    navigator.clipboard.writeText(
+      `${window.location.hostname}/posts/${postId}`
+    );
     setCopied(true);
   };
 
