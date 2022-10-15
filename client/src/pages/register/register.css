@@ -43,6 +43,17 @@
   margin-bottom: 10px;
 }
 
+.loginError {
+  background-color: rgb(238, 173, 173);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 20px;
+  color: rgb(255, 255, 255);
+  padding: 0 20px;
+}
+
 .loginDesc {
   font-style: 24px;
   text-align: center;

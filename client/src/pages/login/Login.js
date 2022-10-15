@@ -16,7 +16,12 @@ export default function Login() {
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
-    ).catch((error) => setLoginError(error));
+    ).then(() => {
+      if (error) {
+        console.log(error.response.data);
+        setLoginError(error.response.data);
+      }
+    });
   };
 
   return (
@@ -51,6 +56,7 @@ export default function Login() {
               required
               minLength={5}
             />
+            {loginError ? <div className="loginError">{loginError}</div> : null}
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginButton" type="submit">
               {isFetching
@@ -59,7 +65,7 @@ export default function Login() {
                   "Logging in.."
                 : "Log in"}
             </button>
-            {loginError ? loginError : null}
+
             <Link to="/register">
               <button className="loginRegisterButton">Sign Up</button>
             </Link>
