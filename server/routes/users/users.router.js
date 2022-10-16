@@ -32,6 +32,8 @@ router
   .put(controller.updateUnfollow)
   .all(methodNotAllowed);
 
+router.route("/:userId/pets").post(controller.createPet).all(methodNotAllowed);
+
 router
   .route("/:userId/img")
   .put(controller.updatePicture)

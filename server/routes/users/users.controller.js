@@ -4,6 +4,7 @@ const hasProperties = require("../../errors/hasProperties");
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 
+//validation functions
 //user exists in database
 async function userExists(req, res, next) {
   let user;
@@ -28,6 +29,22 @@ async function userExists(req, res, next) {
   } else {
     const { password, updatedAt, notifications, ...other } = user._doc;
     res.locals.user = other;
+    next();
+  }
+}
+
+//pet name is unique
+async function petNameUnique(req, res, next) {
+  const user = await User.findOne({ username: req.body.data.username });
+  const foundName = user.pets.find(
+    (pet) => pet.username === req.body.data.name
+  );
+  if (foundName) {
+    next({
+      message: `name already exists`,
+      status: 400,
+    });
+  } else {
     next();
   }
 }
@@ -193,6 +210,13 @@ async function listNotifications(req, res) {
   res.status(200).json(user.notifications);
 }
 
+//create new pet
+async function createPet(req, res) {
+  const user = await User.findOne({ username: req.body.data.username });
+  const updated = await user.updateOne({ $push: { pets: req.body.data } });
+  res.status(201).json(updated);
+}
+
 module.exports = {
   delete: [asyncErrorBoundary(remove)],
   read: [userExists, asyncErrorBoundary(read)],
@@ -214,5 +238,6 @@ module.exports = {
   isAFollower: [asyncErrorBoundary(isAFollower)],
   clearNotifications: [userExists, asyncErrorBoundary(clearNotifications)],
   listNotifications: [userExists, asyncErrorBoundary(listNotifications)],
+  createPet: [petNameUnique, asyncErrorBoundary(createPet)],
   //   update: [asyncErrorBoundary(update)],
 };

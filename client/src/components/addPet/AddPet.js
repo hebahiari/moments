@@ -31,7 +31,7 @@ export default function Pets({ currentUser }) {
           .then((response) => {
             newPet.img = response.data;
           })
-          .then(() => addPet(newPet, currentUser.username).then(history.go()));
+          .then(() => addPet(newPet).then(history.go()));
       } catch (error) {
         console.log(error);
       }
@@ -64,8 +64,7 @@ export default function Pets({ currentUser }) {
               style={{ cursor: "pointer" }}
             >
               <div className="addPetBoxPhotoButton">
-                <InsertPhoto style={{ marginRight: "10px" }} /> Click to add
-                photo
+                <InsertPhoto style={{ marginRight: "10px" }} /> Add pet photo
               </div>
               <input
                 style={{ display: "none" }}
@@ -104,7 +103,7 @@ export default function Pets({ currentUser }) {
               <option value="other">Other</option>
             </select>
             <input
-              type="date"
+              type="text"
               className="addPetInput"
               placeholder="Birthday"
               ref={birthday}

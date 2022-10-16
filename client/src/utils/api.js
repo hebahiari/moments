@@ -64,6 +64,10 @@ export async function getUserNotifications(userId) {
   return await axios.get(`${API_BASE_URL}/users/${userId}/notifications`);
 }
 
+export async function addPet(newPet) {
+  return await axios.post(`${API_BASE_URL}/users/pets`, { data: newPet });
+}
+
 // to posts
 export async function getFollowingPosts(userId) {
   return await axios.get(`${API_BASE_URL}/posts/timeline/${userId}`);
