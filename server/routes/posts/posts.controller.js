@@ -105,7 +105,7 @@ async function create(req, res) {
   const newPost = new Post(req.body.data);
   try {
     const savedPost = await newPost.save();
-    res.status(200).json(savedPost);
+    res.status(201).json(savedPost);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -115,7 +115,7 @@ async function create(req, res) {
 async function remove(req, res) {
   let post = res.locals.post;
   await post.deleteOne();
-  res.status(200).json("the post has been deleted");
+  res.status(204).json("the post has been deleted");
 }
 
 //like/unlike a post // error handling complete
@@ -173,17 +173,6 @@ async function listFollowed(req, res) {
   );
   res.status(200).json(userPosts.concat(...friendsPosts));
 }
-
-//add a comment // moved to comments
-// async function addComment(req, res) {
-//   const newComment = new Comment(req.body.data);
-//   try {
-//     const savedComment = await newComment.save();
-//     res.status(200).json(savedComment);
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// }
 
 //update a post //TODO: review once update post api exists
 async function update(req, res) {

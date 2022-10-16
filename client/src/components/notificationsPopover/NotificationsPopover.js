@@ -40,6 +40,7 @@ export default function NotificationsPopover({
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
+        style={{ cursor: "pointer" }}
       />
       <span
         className={

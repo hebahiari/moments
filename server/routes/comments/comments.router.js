@@ -8,6 +8,11 @@ const router = require("express").Router();
 const controller = require("./comments.controller");
 const methodNotAllowed = require("../../errors/methodNotAllowed");
 
+router
+  .route("/:commentId/delete/:userId")
+  .delete(controller.delete)
+  .all(methodNotAllowed);
+
 router.route("/:postId").get(controller.list).all(methodNotAllowed);
 
 router.route("/").post(controller.create).all(methodNotAllowed);

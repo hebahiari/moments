@@ -49,6 +49,7 @@ export function PostPopover({ postId, userId }) {
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
+        style={{ cursor: "pointer" }}
       />
       <Popover
         id={id}

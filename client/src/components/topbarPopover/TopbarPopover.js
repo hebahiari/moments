@@ -30,6 +30,7 @@ export default function TopbarPopover({ user, handleLogout, dispatch }) {
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
+        style={{ cursor: "pointer" }}
       />
       <Popover
         className="topbarPopover"

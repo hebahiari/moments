@@ -31,12 +31,8 @@ async function postExists(req, res, next) {
 //get comments for a post
 async function list(req, res) {
   const postId = req.params.postId;
-  try {
-    const comments = await Comment.find({ postId: postId });
-    res.status(200).json(comments);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  const comments = await Comment.find({ postId: postId });
+  res.status(200).json(comments);
 }
 
 //add a comment
@@ -46,26 +42,31 @@ async function create(req, res) {
   const commenter = await User.findById(req.body.data.userId);
   const poster = await User.findById(post.userId);
   console.log({ commenter, poster });
-  try {
-    const savedComment = await newComment.save();
 
-    //send notification
-    if (commenter.username !== poster.username) {
-      await poster.updateOne({
-        $push: {
-          notifications: {
-            desc: `${commenter.username} commented on your post`,
-            postId: post._id.toString(),
-            opened: false,
-          },
+  const savedComment = await newComment.save();
+
+  //send notification
+  if (commenter.username !== poster.username) {
+    await poster.updateOne({
+      $push: {
+        notifications: {
+          desc: `${commenter.username} commented on your post`,
+          postId: post._id.toString(),
+          opened: false,
         },
-      });
-    }
-
-    res.status(200).json(savedComment);
-  } catch (error) {
-    res.status(500).json(error);
+      },
+    });
   }
+
+  res.status(201).json(savedComment);
+}
+
+// delete comment
+async function remove(req, res) {
+  const commentId = req.params.commentId;
+  console.log({ commentId });
+  await Comment.findByIdAndDelete(commentId);
+  res.status(204);
 }
 
 module.exports = {
@@ -75,4 +76,5 @@ module.exports = {
     postExists,
     asyncErrorBoundary(create),
   ],
+  delete: [remove],
 };
