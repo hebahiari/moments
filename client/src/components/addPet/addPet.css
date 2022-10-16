@@ -1,0 +1,135 @@
+/* If you like this, be sure to ❤️ it. */
+
+.addPetButton {
+  margin: 20px 30px 0 30px;
+  text-decoration: none;
+  padding: 3px;
+  background-color: #1c8722;
+  border-radius: 50px;
+  color: #585858;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 15px;
+}
+
+.addPetModal {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(77, 77, 77, 0.7);
+  transition: all 0.4s;
+}
+
+.addPetModal:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.addPetModalContent {
+  border-radius: 20px;
+  position: relative;
+  width: 500px;
+  max-width: 90%;
+  background: #fff;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.addPetModalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #585858;
+  text-decoration: none;
+}
+
+.addPetInput {
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size: 18px;
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.addPetFormButton {
+  border: none;
+  align-self: center;
+  background-color: orange;
+  border-radius: 10px;
+  color: aliceblue;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+  height: 50px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.addPetFormButton:hover {
+  background-color: rgb(255, 181, 45);
+}
+
+.addPetFormButton:active {
+  background-color: #ffb835;
+  box-shadow: 5px 5px 15px -9px rgba(0, 0, 0, 0.34);
+  transform: translateY(4px);
+}
+
+.addPetBox {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  padding: 20px;
+  width: 300px;
+}
+
+.addPetBoxPhotoButton {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.addPetInput:hovesr {
+  background-color: pink;
+}
+
+.addPetPhotoContainer {
+}
+
+.addPetPhotoContainer {
+  border-radius: 50%;
+  border: 3px solid white;
+  height: 150px;
+  left: 0;
+  margin: auto;
+  object-fit: cover;
+  position: absolute;
+  right: 0;
+  top: 150px;
+  width: 150px;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  /* background-image: url("/images/icons/caret-down-light.svg"); */
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 8px) center;
+}

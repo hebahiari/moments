@@ -105,8 +105,6 @@ export default function Profile() {
 
   if (!user._id) {
     return <NotFound />;
-  } else {
-    console.log({ user });
   }
 
   return (

@@ -12,6 +12,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import UserIcon from "../userIcon/UserIcon";
+import AddPet from "../addPet/AddPet";
 import LoadingBar from "../loadingBar/LoadingBar";
 
 export default function ProfileInfo() {
@@ -110,17 +111,19 @@ export default function ProfileInfo() {
       )}
       <h4 className="profileInfoTitle">User Information</h4>
       <div className="profileInfoSections">
-        {/* TODO: add pets */}
-        {/* <div className="profileInfoSection">
+        <div className="profileInfoSection">
           <span className="profileInfoInfoKey">Pets:</span>
           <span className="profileInfoInfoValue">
             {user.pets && user.pets.length
               ? user.pets.join("! ")
               : "no data yet"}
           </span>
-        </div> */}
+          {user?._id === currentUser?._id && (
+            <AddPet currentUser={currentUser} />
+          )}
+        </div>
         <div className="profileInfoSection">
-          <h4 className="profileInfoInfoKey">Following:</h4>
+          <h4 className="profileInfoInfoKey">Following:</h4>s
           <div className="profileInfoFollowings">
             {followingUsers.length ? (
               followingUsers.map((person) => {

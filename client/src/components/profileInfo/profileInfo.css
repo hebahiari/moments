@@ -76,6 +76,8 @@
 .profileInfoSection {
   margin-bottom: 20px;
   max-width: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 .profileInfo {
