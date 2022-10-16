@@ -1,14 +1,22 @@
-.notification {
-  margin: 10px;
-  cursor: pointer;
-}
-
+.notification,
 .notificationNew {
   margin: 10px;
   cursor: pointer;
-  color: red;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.notification {
+}
+
+.notificationNew {
+  background-color: rgb(185, 239, 250);
 }
 
 .topbarIconBadgeHide {
   display: none;
+}
+
+.css-17ffvgn-MuiTypography-root {
+  max-width: 300px;
 }
