@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
     },
     followers: {
       type: Array,
-      default: [],
+      default: ["6346056f003f46fccb36ad4d"],
     },
     following: {
       type: Array,
@@ -57,6 +57,11 @@ const UserSchema = new mongoose.Schema(
         {
           desc: "Welcome to Petsgram! you can now share, comment, post, like and follow!",
           opened: false,
+        },
+        {
+          desc: "the-heba now follows you",
+          opened: false,
+          username: "the-heba",
         },
       ],
     },

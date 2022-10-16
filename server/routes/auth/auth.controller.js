@@ -42,6 +42,11 @@ async function register(req, res) {
 
     //save the new user and respond
     const user = await newUser.save();
+    await User.findOneAndUpdate(
+      { username: "the-heba" },
+      { $push: { following: user._id.toString() } }
+    );
+
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json(error);

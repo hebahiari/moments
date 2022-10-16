@@ -66,19 +66,21 @@ export default function NotificationsPopover({
         }}
       >
         <Typography sx={{ p: 2 }}>
-          {notifications?.map((notification) => (
-            <>
-              <div
-                className={
-                  notification.opened ? "notification" : "notificationNew"
-                }
-                onClick={() => handleNotificaion(notification)}
-              >
-                {notification.desc}
-              </div>
-              {/* <hr className="notificationsHr" /> */}
-            </>
-          ))}
+          {notifications
+            ?.map((notification) => (
+              <>
+                <div
+                  className={
+                    notification.opened ? "notification" : "notificationNew"
+                  }
+                  onClick={() => handleNotificaion(notification)}
+                >
+                  {notification.desc}
+                </div>
+                {/* <hr className="notificationsHr" /> */}
+              </>
+            ))
+            .reverse()}
         </Typography>
       </Popover>
     </div>
