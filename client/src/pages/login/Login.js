@@ -10,6 +10,7 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const [forgotPassword, setForgotPassword] = useState(false);
 
   let loginError = null;
   if (error) {
@@ -23,6 +24,10 @@ export default function Login() {
       { email: email.current.value, password: password.current.value },
       dispatch
     );
+  };
+
+  const handleClick = () => {
+    setForgotPassword(true);
   };
 
   return (
@@ -59,7 +64,10 @@ export default function Login() {
               autocomplete="on"
             />
             {loginError ? <div className="loginError">{loginError}</div> : null}
-            <span className="loginForgot">Forgot Password?</span>
+            <span className="loginForgot" onClick={handleClick}>
+              Forgot Password?
+            </span>
+            {forgotPassword ? <div className="loginError">Too bad.</div> : null}
             <button className="loginButton" type="submit">
               {isFetching ? (
                 //ADD: fix this situation
