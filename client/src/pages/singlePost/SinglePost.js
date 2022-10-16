@@ -11,20 +11,25 @@ export default function SinglePost() {
   const postId = useParams().postId;
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
     try {
+      setLoading(true);
       getPost(postId, abortController.signal).then((response) =>
         setPost(response.data)
       );
-      getPostComments(postId, abortController.signal).then((response) =>
-        setComments(
-          response.data.sort((postA, postB) => {
-            return new Date(postB.createdAt) - new Date(postA.createdAt);
-          })
-        ).catch((error) => console.log(error))
-      );
+      getPostComments(postId, abortController.signal)
+        .then((response) => {
+          setComments(
+            response.data.sort((postA, postB) => {
+              return new Date(postB.createdAt) - new Date(postA.createdAt);
+            })
+          );
+          setLoading(false);
+        })
+        .catch((error) => console.log(error));
     } catch (error) {
       if (error.name === "AbortError") {
         // Ignore `AbortError`

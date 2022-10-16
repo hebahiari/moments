@@ -22,17 +22,21 @@ export default function Profile() {
   const [file, setFile] = useState("");
   const [coverPhoto, setCoverPhoto] = useState("");
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   // get user
   useEffect(() => {
     const abortController = new AbortController();
 
     try {
-      getUserByUsername(username, abortController.signal).then((response) =>
-        setUser(response.data)
-      );
+      setLoading(true);
+      getUserByUsername(username, abortController.signal).then((response) => {
+        setUser(response.data);
+        setLoading(false);
+      });
     } catch (error) {
       if (error.name === "AbortError") {
+        setLoading(false);
         // Ignore `AbortError`
         console.log("Aborted");
       } else {
@@ -93,6 +97,10 @@ export default function Profile() {
 
     return () => abortController.abort();
   }, [file]);
+
+  if (loading) {
+    return null;
+  }
 
   if (!user._id) {
     return <NotFound />;

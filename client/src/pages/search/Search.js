@@ -14,6 +14,7 @@ export default function Search() {
   const [found, setFound] = useState([]);
   const history = useHistory();
   const searchUsername = useRef();
+  const [loading, setLoading] = useState(false);
 
   const query = useQuery();
   if (query.get("username")) {
@@ -28,14 +29,23 @@ export default function Search() {
   useEffect(() => {
     const abortController = new AbortController();
     try {
-      findMatchingUsernames(username, abortController.signal).then((response) =>
-        setFound(response.data)
+      setLoading(true);
+      findMatchingUsernames(username, abortController.signal).then(
+        (response) => {
+          setFound(response.data);
+          setLoading(false);
+        }
       );
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
     return () => abortController.abort();
   }, [username]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div>

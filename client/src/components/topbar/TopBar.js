@@ -13,12 +13,17 @@ export default function TopBar() {
   const searchUsername = useRef();
   const { user, dispatch } = useContext(AuthContext);
   const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
     try {
-      getUserNotifications(user._id, abortController.signal).then((response) =>
-        setNotifications(response.data)
+      setLoading(true);
+      getUserNotifications(user._id, abortController.signal).then(
+        (response) => {
+          setNotifications(response.data);
+          setLoading(false);
+        }
       );
     } catch (error) {
       console.log(error);
@@ -77,6 +82,10 @@ export default function TopBar() {
       <div className="topbarRightHamburgerOverlay"></div>
     </>
   );
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div className="topbarContainer">

@@ -27,24 +27,28 @@ export default function Post({ post }) {
   const isLiked = post.likes.includes(currentUser?._id);
   const comment = useRef();
   const [liked, setLiked] = useState(isLiked);
+  const [loading, setLoading] = useState(false);
 
   //fetch the user that made the post
   useEffect(() => {
     const abortController = new AbortController();
-
-    getUserById(post.userId, abortController.signal).then((response) =>
-      setUser(response.data)
-    );
+    setLoading(true);
+    getUserById(post.userId, abortController.signal).then((response) => {
+      setUser(response.data);
+      setLoading(false);
+    });
     return () => abortController.abort();
   }, [post?.userId]);
 
   //fetch comments on the post
   useEffect(() => {
     const abortController = new AbortController();
+    setLoading(true);
 
-    getPostComments(post._id, abortController.signal).then((response) =>
-      setComments(response.data)
-    );
+    getPostComments(post._id, abortController.signal).then((response) => {
+      setComments(response.data);
+      setLoading(false);
+    });
     return () => abortController.abort();
   }, [post?._id]);
 
@@ -98,6 +102,10 @@ export default function Post({ post }) {
       </form>
     </>
   );
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div className="post">

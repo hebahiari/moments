@@ -21,14 +21,18 @@ export default function ProfileInfo() {
   const [user, setUser] = useState({});
   const { username } = useParams();
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
     try {
-      getUserByUsername(username, abortController.signal).then((response) =>
-        setUser(response.data)
-      );
+      setLoading(true);
+      getUserByUsername(username, abortController.signal).then((response) => {
+        setUser(response.data);
+        setLoading(false);
+      });
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
     return () => abortController.abort();
@@ -37,12 +41,15 @@ export default function ProfileInfo() {
   useEffect(() => {
     const abortController = new AbortController();
     if (user?._id) {
-      getFollowingUsers(user._id, abortController.signal).then((response) =>
-        setFollowingUsers(response.data)
-      );
-      getFollowersUsers(user._id, abortController.signal).then((response) =>
-        setFollowersUsers(response.data)
-      );
+      setLoading(true);
+      getFollowingUsers(user._id, abortController.signal).then((response) => {
+        setFollowingUsers(response.data);
+        setLoading(false);
+      });
+      getFollowersUsers(user._id, abortController.signal).then((response) => {
+        setFollowersUsers(response.data);
+        setLoading(false);
+      });
     }
     return () => abortController.abort();
   }, [user]);
@@ -50,11 +57,15 @@ export default function ProfileInfo() {
   useEffect(() => {
     const abortController = new AbortController();
     if (user?._id && currentUser?._id) {
+      setLoading(true);
       userFollowsProfile(
         user._id,
         currentUser._id,
         abortController.signal
-      ).then((response) => setFollowed(response.data));
+      ).then((response) => {
+        setFollowed(response.data);
+        setLoading(false);
+      });
     }
     return () => abortController.abort();
   }, [user, currentUser]);
@@ -74,6 +85,10 @@ export default function ProfileInfo() {
       setError(true);
     }
   };
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <>

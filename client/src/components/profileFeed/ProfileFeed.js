@@ -11,25 +11,33 @@ export default function ProfileFeed() {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
   const { username } = useParams();
+  const [loading, setLoading] = useState(false);
 
   //fetch posts
   useEffect(() => {
     const abortController = new AbortController();
     try {
       // get the posts of the username
-      getUserPosts(username, abortController.signal).then((response) =>
+      setLoading(true);
+      getUserPosts(username, abortController.signal).then((response) => {
         setPosts(
           // sort by date
           response.data.sort((postA, postB) => {
             return new Date(postB.createdAt) - new Date(postA.createdAt);
           })
-        )
-      );
+        );
+        setLoading(false);
+      });
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
     return () => abortController.abort();
   }, [username, user?._id]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div className="profileFeed">
