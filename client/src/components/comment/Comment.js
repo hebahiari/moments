@@ -23,7 +23,7 @@ export default function Comments(comment) {
   //display the comment
   return (
     <>
-      <div className="postTopLeft">
+      <div className="postTopLeft" style={{ margin: "10px 0" }}>
         <Link
           to={`/profile/${user.username}`}
           style={{ textDecoration: "none" }}
@@ -36,7 +36,7 @@ export default function Comments(comment) {
         >
           <span className="postUsername">{user.username}:</span>
         </Link>
-        <div className="postText">{comment.comment.desc}</div>
+        <div className="postCommentText">{comment.comment.desc}</div>
         {/* <span className="postDate">{format(comment.createdAt)}</span> */}
       </div>
       <div className="postTopRight"></div>

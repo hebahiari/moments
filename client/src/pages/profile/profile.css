@@ -96,6 +96,7 @@
   display: flex;
   flex: 6;
   justify-content: center;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
