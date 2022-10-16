@@ -54,6 +54,12 @@
   width: 100px;
 }
 
+.welcomeGuestSignIn {
+  color: #fefdfc;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
 @media (min-width: 768px) {
   .welcomeLogin {
     height: 550px;

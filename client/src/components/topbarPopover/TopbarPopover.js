@@ -1,12 +1,14 @@
 import * as React from "react";
+import { useHistory } from "react-router-dom";
 import "./topbarPopover.css";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-export default function TopbarPopover({ user, handleLogout }) {
+export default function TopbarPopover({ user, handleLogout, dispatch }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -49,6 +51,21 @@ export default function TopbarPopover({ user, handleLogout }) {
               profile
             </Link>
           </span>
+          {user?.username == "guest-user" ? (
+            <>
+              <hr className="TopbarPopoverHr" />
+              <span
+                className="topbarRightHamburgerItem"
+                onClick={() => {
+                  localStorage.clear();
+                  dispatch({ type: "LOGOUT" });
+                  history.push("/register");
+                }}
+              >
+                sign up
+              </span>
+            </>
+          ) : null}
           <hr className="TopbarPopoverHr" />
           <span className="topbarRightHamburgerItem" onClick={handleLogout}>
             logout

@@ -103,3 +103,15 @@
 .commentHr {
   margin: 0 25px;
 }
+
+.commentError {
+  background-color: rgb(255, 81, 0);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  color: rgb(255, 255, 255);
+  padding: 0 20px;
+  font-size: 15px;
+}

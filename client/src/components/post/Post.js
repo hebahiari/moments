@@ -16,6 +16,7 @@ import { PostPopover } from "../popover/PostPopover";
 export default function Post({ post }) {
   const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
+  const [error, setError] = useState(false);
   // only show add comment section initally if its the single post page
   const [addComment, setAddComment] = useState(
     useParams().postId ? true : false
@@ -64,15 +65,19 @@ export default function Post({ post }) {
   //submit new comment
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newComment = {
-      userId: currentUser?._id,
-      postId: post._id,
-      desc: comment.current.value,
-    };
-    try {
-      sendComment(newComment).then(history.go());
-    } catch (error) {
-      console.log(error);
+    if (currentUser.username !== "guest-user") {
+      const newComment = {
+        userId: currentUser?._id,
+        postId: post._id,
+        desc: comment.current.value,
+      };
+      try {
+        sendComment(newComment).then(history.go());
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setError(true);
     }
   };
 
@@ -165,6 +170,9 @@ export default function Post({ post }) {
         </div>
       </div>
       {addComment ? addCommentSection : null}
+      {error ? (
+        <div className="commentError">Please sign up to use this feature</div>
+      ) : null}
     </div>
   );
 }

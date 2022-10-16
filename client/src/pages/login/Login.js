@@ -19,7 +19,6 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit");
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch

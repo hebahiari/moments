@@ -1,7 +1,19 @@
 import { Link } from "react-router-dom";
 import "./welcome.css";
+import { useContext } from "react";
+import { loginCall } from "../../utils/api";
+import { AuthContext } from "../../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export default function Welcome() {
+  const { dispatch } = useContext(AuthContext);
+  const history = useHistory();
+
+  const handleClick = () => {
+    loginCall({ email: "guest@gmail.com", password: "123456" }, dispatch);
+    history.push("/");
+  };
+
   return (
     <>
       <div
@@ -24,6 +36,9 @@ export default function Welcome() {
               <Link to="/Register">
                 <button className="welcomeButton">Sign Up</button>
               </Link>
+            </div>
+            <div className="welcomeGuestSignIn" onClick={handleClick}>
+              enter as a guest
             </div>
           </div>
         </div>

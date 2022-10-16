@@ -109,7 +109,11 @@ export default function TopBar() {
             />
           </li>
           <li className="topbarRightMenuItem">
-            <TopbarPopover user={user} handleLogout={handleLogout} />
+            <TopbarPopover
+              user={user}
+              handleLogout={handleLogout}
+              dispatch={dispatch}
+            />
           </li>
         </ul>
         <div className="topbarRightHamburgerIcon" onClick={handleClick}>

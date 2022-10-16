@@ -10,34 +10,39 @@ export default function Share() {
   const desc = useRef();
   const [file, setFile] = useState("");
   const history = useHistory();
+  const [error, setError] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newPost = {
-      userId: user._id,
-      desc: desc.current.value,
-    };
-    // if the new posts includes a file when submitting
-    if (file) {
-      const data = new FormData();
-      data.append("name", file.name);
-      data.append("file", file);
-      newPost.img = file.location;
-      try {
-        uploadImage(data)
-          .then((response) => {
-            newPost.img = response.data;
-          })
-          .then(() => sharePost(newPost).then(history.go()));
-      } catch (error) {
-        console.log(error);
+    if (user.username !== "guest-user") {
+      const newPost = {
+        userId: user._id,
+        desc: desc.current.value,
+      };
+      // if the new posts includes a file when submitting
+      if (file) {
+        const data = new FormData();
+        data.append("name", file.name);
+        data.append("file", file);
+        newPost.img = file.location;
+        try {
+          uploadImage(data)
+            .then((response) => {
+              newPost.img = response.data;
+            })
+            .then(() => sharePost(newPost).then(history.go()));
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          sharePost(newPost).then(history.go());
+        } catch (error) {
+          console.log(error);
+        }
       }
     } else {
-      try {
-        sharePost(newPost).then(history.go());
-      } catch (error) {
-        console.log(error);
-      }
+      setError(true);
     }
   };
 
@@ -83,6 +88,11 @@ export default function Share() {
             </button>
           </div>
         </form>
+        {error ? (
+          <div className="shareError">
+            You are using a guest account, please sign up to use this feature
+          </div>
+        ) : null}
       </div>
     </div>
   );

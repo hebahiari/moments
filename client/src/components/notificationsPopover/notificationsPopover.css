@@ -4,6 +4,7 @@
   cursor: pointer;
   border-radius: 20px;
   padding: 10px;
+  max-width: 200px;
 }
 
 .notification {

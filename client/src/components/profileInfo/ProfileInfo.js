@@ -20,6 +20,7 @@ export default function ProfileInfo() {
   const [followed, setFollowed] = useState(false);
   const [user, setUser] = useState({});
   const { username } = useParams();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -59,28 +60,37 @@ export default function ProfileInfo() {
   }, [user, currentUser]);
 
   const handleClick = () => {
-    try {
-      if (followed) {
-        unfollowUser(user._id, currentUser._id).then(setFollowed(false));
-      } else {
-        followUser(user._id, currentUser._id).then(setFollowed(true));
+    if (currentUser.username !== "guest-user") {
+      try {
+        if (followed) {
+          unfollowUser(user._id, currentUser._id).then(setFollowed(false));
+        } else {
+          followUser(user._id, currentUser._id).then(setFollowed(true));
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      setError(true);
     }
   };
 
   return (
     <>
       {user?._id !== currentUser?._id && (
-        <button className="profileInfoFollowButton" onClick={handleClick}>
-          {followed ? (
-            <Remove style={{ color: "white" }} />
-          ) : (
-            <Add style={{ color: "white" }} />
-          )}
-          {followed ? "Unfollow" : "Follow"}
-        </button>
+        <>
+          <button className="profileInfoFollowButton" onClick={handleClick}>
+            {followed ? (
+              <Remove style={{ color: "white" }} />
+            ) : (
+              <Add style={{ color: "white" }} />
+            )}
+            {followed ? "Unfollow" : "Follow"}
+          </button>
+          {error ? (
+            <div className="shareError">Please sign up to use this feature</div>
+          ) : null}
+        </>
       )}
       <h4 className="profileInfoTitle">User Information</h4>
       <div className="profileInfoSections">
