@@ -7,20 +7,28 @@ import { getUserById } from "../../utils/api";
 export default function Comments(comment) {
   const history = useHistory;
   const [user, setUser] = useState({});
-  console.log(comment.comment);
+  const [loading, setLoading] = useState(false);
 
   //fetch the profile of the user that posted the comment
   useEffect(() => {
     const abortController = new AbortController();
 
+    setLoading(true);
     getUserById(comment.comment.userId, abortController.signal).then(
-      (response) => setUser(response.data)
+      (response) => {
+        setUser(response.data);
+        setLoading(false);
+      }
     );
 
     return () => abortController.abort();
   }, [comment.userId]);
 
   //display the comment
+  if (loading) {
+    return null;
+  }
+
   return (
     <>
       <div className="postTopLeft" style={{ margin: "10px 0" }}>

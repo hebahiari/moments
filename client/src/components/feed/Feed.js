@@ -7,19 +7,19 @@ import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";
 
-export default function Feed() {
+export default function Feed({ showAllPosts }) {
   const [posts, setPosts] = useState([]);
   const [followingPosts, setFollowingPosts] = useState([]);
-  const [showAllPosts, setShowAllPosts] = useState(true);
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   //fetch posts
   useEffect(() => {
     const abortController = new AbortController();
-
+    setLoading(true);
     // get posts for around the world tab
     if (showAllPosts) {
-      getAllPosts(abortController.signal).then((response) =>
+      getAllPosts(abortController.signal).then((response) => {
         setPosts(
           response.data
             //sort results by most recent
@@ -28,11 +28,12 @@ export default function Feed() {
             })
             // limit the results to 50
             .slice(0, 50)
-        )
-      );
+        );
+        setLoading(false);
+      });
     } else {
       //get only following posts
-      getFollowingPosts(user._id, abortController.signal).then((response) =>
+      getFollowingPosts(user._id, abortController.signal).then((response) => {
         setFollowingPosts(
           response.data
             //sort results by most recent
@@ -41,49 +42,35 @@ export default function Feed() {
             })
             // limit the results to 50
             .slice(0, 50)
-        )
-      );
+        );
+        setLoading(false);
+      });
     }
     return () => abortController.abort();
   }, [user._id, showAllPosts]);
 
+  if (loading) {
+    return null;
+  }
+
   return (
-    <div className="feed">
-      <div className="feedWrapper">
-        <div className="feedShareWrapper">
-          <div className="feedShare">
-            <Share />
+    <>
+      {loading ? null : (
+        <>
+          <div className="feedPosts">
+            {showAllPosts
+              ? posts.map((post) => <Post key={post._id} post={post} />)
+              : followingPosts.map((post) => (
+                  <Post key={post._id} post={post} />
+                ))}
           </div>
-        </div>
-        {/* <hr className="feedHr" /> */}
-        <div className="feedOptions">
-          <span
-            onClick={() => setShowAllPosts(true)}
-            style={{ textDecoration: "none" }}
-            className={showAllPosts ? "feedOptionsOrange" : "feedOptionsGrey"}
-          >
-            Around the World
-          </span>
-          <span> | </span>
-          <span
-            onClick={() => setShowAllPosts(false)}
-            style={{ textDecoration: "none" }}
-            className={!showAllPosts ? "feedOptionsOrange" : "feedOptionsGrey"}
-          >
-            Following
-          </span>
-        </div>
-        <div className="feedPosts">
-          {showAllPosts
-            ? posts.map((post) => <Post key={post._id} post={post} />)
-            : followingPosts.map((post) => <Post key={post._id} post={post} />)}
-        </div>
-        <div className="feedNoPosts">
-          {followingPosts.length === 0 && !showAllPosts ? (
-            <NoPosts message={"no posts here!"} />
-          ) : null}
-        </div>
-      </div>
-    </div>
+          <div className="feedNoPosts">
+            {followingPosts.length === 0 && !showAllPosts ? (
+              <NoPosts message={"no posts here!"} />
+            ) : null}
+          </div>
+        </>
+      )}
+    </>
   );
 }
