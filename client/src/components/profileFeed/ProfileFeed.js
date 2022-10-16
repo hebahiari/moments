@@ -6,6 +6,7 @@ import { getUserPosts } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useParams } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";
+import LoadingBar from "../loadingBar/LoadingBar";
 
 export default function ProfileFeed() {
   const [posts, setPosts] = useState([]);
@@ -36,7 +37,7 @@ export default function ProfileFeed() {
   }, [username, user?._id]);
 
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   return (

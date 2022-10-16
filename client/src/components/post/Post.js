@@ -12,6 +12,7 @@ import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import { PostPopover } from "../popover/PostPopover";
+import LoadingBar from "../loadingBar/LoadingBar";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
@@ -104,7 +105,7 @@ export default function Post({ post }) {
   );
 
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   return (

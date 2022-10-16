@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { format } from "timeago.js";
 import { useEffect, useState } from "react";
 import { getUserById } from "../../utils/api";
+import LoadingBar from "../loadingBar/LoadingBar";
 
 export default function Comments(comment) {
   const history = useHistory;
@@ -26,7 +27,7 @@ export default function Comments(comment) {
 
   //display the comment
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   return (

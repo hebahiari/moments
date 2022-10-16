@@ -9,6 +9,7 @@ import { AuthContext } from "./context/AuthContext";
 import SinglePost from "./pages/singlePost/SinglePost";
 import Search from "./pages/search/Search";
 import NotFound from "./pages/notFound/NotFound";
+import TopBar from "./components/topbar/TopBar";
 
 function App() {
   const { user, dispatch } = useContext(AuthContext);
@@ -24,12 +25,20 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        {user ? <Home /> : <Welcome />}
+        {user ? (
+          <>
+            <TopBar />
+            <Home />
+          </>
+        ) : (
+          <Welcome />
+        )}
       </Route>
       <Route path="/welcome">
         <Welcome />
       </Route>
       <Route path="/search">
+        <TopBar />
         <Search />
       </Route>
       <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
@@ -37,12 +46,15 @@ function App() {
         {user ? <Redirect to="/" /> : <Register />}
       </Route>
       <Route path="/profile/:username">
+        <TopBar />
         <Profile />
       </Route>
       <Route path="/posts/:postId">
+        <TopBar />
         <SinglePost />
       </Route>
       <Route>
+        <TopBar />
         <NotFound />
       </Route>
     </Switch>

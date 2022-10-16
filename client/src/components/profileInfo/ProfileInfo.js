@@ -12,6 +12,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import UserIcon from "../userIcon/UserIcon";
+import LoadingBar from "../loadingBar/LoadingBar";
 
 export default function ProfileInfo() {
   const [followingUsers, setFollowingUsers] = useState([]);
@@ -87,7 +88,7 @@ export default function ProfileInfo() {
   };
 
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   return (

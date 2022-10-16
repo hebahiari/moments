@@ -14,6 +14,7 @@ import { Edit } from "@mui/icons-material";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import NotFound from "../notFound/NotFound";
+import LoadingBar from "../../components/loadingBar/LoadingBar";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -99,7 +100,7 @@ export default function Profile() {
   }, [file]);
 
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   if (!user._id) {

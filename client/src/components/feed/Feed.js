@@ -6,6 +6,7 @@ import { getFollowingPosts, getAllPosts } from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";
+import LoadingBar from "../loadingBar/LoadingBar";
 
 export default function Feed({ showAllPosts }) {
   const [posts, setPosts] = useState([]);
@@ -50,7 +51,7 @@ export default function Feed({ showAllPosts }) {
   }, [user._id, showAllPosts]);
 
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   return (

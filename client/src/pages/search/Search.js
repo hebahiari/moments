@@ -7,6 +7,7 @@ import { findMatchingUsernames } from "../../utils/api";
 import NoPosts from "../../components/noPosts/NoPosts";
 import UserIcon from "../../components/userIcon/UserIcon";
 import { useHistory } from "react-router-dom";
+import LoadingBar from "../../components/loadingBar/LoadingBar";
 
 export default function Search() {
   // getting the searched username
@@ -44,7 +45,7 @@ export default function Search() {
   }, [username]);
 
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   return (

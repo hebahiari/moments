@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import TopbarPopover from "../topbarPopover/TopbarPopover";
 import NotificationsPopover from "../notificationsPopover/NotificationsPopover";
 import { getUserNotifications } from "../../utils/api";
+import LoadingBar from "../loadingBar/LoadingBar";
 
 export default function TopBar() {
   const [menuClicked, setMenuClicked] = useState(false);
@@ -84,7 +85,7 @@ export default function TopBar() {
   );
 
   if (loading) {
-    return null;
+    return <LoadingBar />;
   }
 
   return (
