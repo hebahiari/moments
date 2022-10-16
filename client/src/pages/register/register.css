@@ -92,6 +92,21 @@
   width: 100%;
 }
 
+.loginButton:hover {
+  background-color: rgb(255, 181, 45);
+}
+
+.loginRegisterButton:hover {
+  background-color: rgb(248, 241, 241);
+}
+
+.loginButton:active,
+.loginRegisterButton:active {
+  background-color: #ffb835;
+  box-shadow: 5px 5px 15px -9px rgba(0, 0, 0, 0.34);
+  transform: translateY(4px);
+}
+
 .loginInput:focus {
   outline: none;
 }

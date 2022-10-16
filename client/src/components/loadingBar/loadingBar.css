@@ -6,9 +6,9 @@
     linear-gradient(to right, #27c4f5, #a307ba, #fd8d32, #70c050, #27c4f5);
   background-size: 500%;
   -webkit-animation: 2s linear infinite LoadingBarProgress,
-    0.5s ease-out LoadingBarEnter;
+    0.001s ease-out LoadingBarEnter;
   animation: 2s linear infinite LoadingBarProgress,
-    0.5s ease-out LoadingBarEnter;
+    0.001s ease-out LoadingBarEnter;
   -webkit-transform-origin: left;
   transform-origin: left;
   width: 100%;

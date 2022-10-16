@@ -127,6 +127,12 @@ export async function getPostComments(postId) {
   return await axios.get(`${API_BASE_URL}/comments/${postId}`);
 }
 
+export async function deleteComment(commentId, userId) {
+  return await axios.delete(
+    `${API_BASE_URL}/comments/${commentId}/delete/${userId}`
+  );
+}
+
 // to upload
 
 export async function uploadImage(data) {

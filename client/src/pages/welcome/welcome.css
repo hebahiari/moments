@@ -52,6 +52,17 @@
   height: 40px;
   margin: 0 10px;
   width: 100px;
+  box-shadow: 5px 5px 15px -9px rgba(0, 0, 0, 0.34);
+}
+
+.welcomeButton:hover {
+  background-color: orange;
+}
+
+.welcomeButton:active {
+  background-color: orange;
+  box-shadow: 5px 5px 15px -9px rgba(0, 0, 0, 0.34);
+  transform: translateY(4px);
 }
 
 .welcomeGuestSignIn {

@@ -77,10 +77,25 @@
   margin-right: 5px;
 }
 
+.welcomeButton:hover {
+  background-color: red;
+}
+
+.welcomeButton:active {
+  background-color: red;
+  box-shadow: 5px 5px 15px -9px rgba(0, 0, 0, 0.34);
+  transform: translateY(4px);
+}
+
 .commentIcon {
   cursor: pointer;
   height: 32px;
   width: 32px;
+}
+
+.welcomeButton:active {
+  box-shadow: 5px 5px 15px -9px rgba(0, 0, 0, 0.34);
+  transform: translateY(4px);
 }
 
 .postLikeCounter {
