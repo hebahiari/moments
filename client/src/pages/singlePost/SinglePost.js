@@ -11,7 +11,7 @@ export default function SinglePost() {
   const postId = useParams().postId;
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -47,7 +47,6 @@ export default function SinglePost() {
 
   return (
     <>
-      <TopBar />
       <div className="singlePostWrapper">
         {post._id ? <Post post={post} /> : null}
         <div className="commentsSection">

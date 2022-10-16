@@ -7,7 +7,7 @@ import { getUserById } from "../../utils/api";
 export default function Comments(comment) {
   const history = useHistory;
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //fetch the profile of the user that posted the comment
   useEffect(() => {

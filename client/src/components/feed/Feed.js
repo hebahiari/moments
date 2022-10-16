@@ -11,7 +11,7 @@ export default function Feed({ showAllPosts }) {
   const [posts, setPosts] = useState([]);
   const [followingPosts, setFollowingPosts] = useState([]);
   const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //fetch posts
   useEffect(() => {

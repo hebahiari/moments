@@ -13,7 +13,7 @@ export default function TopBar() {
   const searchUsername = useRef();
   const { user, dispatch } = useContext(AuthContext);
   const [notifications, setNotifications] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const abortController = new AbortController();

@@ -14,7 +14,7 @@ export default function Search() {
   const [found, setFound] = useState([]);
   const history = useHistory();
   const searchUsername = useRef();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const query = useQuery();
   if (query.get("username")) {
@@ -49,7 +49,6 @@ export default function Search() {
 
   return (
     <div>
-      <TopBar />
       <div className="searchWrapper">
         <div className="searchBarFull">
           <SearchIcon className="icon" />

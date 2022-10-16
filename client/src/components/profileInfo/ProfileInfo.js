@@ -21,7 +21,7 @@ export default function ProfileInfo() {
   const [user, setUser] = useState({});
   const { username } = useParams();
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const abortController = new AbortController();

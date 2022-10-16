@@ -22,7 +22,7 @@ export default function Profile() {
   const [file, setFile] = useState("");
   const [coverPhoto, setCoverPhoto] = useState("");
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // get user
   useEffect(() => {
@@ -110,7 +110,6 @@ export default function Profile() {
 
   return (
     <>
-      <TopBar />
       <div className="profile">
         <div className="profileTop">
           <div className="profileCover">

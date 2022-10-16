@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <>
       <div className="home">
-        <TopBar />
         <div className="feed">
           <div className="feedWrapper">
             <div className="feedShareWrapper">

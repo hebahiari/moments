@@ -27,7 +27,7 @@ export default function Post({ post }) {
   const isLiked = post.likes.includes(currentUser?._id);
   const comment = useRef();
   const [liked, setLiked] = useState(isLiked);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //fetch the user that made the post
   useEffect(() => {

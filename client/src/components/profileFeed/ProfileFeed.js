@@ -11,7 +11,7 @@ export default function ProfileFeed() {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
   const { username } = useParams();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //fetch posts
   useEffect(() => {
