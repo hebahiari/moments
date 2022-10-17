@@ -1,3 +1,9 @@
 .home {
   background-color: white;
 }
+
+.filter {
+  color: grey;
+  position: absolute;
+  right: 7%;
+}

@@ -14,6 +14,7 @@ export default function Share() {
   const [file, setFile] = useState("");
   const history = useHistory();
   const [error, setError] = useState(false);
+  const [showForm, setShowForm] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,9 +51,9 @@ export default function Share() {
   };
 
   const handleChange = () => {
-    console.log("changing ....");
-    if (pets.value.current == "add") {
-      return <AddPetForm />;
+    if (pets.current.value == "add") {
+      console.log(pets.current.value);
+      setShowForm(true);
     }
   };
 
@@ -119,6 +120,7 @@ export default function Share() {
             </button>
           </div>
         </form>
+        {showForm ? <AddPetForm currentUser={user} /> : null}
         {error ? (
           <div className="shareError">
             You are using a guest account, please sign up to use this feature
