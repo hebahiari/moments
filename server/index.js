@@ -26,6 +26,8 @@ mongoose.connect(process.env.MONGO_URL);
 
 app.use(cors());
 
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 app.use("/", express.static(path.join(__dirname, "../client/build")));
 
 // middleware
