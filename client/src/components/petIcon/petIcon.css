@@ -1,0 +1,23 @@
+.user {
+  align-items: center;
+  color: rgb(70, 70, 70);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.userImg {
+  border-radius: 5px;
+  height: 50px;
+  margin-bottom: 5px;
+  object-fit: cover;
+  width: 50px;
+}
+
+.userName {
+  max-width: 50px;
+}

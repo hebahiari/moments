@@ -125,11 +125,22 @@
   width: 150px;
 }
 
-select {
+/* select {
   -webkit-appearance: none;
   appearance: none;
-  /* background-image: url("/images/icons/caret-down-light.svg"); */
+  background-image: url("/images/icons/caret-down-light.svg");
   background-size: 24px;
   background-repeat: no-repeat;
   background-position: calc(100% - 8px) center;
+} */
+
+.addPetError {
+  background-color: rgb(255, 81, 0);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-top: 20px;
+  color: rgb(255, 255, 255);
+  padding: 0 20px;
 }

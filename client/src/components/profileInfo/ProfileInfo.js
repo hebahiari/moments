@@ -14,6 +14,7 @@ import { AuthContext } from "../../context/AuthContext";
 import UserIcon from "../userIcon/UserIcon";
 import AddPet from "../addPet/AddPet";
 import LoadingBar from "../loadingBar/LoadingBar";
+import PetIcon from "../petIcon/PetIcon";
 
 export default function ProfileInfo() {
   const [followingUsers, setFollowingUsers] = useState([]);
@@ -115,7 +116,7 @@ export default function ProfileInfo() {
           <span className="profileInfoInfoKey">Pets:</span>
           <span className="profileInfoInfoValue">
             {user.pets && user.pets.length
-              ? user.pets.join("! ")
+              ? user.pets.map((pet) => <PetIcon pet={pet} />)
               : "no data yet"}
           </span>
           {user?._id === currentUser?._id && (

@@ -4,10 +4,13 @@ import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { sharePost, uploadImage } from "../../utils/api";
 import { useHistory } from "react-router-dom";
+import AddPet from "../../components/addPet/AddPet";
+import AddPetForm from "../addPet/AddPetForm";
 
 export default function Share() {
   const { user } = useContext(AuthContext);
   const desc = useRef();
+  const pets = useRef();
   const [file, setFile] = useState("");
   const history = useHistory();
   const [error, setError] = useState(false);
@@ -46,6 +49,13 @@ export default function Share() {
     }
   };
 
+  const handleChange = () => {
+    console.log("changing ....");
+    if (pets.value.current == "add") {
+      return <AddPetForm />;
+    }
+  };
+
   return (
     <div className="share">
       <div className="shareWrapper">
@@ -75,6 +85,27 @@ export default function Share() {
             <label htmlFor="file" className="shareOption">
               <PermMedia className="shareIcon" />
               <span className="shareOptionText">Media</span>
+              {!file ? (
+                <select
+                  ref={pets}
+                  className="shareTags"
+                  name="animals"
+                  required
+                  style={{ paddingLeft: "10px" }}
+                  onChange={handleChange}
+                >
+                  <option value=""> Tag pet</option>
+                  {user.pets.map((pet) => (
+                    <option value={`${pet.name.toLowerCase()}`}>
+                      {pet.name}
+                    </option>
+                  ))}
+                  <option value="add" onClick={() => console.log("hi")}>
+                    Add new pet
+                  </option>
+                  <option value="other">Other</option>
+                </select>
+              ) : null}
               <input
                 style={{ display: "none" }}
                 type="file"
