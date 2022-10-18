@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      imgSrc: ["'self'", "https://petsgram-app.s3.us-west-1.amazonaws.com/"],
+      imgSrc: ["'self'", "*", "blob:", "data:"],
     },
   })
 );
