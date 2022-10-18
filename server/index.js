@@ -32,7 +32,13 @@ app.use("/", express.static(path.join(__dirname, "../client/build")));
 
 // middleware
 app.use(express.json());
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      imgSrc: ["'self'", "https://petsgram-app.s3.us-west-1.amazonaws.com/"],
+    },
+  })
+);
 app.use(morgan("dev"));
 
 // routing
