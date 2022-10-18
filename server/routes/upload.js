@@ -8,58 +8,36 @@ const dotenv = require("dotenv").config();
 //upload an image for a post
 //TODO: replace this section && switch to S3 storage bucket
 
-// const s3 = new S3Client({
-//   region: "us-west-1",
-//   credentials: {
-//     accessKeyId: process.env.ACCESS_KEY_AWS,
-//     secretAccessKey: process.env.ACCESS_SECRET_AWS,
-//   },
-//   sslEnabled: false,
-//   s3ForcePathStyle: true,
-//   signatureVersion: "v4",
-// });
-
-// const upload = multer({
-//   storage: multerS3({
-//     s3: s3,
-//     bucket: "petsgram-app",
-//     acl: "public-read",
-//     metadata: function (req, file, cb) {
-//       cb(null, { fieldName: file.fieldname });
-//     },
-//     key: function (req, file, cb) {
-//       cb(null, shortId.generate() + "-" + file.originalname);
-//     },
-//   }),
-// });
-
-// router.post("/", upload.single("file"), (req, res) => {
-//   try {
-//     const url = req.file.location;
-//     return res.status(200).json(url);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-//TODO: replace this section
-/////
-
-//middleware
-//TODO: replace this section && switch to S3 storage bucket
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/images");
+const s3 = new S3Client({
+  region: "us-west-1",
+  credentials: {
+    accessKeyId: process.env.ACCESS_KEY_AWS,
+    secretAccessKey: process.env.ACCESS_SECRET_AWS,
   },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
+  sslEnabled: false,
+  s3ForcePathStyle: true,
+  signatureVersion: "v4",
 });
 
-const upload = multer({ storage });
-router.post("/api/upload", upload.single("file"), (req, res) => {
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "petsgram-app",
+    acl: "public-read",
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, cb) {
+      cb(null, shortId.generate() + "-" + file.originalname);
+    },
+  }),
+});
+
+router.post("/", upload.single("file"), (req, res) => {
+  console.log("inside router!");
   try {
-    return res.status(200).json("File uploaded");
+    const url = req.file.location;
+    return res.status(200).json(url);
   } catch (error) {
     console.log(error);
   }

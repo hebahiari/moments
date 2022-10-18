@@ -86,7 +86,8 @@ export default function Share() {
             <label htmlFor="file" className="shareOption">
               <PermMedia className="shareIcon" />
               <span className="shareOptionText">Media</span>
-              {!file ? (
+              {/* {!file ? 
+              (
                 <select
                   ref={pets}
                   className="shareTags"
@@ -106,7 +107,7 @@ export default function Share() {
                   </option>
                   <option value="other">Other</option>
                 </select>
-              ) : null}
+              ) : null} */}
               <input
                 style={{ display: "none" }}
                 type="file"
@@ -120,7 +121,10 @@ export default function Share() {
             </button>
           </div>
         </form>
-        {showForm ? <AddPetForm currentUser={user} /> : null}
+        {showForm
+          ? null
+          : // <AddPetForm currentUser={user}  />
+            null}
         {error ? (
           <div className="shareError">
             You are using a guest account, please sign up to use this feature

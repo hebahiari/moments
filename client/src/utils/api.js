@@ -1,9 +1,8 @@
 import axios from "axios";
 
 //server's URL
-const API_BASE_URL =
-  // "/api";
-  process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = "/api";
+// process.env.REACT_APP_API_BASE_URL;
 
 // to users
 export async function getUserById(userId) {

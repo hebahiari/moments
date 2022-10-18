@@ -37,7 +37,7 @@ export default function Home() {
               >
                 Following
               </span>
-              <div className="filter">Filter ˅</div>
+              {/* <div className="filter">Filter ˅</div> */}
             </div>
             <Feed showAllPosts={showAllPosts} />
           </div>

@@ -112,7 +112,7 @@ export default function ProfileInfo() {
       )}
       <h4 className="profileInfoTitle">User Information</h4>
       <div className="profileInfoSections">
-        <div className="profileInfoSection">
+        {/* <div className="profileInfoSection">
           <span className="profileInfoInfoKey">Pets:</span>
           <span className="profileInfoInfoValue">
             {user.pets && user.pets.length
@@ -122,9 +122,9 @@ export default function ProfileInfo() {
           {user?._id === currentUser?._id && (
             <AddPet currentUser={currentUser} />
           )}
-        </div>
+        </div> */}
         <div className="profileInfoSection">
-          <h4 className="profileInfoInfoKey">Following:</h4>s
+          <h4 className="profileInfoInfoKey">Following:</h4>
           <div className="profileInfoFollowings">
             {followingUsers.length ? (
               followingUsers.map((person) => {
