@@ -83,7 +83,7 @@ export default function Share() {
             </div>
           ) : null}
           <div className="shareBottom">
-            <label htmlFor="file" className="shareOption">
+            <label htmlFor="ssfile" className="shareOption">
               <PermMedia className="shareIcon" />
               <span className="shareOptionText">Media</span>
               {/* {!file ? 
@@ -111,9 +111,13 @@ export default function Share() {
               <input
                 style={{ display: "none" }}
                 type="file"
-                id="file"
+                id="ssfile"
                 accept=".png,.jpg,.jpeg"
-                onChange={(event) => setFile(event.target.files[0])}
+                onChange={(event) => {
+                  const c = event.target.files[0];
+                  setFile(c);
+                  console.log({ c });
+                }}
               ></input>
             </label>
             <button className="shareButton" type="submit">

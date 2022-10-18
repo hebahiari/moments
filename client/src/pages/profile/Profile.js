@@ -97,7 +97,7 @@ export default function Profile() {
     }
 
     return () => abortController.abort();
-  }, [file]);
+  }, [coverPhoto]);
 
   if (loading) {
     return <LoadingBar />;
@@ -115,12 +115,12 @@ export default function Profile() {
             <img src={user?.coverPhoto} className="profileCoverImg" alt="" />
             {/* TODO: ability to edit cover photo */}
             {currentUser?.username === username && username !== "guest-user" ? (
-              <label htmlFor="file" className="coverPhotoEditButton">
+              <label htmlFor="ccfile" className="coverPhotoEditButton">
                 <Edit />
                 <input
                   style={{ display: "none" }}
                   type="file"
-                  // id="file"
+                  id="ccfile"
                   accept=".png,.jpg,.jpeg"
                   onChange={(event) => {
                     setCoverPhoto(event.target.files[0]);
