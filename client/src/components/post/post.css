@@ -19,6 +19,7 @@
 .postTopLeft {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .postProfileImg {
@@ -43,7 +44,7 @@
 }
 
 .postText {
-  padding: 25px;
+  padding: 0 25px;
   display: block;
   max-width: 300px;
 }
