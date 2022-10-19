@@ -39,14 +39,17 @@ export default function Share() {
           console.log(error);
         }
       } else {
-        try {
-          sharePost(newPost).then(history.go());
-        } catch (error) {
-          console.log(error);
-        }
+        sharePost(newPost)
+          .then(() => history.go())
+          .catch((error) => {
+            console.log(error);
+            setError("Post cannot be empty");
+          });
       }
     } else {
-      setError(true);
+      setError(
+        "You are using a guest account, please sign up to use this feature"
+      );
     }
   };
 
@@ -129,11 +132,7 @@ export default function Share() {
           ? null
           : // <AddPetForm currentUser={user}  />
             null}
-        {error ? (
-          <div className="shareError">
-            You are using a guest account, please sign up to use this feature
-          </div>
-        ) : null}
+        {error ? <div className="shareError">{error}</div> : null}
       </div>
     </div>
   );

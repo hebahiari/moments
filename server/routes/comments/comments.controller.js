@@ -5,8 +5,7 @@ const hasProperties = require("../../errors/hasProperties");
 const Post = require("../../models/Post");
 const User = require("../../models/User");
 
-//ADD: error handling
-
+//validation
 async function postExists(req, res, next) {
   postId = req.params.postId ? req.params.postId : req.body.data.postId;
 
@@ -28,6 +27,22 @@ async function postExists(req, res, next) {
   }
 }
 
+async function isNotEmpty(req, res, next) {
+  console.log("hello");
+  const comment = req.body.data.desc;
+  console.log({ comment });
+  console.log(!/\S/.test(comment));
+  if (!/\S/.test(comment)) {
+    next({
+      message: `comment cannot be empty`,
+      status: 400,
+    });
+  } else {
+    next();
+  }
+}
+
+//requests
 //get comments for a post
 async function list(req, res) {
   const postId = req.params.postId;
@@ -73,6 +88,7 @@ module.exports = {
   list: [postExists, asyncErrorBoundary(list)],
   create: [
     hasProperties("desc", "userId", "postId"),
+    isNotEmpty,
     postExists,
     asyncErrorBoundary(create),
   ],

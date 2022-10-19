@@ -76,13 +76,11 @@ export default function Post({ post }) {
         postId: post._id,
         desc: comment.current.value,
       };
-      try {
-        sendComment(newComment).then(history.go());
-      } catch (error) {
-        console.log(error);
-      }
+      sendComment(newComment)
+        .then(() => history.go())
+        .catch((error) => setError("Comment cannot be empty"));
     } else {
-      setError(true);
+      setError("Please sign up to use this feature");
     }
   };
 
@@ -179,9 +177,7 @@ export default function Post({ post }) {
         </div>
       </div>
       {addComment ? addCommentSection : null}
-      {error ? (
-        <div className="commentError">Please sign up to use this feature</div>
-      ) : null}
+      {error ? <div className="commentError">{error}</div> : null}
     </div>
   );
 }

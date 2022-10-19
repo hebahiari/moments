@@ -13,10 +13,12 @@ export default function NotificationsPopover({
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory();
+  const [opened, setOpened] = React.useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     clearNotifications(user?._id);
+    setOpened = true;
   };
 
   const handleClose = () => {

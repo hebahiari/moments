@@ -38,7 +38,7 @@ export default function Welcome() {
               </Link>
             </div>
             <div className="welcomeGuestSignIn" onClick={handleClick}>
-              enter as a guest
+              Enter as a guest
             </div>
           </div>
         </div>
