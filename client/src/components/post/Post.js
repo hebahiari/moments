@@ -61,9 +61,8 @@ export default function Post({ post }) {
     if (currentUser.username !== "guest-user") {
       try {
         //api checks if its liked or not and does the opposite
-        likeDislikePost(post._id, currentUser?._id).then(() =>
-          setLiked(!liked)
-        );
+        setLiked(!liked);
+        likeDislikePost(post._id, currentUser?._id);
       } catch (error) {
         console.log(error);
       }
