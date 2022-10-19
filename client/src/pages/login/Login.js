@@ -70,14 +70,11 @@ export default function Login() {
             {forgotPassword ? <div className="loginError">Too bad.</div> : null}
             <button className="loginButton" type="submit">
               {isFetching ? (
-                //ADD: fix this situation
-                // <CircularProgress size="20px" color="white" />
                 <Loading style={{ backgroundColor: "white" }} />
               ) : (
                 "Log in"
               )}
             </button>
-
             <Link to="/register">
               <button className="loginRegisterButton">Sign Up</button>
             </Link>

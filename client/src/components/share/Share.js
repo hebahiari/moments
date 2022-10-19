@@ -6,6 +6,7 @@ import { sharePost, uploadImage } from "../../utils/api";
 import { useHistory } from "react-router-dom";
 import AddPet from "../../components/addPet/AddPet";
 import AddPetForm from "../addPet/AddPetForm";
+import Loading from "../loading/Loading";
 
 export default function Share() {
   const { user } = useContext(AuthContext);
@@ -15,9 +16,11 @@ export default function Share() {
   const history = useHistory();
   const [error, setError] = useState(false);
   const [showForm, setShowForm] = useState(true);
+  const [isSharing, setIsSharing] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsSharing(true);
     if (user.username !== "guest-user") {
       const newPost = {
         userId: user._id,
@@ -119,12 +122,12 @@ export default function Share() {
                 onChange={(event) => {
                   const c = event.target.files[0];
                   setFile(c);
-                  console.log({ c });
                 }}
               ></input>
             </label>
+
             <button className="shareButton" type="submit">
-              Share
+              {isSharing ? <Loading /> : "Share"}
             </button>
           </div>
         </form>

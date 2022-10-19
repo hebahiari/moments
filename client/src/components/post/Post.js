@@ -13,12 +13,14 @@ import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import { PostPopover } from "../popover/PostPopover";
 import LoadingBar from "../loadingBar/LoadingBar";
+import Loading from "../loading/Loading";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(false);
   const [likeError, setLikeError] = useState(false);
+  const [isCommenting, setIsCommenting] = useState(false);
 
   // only show add comment section initally if its the single post page
   const [addComment, setAddComment] = useState(
@@ -78,6 +80,7 @@ export default function Post({ post }) {
   //submit new comment
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsCommenting(true);
     if (currentUser.username !== "guest-user") {
       const newComment = {
         userId: currentUser?._id,
@@ -104,7 +107,7 @@ export default function Post({ post }) {
           required
         />
         <button className="shareButton" type="submit">
-          Post
+          {isCommenting ? <Loading /> : "Post"}
         </button>
       </form>
     </>
