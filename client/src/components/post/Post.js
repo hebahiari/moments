@@ -18,6 +18,8 @@ export default function Post({ post }) {
   const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(false);
+  const [likeError, setLikeError] = useState(false);
+
   // only show add comment section initally if its the single post page
   const [addComment, setAddComment] = useState(
     useParams().postId ? true : false
@@ -54,11 +56,17 @@ export default function Post({ post }) {
   }, [post?._id]);
 
   const likeHandler = () => {
-    try {
-      //api checks if its liked or not and does the opposite
-      likeDislikePost(post._id, currentUser?._id).then(() => setLiked(!liked));
-    } catch (error) {
-      console.log(error);
+    if (currentUser.username !== "guest-user") {
+      try {
+        //api checks if its liked or not and does the opposite
+        likeDislikePost(post._id, currentUser?._id).then(() =>
+          setLiked(!liked)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setLikeError(true);
     }
   };
 
@@ -176,6 +184,9 @@ export default function Post({ post }) {
           </span>
         </div>
       </div>
+      {likeError ? (
+        <div className="commentError">Please sign up to use this feature</div>
+      ) : null}
       {addComment ? addCommentSection : null}
       {error ? <div className="commentError">{error}</div> : null}
     </div>
