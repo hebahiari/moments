@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/util-endpoints": "^3.192.0",
     "aws-sdk": "^2.1231.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
