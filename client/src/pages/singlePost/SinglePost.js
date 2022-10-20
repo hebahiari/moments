@@ -41,8 +41,12 @@ export default function SinglePost() {
     return () => abortController.abort();
   }, [postId]);
 
-  if (!post._id) {
+  if (!post._id && !loading) {
     return <NotFound />;
+  }
+
+  if (loading) {
+    return null;
   }
 
   return (
