@@ -55,12 +55,18 @@ export default function TopBar() {
   const hamburgerMenuItems = (
     <>
       <div className="topbarRightHamburgerMenu">
-        <span className="topbarRightHamburgerItem">
+        <span
+          className="topbarRightHamburgerItem"
+          onClick={setMenuClicked(false)}
+        >
           <Link to="/" style={{ textDecoration: "none", color: "#555555" }}>
             Home
           </Link>
         </span>
-        <span className="topbarRightHamburgerItem">
+        <span
+          className="topbarRightHamburgerItem"
+          onClick={setMenuClicked(false)}
+        >
           <Link
             to={`/profile/${user?.username}`}
             style={{ textDecoration: "none", color: "#555555" }}
@@ -68,7 +74,10 @@ export default function TopBar() {
             Profile
           </Link>
         </span>
-        <span className="topbarRightHamburgerItem">
+        <span
+          className="topbarRightHamburgerItem"
+          onClick={setMenuClicked(false)}
+        >
           <Link
             to="/search"
             style={{ textDecoration: "none", color: "#555555" }}
