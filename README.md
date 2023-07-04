@@ -4,7 +4,10 @@
 [![welcome](/screenshots/welcome.gif)](https://petsgram.hebahiari.com/)
 
 ## Summary
-//TODO
+- MERN full-stack website built to be a social media application.
+- Frontend build with React, mobile first responsive design.
+- Backend was built using Express and NodeJs, and was linked to Postgres database.
+
 
 ## Installation
 1. Go to the project root
