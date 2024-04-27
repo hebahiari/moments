@@ -13,6 +13,8 @@ export default function Feed({ showAllPosts }) {
   const [followingPosts, setFollowingPosts] = useState([]);
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
+  const [allPostsRendered, setAllPostsRendered] = useState(false);
+
 
   //fetch posts
   useEffect(() => {
@@ -50,20 +52,33 @@ export default function Feed({ showAllPosts }) {
     return () => abortController.abort();
   }, [user._id, showAllPosts]);
 
-  if (loading) {
-    return <LoadingBar />;
-  }
+  useEffect(() => {
+    console.log(document.querySelectorAll(".post").length, posts.length)
+    let interval;
+    const checkAllPostsRendered = () => {
+      const allPosts = showAllPosts ? posts : followingPosts;
+      if (allPosts.length > 0 && document.querySelectorAll(".post").length === allPosts.length) {
+        setAllPostsRendered(true);
+        clearInterval(interval);
+      }
+    };
+
+    if (!allPostsRendered) {
+      interval = setInterval(checkAllPostsRendered, 1000); // Check every second
+    }
+
+    return () => clearInterval(interval);
+  }, [posts, followingPosts, showAllPosts, allPostsRendered]);
 
   return (
     <>
       {loading ? null : (
         <>
-          <div className="feedPosts">
+          {allPostsRendered ? null : <LoadingBar />}
+          <div className={`feedPosts`} style={allPostsRendered ? { display: 'block' } : { display: 'none' }}>
             {showAllPosts
               ? posts.map((post) => <Post key={post._id} post={post} />)
-              : followingPosts.map((post) => (
-                  <Post key={post._id} post={post} />
-                ))}
+              : followingPosts.map((post) => <Post key={post._id} post={post} />)}
           </div>
           <div className="feedNoPosts">
             {followingPosts.length === 0 && !showAllPosts ? (
