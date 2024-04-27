@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //server's URL
-const API_BASE_URL = "/api";
+const API_BASE_URL = "http://localhost:8800/api";
 // process.env.REACT_APP_API_BASE_URL;
 
 // to users

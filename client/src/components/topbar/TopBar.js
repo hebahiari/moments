@@ -7,6 +7,7 @@ import TopbarPopover from "../topbarPopover/TopbarPopover";
 import NotificationsPopover from "../notificationsPopover/NotificationsPopover";
 import { getUserNotifications } from "../../utils/api";
 import LoadingBar from "../loadingBar/LoadingBar";
+import TopBarPlaceHolder from "./TopBarPlaceHolder";
 
 export default function TopBar() {
   const [menuClicked, setMenuClicked] = useState(false);
@@ -50,14 +51,14 @@ export default function TopBar() {
   };
 
   //TODO
-  const handleOpenNotifications = () => {};
+  const handleOpenNotifications = () => { };
 
-  const hamburgerMenuItems = (
-    <>
+  const hamburgerMenuItems = menuClicked ?
+    (<>
       <div className="topbarRightHamburgerMenu">
         <span
           className="topbarRightHamburgerItem"
-          onClick={setMenuClicked(false)}
+          onClick={() => setMenuClicked(false)}
         >
           <Link to="/" style={{ textDecoration: "none", color: "#555555" }}>
             Home
@@ -65,7 +66,7 @@ export default function TopBar() {
         </span>
         <span
           className="topbarRightHamburgerItem"
-          onClick={setMenuClicked(false)}
+          onClick={() => setMenuClicked(false)}
         >
           <Link
             to={`/profile/${user?.username}`}
@@ -76,7 +77,7 @@ export default function TopBar() {
         </span>
         <span
           className="topbarRightHamburgerItem"
-          onClick={setMenuClicked(false)}
+          onClick={() => setMenuClicked(false)}
         >
           <Link
             to="/search"
@@ -90,11 +91,11 @@ export default function TopBar() {
         </span>
       </div>
       <div className="topbarRightHamburgerOverlay"></div>
-    </>
-  );
+    </>)
+    : null
 
   if (loading) {
-    return <LoadingBar />;
+    return <TopBarPlaceHolder />;
   }
 
   return (

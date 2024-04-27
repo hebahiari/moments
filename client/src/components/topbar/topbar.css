@@ -12,6 +12,11 @@
   z-index: 999;
 }
 
+.topbarPlaceHolder {
+  z-index: -5;
+  position: absolute;
+}
+
 .logo {
   color: #ffffff;
   cursor: pointer;
