@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import NoPosts from "../noPosts/NoPosts";
 import LoadingBar from "../loadingBar/LoadingBar";
+import PostLoading from "../post/PostLoading";
 
 export default function Feed({ showAllPosts }) {
   const [posts, setPosts] = useState([]);
@@ -57,7 +58,7 @@ export default function Feed({ showAllPosts }) {
     let interval;
     const checkAllPostsRendered = () => {
       const allPosts = showAllPosts ? posts : followingPosts;
-      if (allPosts.length > 0 && document.querySelectorAll(".post").length === allPosts.length) {
+      if (allPosts.length > 0 && document.querySelectorAll(".post").length >= allPosts.length) {
         setAllPostsRendered(true);
         clearInterval(interval);
       }
@@ -74,8 +75,10 @@ export default function Feed({ showAllPosts }) {
     <>
       {loading ? null : (
         <>
-          {allPostsRendered ? null : <LoadingBar />}
-          <div className={`feedPosts`} style={allPostsRendered ? { display: 'block' } : { display: 'none' }}>
+          {
+            allPostsRendered ? null : <div className='feedPosts feedPostsLoading'><PostLoading /><PostLoading /><PostLoading /><LoadingBar /></div>
+          }
+          <div className='feedPosts' style={allPostsRendered ? { display: 'block' } : { display: 'none' }}>
             {showAllPosts
               ? posts.map((post) => <Post key={post._id} post={post} />)
               : followingPosts.map((post) => <Post key={post._id} post={post} />)}
