@@ -20,7 +20,7 @@ export default function Welcome() {
         className="welcomeWrapper"
         style={{
           backgroundImage:
-            'url("https://petsgram-app.s3.us-west-1.amazonaws.com/wallpaper-pets.gif")',
+            'url(/images/wallpaper-pets.gif)',
         }}
       >
         <div className="welcomeLogin">
