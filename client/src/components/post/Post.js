@@ -92,6 +92,7 @@ export default function Post({ post }) {
     } else {
       setError("Please sign up to use this feature");
     }
+    setIsCommenting(false)
   };
 
   const addCommentSection = (
