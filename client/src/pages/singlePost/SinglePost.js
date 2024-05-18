@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Post from "../../components/post/Post";
 import Comment from "../../components/comment/Comment";
 import NotFound from "../notFound/NotFound";
+import PostLoading from "../../components/post/PostLoading";
 
 export default function SinglePost() {
   const postId = useParams().postId;
@@ -52,7 +53,7 @@ export default function SinglePost() {
   return (
     <>
       <div className="singlePostWrapper">
-        {post._id ? <Post post={post} /> : null}
+        {post._id ? <Post post={post} /> : <PostLoading />}
         <div className="commentsSection">
           <div className="commentsWrapper">
             <h1 className="commentsTitle">Comments</h1>
@@ -62,8 +63,8 @@ export default function SinglePost() {
               ) : null}
               {comments?.length
                 ? comments.map((comment) => (
-                    <Comment comment={comment} key={comment._id} />
-                  ))
+                  <Comment comment={comment} key={comment._id} />
+                ))
                 : null}
             </div>
           </div>
