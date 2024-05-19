@@ -46,9 +46,6 @@ export default function SinglePost() {
     return <NotFound />;
   }
 
-  if (loading) {
-    return null;
-  }
 
   return (
     <>
